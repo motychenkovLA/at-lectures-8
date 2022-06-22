@@ -34,7 +34,7 @@ public class Main {
                     break;
                 case "list":
                     for(int i = 0;i < count;i++) {
-                        System.out.println(defect[i]+" | "+priority[i]+" | "+days[i]);
+                        System.out.println(defect[i]+" "+priority[i]+" "+days[i]);
                     }
                     break;
                 case "quit":
