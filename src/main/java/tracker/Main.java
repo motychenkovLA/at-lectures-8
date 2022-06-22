@@ -10,31 +10,29 @@ public class Main {
         final int maxDefects = arrayOfDefects.length; //константа - максимальное количество дефектов, равное длинне массива
         boolean flag = true; //флаг завершения цикла
         while (flag) {
-            System.out.println("Вы находитесь в главном меню багтрекинговой системы. Выберите действие:");
-            System.out.println("Добавить новый дефект (введите команду add)");
-            System.out.println("Вывести список дефектов (введите команду list)");
-            System.out.println("Вернуться в главное меню (введите команду quit)");
-
+            System.out.println("Вы находитесь в главном меню багтрекинговой системы. Выберите действие:" +
+                    "\nДобавить новый дефект (введите команду add)" +
+                    "\nВывести список дефектов (введите команду list)" +
+                    "\nВернуться в главное меню (введите команду quit)");
             String command = scan.nextLine();
-
             switch (command) {
                 case "add": //ввод дефекта
                     if (count < maxDefects ) //проверяем сколько дефектов заведено
                     {
                         System.out.println("Введите краткое описание дефекта:");
                         String description = scan.nextLine();
-                        System.out.println("Отлично! Следующий шаг: введите критичность дефекта: ");
-                        System.out.println("(Доступны следующие варианты: Тривиальный, Незначительный, Значительный, Критический, Блокирующий)");
+                        System.out.println("Отлично! Следующий шаг: введите критичность дефекта" +
+                                "\n(Доступны следующие варианты: Тривиальный, Незначительный, Значительный, Критический, Блокирующий)");
                         String severity = scan.nextLine();
 
                         System.out.println("Замечательно! Следующий шаг: введите ожидаемое количество дней на исправление дефекта: ");
                         int numberOfDays = scan.nextInt();
                         scan.nextLine();
 
-                        System.out.println("Великолепно! Вы ввели следующую информацию по дефекту: ");
-                        System.out.println("Описание дефекта: " + description);
-                        System.out.println("Критичность дефекта: " + severity);
-                        System.out.println("Количество дней на исправление: " + numberOfDays);
+                        System.out.println("Великолепно! Вы ввели следующую информацию по дефекту: " +
+                                "\nОписание дефекта: " + description +
+                                "\nКритичность дефекта: " + severity +
+                                "\nКоличество дней на исправление: " + numberOfDays);
 
                         arrayOfDefects[count] = description + " " + severity + " " + numberOfDays; //записываем дефект в массив
                         count++;//увеличиваем счетчик
