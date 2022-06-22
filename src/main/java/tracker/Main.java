@@ -4,12 +4,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // todo 1 - форматирование не как у константы
-        final int countBug = 10;
-        // todo 0 - defect -> resumes; priority -> priorities;
-        String [] defect = new String[countBug];
-        String [] priority = new String[countBug];
-        int [] days = new int[countBug];
+        final int COUNT_BUG = 10;
+        String [] resumes = new String[COUNT_BUG];
+        String [] priorities = new String[COUNT_BUG];
+        int [] days = new int[COUNT_BUG];
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
         int count = 0;
@@ -20,16 +18,15 @@ public class Main {
                     "\nВыйти из программы - введите (quit)");
             switch (scanner.nextLine()) {
                 case "add":
-                    // todo 3 - 9 никак не связана с countBug
                     if(count > 9) {
                         System.out.println("Вы ввели максимальное колличество дефектов");
                         System.out.println();
                         break;
                     }
                     System.out.println("Введите резюме дефекта");
-                    defect[count] = scanner.nextLine();
+                    resumes[count] = scanner.nextLine();
                     System.out.println("Введите критичность дефекта из списка : High, Low, Medium");
-                    priority[count] = scanner.nextLine();
+                    priorities[count] = scanner.nextLine();
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
                     days[count] = scanner.nextInt();
                     scanner.nextLine();
@@ -37,12 +34,11 @@ public class Main {
                     break;
                 case "list":
                     for(int i = 0;i < count;i++) {
-                        System.out.println(defect[i]+" "+priority[i]+" "+days[i]);
+                        System.out.println(resumes[i]+" "+priorities[i]+" "+days[i]);
                     }
                     break;
                 case "quit":
                     run = false;
-                    // todo 3 - break
                 default:
                     break;
             }
