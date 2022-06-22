@@ -4,36 +4,41 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String [] array = new String[10];
+        final int countBug = 10;
+        String [] defect = new String[countBug];
+        String [] priority = new String[countBug];
+        int [] days = new int[countBug];
         Scanner scanner = new Scanner(System.in);
-        boolean quit = true;
-        int i = 0;
-        while (quit) {
-            System.out.println("Главное меню:  \nДобавить новый дефевкт - введите (add) \nВывести список дефектов - введите (list) \nВыйти из программы - введите (quit)");
+        boolean run = true;
+        int count = 0;
+        while (run) {
+            System.out.println("Главное меню:  " +
+                    "\nДобавить новый дефевкт - введите (add) " +
+                    "\nВывести список дефектов - введите (list) " +
+                    "\nВыйти из программы - введите (quit)");
             switch (scanner.nextLine()) {
                 case "add":
-                    if(i > 9) {
+                    if(count > 9) {
                         System.out.println("Вы ввели максимальное колличество дефектов");
                         System.out.println();
                         break;
                     }
                     System.out.println("Введите резюме дефекта");
-                    String defect = scanner.nextLine();
+                    defect[count] = scanner.nextLine();
                     System.out.println("Введите критичность дефекта из списка : High, Low, Medium");
-                    String priority = scanner.nextLine();
+                    priority[count] = scanner.nextLine();
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
-                    int days = scanner.nextInt();
+                    days[count] = scanner.nextInt();
                     scanner.nextLine();
-                    array[i] = defect + " " + priority + " " + days;
-                    i++;
+                    count++;
                     break;
                 case "list":
-                    for(String element:array) {
-                        System.out.println(element);
+                    for(int i = 0;i < count;i++) {
+                        System.out.println(defect[i]+" "+priority[i]+" "+days[i]);
                     }
                     break;
                 case "quit":
-                    quit = false;
+                    run = false;
                 default:
                     break;
             }
