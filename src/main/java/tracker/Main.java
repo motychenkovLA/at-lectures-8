@@ -39,6 +39,7 @@ public class Main {
                     break;
                 case "quit":
                     run = false;
+                    break;
                 default:
                     break;
             }
