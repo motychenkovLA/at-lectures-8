@@ -18,7 +18,7 @@ public class Main {
                     "\nВыйти из программы - введите (quit)");
             switch (scanner.nextLine()) {
                 case "add":
-                    if(count > 9) {
+                    if(count >= COUNT_BUG) {
                         System.out.println("Вы ввели максимальное колличество дефектов");
                         System.out.println();
                         break;
