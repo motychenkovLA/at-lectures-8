@@ -4,7 +4,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        // todo 1 - форматирование не как у константы
         final int countBug = 10;
+        // todo 0 - defect -> resumes; priority -> priorities;
         String [] defect = new String[countBug];
         String [] priority = new String[countBug];
         int [] days = new int[countBug];
@@ -18,6 +20,7 @@ public class Main {
                     "\nВыйти из программы - введите (quit)");
             switch (scanner.nextLine()) {
                 case "add":
+                    // todo 3 - 9 никак не связана с countBug
                     if(count > 9) {
                         System.out.println("Вы ввели максимальное колличество дефектов");
                         System.out.println();
@@ -39,6 +42,7 @@ public class Main {
                     break;
                 case "quit":
                     run = false;
+                    // todo 3 - break
                 default:
                     break;
             }
