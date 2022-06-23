@@ -11,40 +11,36 @@ public class Main {
         String criticality;
         int amountDays;
         boolean run = true;
+        int i = 0;
         while (run) {
             System.out.println("Выберите действие: добавить новый дефект (\"add\"), " +
                     "вывести список (\"list\"), выйти из программы (\"quit\") - главное меню");
             String userDo = scanner.nextLine();
-            if (userDo.equals("add")) {
-                System.out.println("Введите резюме дефекта");
-                resume = scanner.nextLine();
-                System.out.println("Введите критичность дефекта (Highest, high, middle, low):");
-                criticality = scanner.nextLine();
-                System.out.println("Введите ожидамое количество дней на исправление дефекта");
-                amountDays = scanner.nextInt();
-                scanner.nextLine();
-                System.out.println("Информация о дефекте: ");
-                System.out.println("Резюме: " + resume + " | " + "Серьезность " + criticality +
-                        " | " + "Количество дней на исправление " + amountDays);
-                int i = 0;
-                defects[i] = resume;
-                i++;
-                run = true;
-                    if (i > defects.length) {
-                        System.out.println("Невозможно ввести новый дефект");
-                        run = true;
+                if (userDo.equals("add")) {
+                    System.out.println("Введите резюме дефекта");
+                    resume = scanner.nextLine();
+                    System.out.println("Введите критичность дефекта (Highest, high, middle, low):");
+                    criticality = scanner.nextLine();
+                    System.out.println("Введите ожидамое количество дней на исправление дефекта");
+                    amountDays = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Информация о дефекте: ");
+                    System.out.println("Резюме: " + resume + " | " + "Серьезность " + criticality +
+                            " | " + "Количество дней на исправление " + amountDays);
+                    if (i < 10) {
+                        defects[i] = resume;
+                        i++;
+                    } else {
+                        System.out.println("Закончилось место, невозможно ввести новый дефект");
                     }
-
-            } else if (userDo.equals("list")) {
-                System.out.println(Arrays.toString(defects));
-                run = true;
-            } else if (userDo.equals("quit")) {
-                run = true;
-            } else {
-                System.out.println("Введите корректное значение");
-                run = true;
+                } else if (userDo.equals("list")) {
+                    System.out.println(Arrays.toString(defects));
+                } else if (userDo.equals("quit")) {
+                    run = false;
+                } else {
+                    System.out.println("Введите корректное значение");
+                }
             }
-
         }
     }
-}
+
