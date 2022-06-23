@@ -6,9 +6,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String[] resumeDefects = new String[10];
-        String[] criticalityDefects = new String[10];
-        int[] amountDaysDefects = new int[10];
+        final int MAX_DEFECT_COUNT = 10;
+        String[] resumeDefects = new String[MAX_DEFECT_COUNT];
+        String[] criticalityDefects = new String[MAX_DEFECT_COUNT];
+        int[] amountDaysDefects = new int[MAX_DEFECT_COUNT];
         boolean isRun = true;
         int amountDefects = 0;
         while (isRun) {
@@ -16,7 +17,7 @@ public class Main {
                     "вывести список (\"list\"), выйти из программы (\"quit\") - главное меню");
             String userDo = scanner.nextLine();
                 if (userDo.equals("add")) {
-                    if (amountDefects < 10) {
+                    if (amountDefects < MAX_DEFECT_COUNT) {
                         String resume;
                         String criticality;
                         int amountDays;
