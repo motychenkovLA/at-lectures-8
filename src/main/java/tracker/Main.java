@@ -49,6 +49,7 @@ public class Main {
                     for (int i=0; i<countDefects; i++) {
                         System.out.println(defectSummary[i]+ " | " +defectSeverity[i]+ " | " +numberOfDays[i]);
                     }
+                    System.out.println();
                 }
             }
             else if (userChoice.equals("quit")) {
