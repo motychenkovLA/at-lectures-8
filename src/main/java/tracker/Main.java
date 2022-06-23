@@ -8,10 +8,10 @@ public class Main {
         System.out.print("Введите название дефекта: ");
         String name = in.nextLine();
         String pLow = "Low";
-        String pMed = "Medium";
+        String pMedium = "Medium";
         String pHigh = "High";
-        String pCrit = "Critical";
-        System.out.printf("Введите приоритет дефекта ( %s, %s, %s, %s): ", pLow ,pMed ,pHigh ,pCrit);
+        String pCritical = "Critical";
+        System.out.printf("Введите приоритет дефекта ( %s, %s, %s, %s): ", pLow ,pMedium ,pHigh ,pCritical);
         String priority = in.nextLine();
         System.out.print("Введите количество дней на исправление дефекта: ");
         int numDays = in.nextInt();
