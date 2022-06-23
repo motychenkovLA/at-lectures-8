@@ -5,9 +5,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        // todo 3 - 10 это константа
+        // todo 3 - дефекты хранятся в виде строк, хотя строками не являются, дефект состоит из нескольких полей разного тип
         String[] arrayOfDefects = new String[10]; //вводим строковый массив arrayOfDefects с количеством элементов 10
         int count = 0; //вводим счетчик
         final int maxDefects = arrayOfDefects.length; //константа - максимальное количество дефектов, равное длинне массива
+        // todo 0 - не говорящее название
         boolean flag = true; //флаг завершения цикла
         while (flag) {
             System.out.println("Вы находитесь в главном меню багтрекинговой системы. Выберите действие:" +
@@ -17,6 +20,7 @@ public class Main {
             String command = scan.nextLine();
             switch (command) {
                 case "add": //ввод дефекта
+                    // todo 0 - переносы { и отступы
                     if (count < maxDefects ) //проверяем сколько дефектов заведено
                     {
                         System.out.println("Введите краткое описание дефекта:");
@@ -43,7 +47,7 @@ public class Main {
                     break;
                 case "list": //команда список дефектов
                     System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление):");
-                    int countList = count; //вводим ещё один счетчик, равный count
+                    int countList = count; //вводим ещё один счетчик, равный count // todo 3 - зачем?
                     for (int i = 0; i < countList; i++) { //выводим построково дефекты из массива в количестве i, равному счетчику count
                         System.out.println(arrayOfDefects[i]);
                     }
