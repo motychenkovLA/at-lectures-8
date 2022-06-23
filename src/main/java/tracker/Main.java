@@ -5,9 +5,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String[] defectSummary = new String[10];
-        String[] defectSeverity = new String[10];
-        int[] numberOfDays = new int[10];
+        final int MAX_AMOUNT_DEFECT = 10;
+        String[] defectSummary = new String[MAX_AMOUNT_DEFECT];
+        String[] defectSeverity = new String[MAX_AMOUNT_DEFECT];
+        int[] numberOfDays = new int[MAX_AMOUNT_DEFECT];
         int countDefects = 0;
 
         while (true) {
@@ -18,7 +19,7 @@ public class Main {
 
             if (userChoice.equals("add")) {
 
-                if (countDefects < 10) {
+                if (countDefects < MAX_AMOUNT_DEFECT) {
 
                     System.out.println("Введите резюме дефекта");
                     String defectSummaryThisDefect = scanner.nextLine();
