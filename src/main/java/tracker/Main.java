@@ -6,37 +6,45 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String[] defects = new String[10];
-        String resume;
-        String criticality;
-        int amountDays;
-        boolean run = true;
-        int i = 0;
-        while (run) {
+        String[] resumeDefects = new String[10];
+        String[] criticalityDefects = new String[10];
+        int[] amountDaysDefects = new int[10];
+        boolean isRun = true;
+        int amountDefects = 0;
+        while (isRun) {
             System.out.println("Выберите действие: добавить новый дефект (\"add\"), " +
                     "вывести список (\"list\"), выйти из программы (\"quit\") - главное меню");
             String userDo = scanner.nextLine();
                 if (userDo.equals("add")) {
-                    System.out.println("Введите резюме дефекта");
-                    resume = scanner.nextLine();
-                    System.out.println("Введите критичность дефекта (Highest, high, middle, low):");
-                    criticality = scanner.nextLine();
-                    System.out.println("Введите ожидамое количество дней на исправление дефекта");
-                    amountDays = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Информация о дефекте: ");
-                    System.out.println("Резюме: " + resume + " | " + "Серьезность " + criticality +
-                            " | " + "Количество дней на исправление " + amountDays);
-                    if (i < 10) {
-                        defects[i] = resume;
-                        i++;
+                    if (amountDefects < 10) {
+                        String resume;
+                        String criticality;
+                        int amountDays;
+                        System.out.println("Введите резюме дефекта");
+                        resume = scanner.nextLine();
+                        System.out.println("Введите критичность дефекта (Highest, high, middle, low):");
+                        criticality = scanner.nextLine();
+                        System.out.println("Введите ожидамое количество дней на исправление дефекта");
+                        amountDays = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("Информация о дефекте: ");
+                        System.out.println("Резюме: " + resume + " | " + "Серьезность " + criticality +
+                                " | " + "Количество дней на исправление " + amountDays);
+                        resumeDefects[amountDefects] = resume;
+                        criticalityDefects[amountDefects] = criticality;
+                        amountDaysDefects[amountDefects] = amountDays;
+                        amountDefects++;
                     } else {
                         System.out.println("Закончилось место, невозможно ввести новый дефект");
                     }
                 } else if (userDo.equals("list")) {
-                    System.out.println(Arrays.toString(defects));
+                    for (int i = 0; i < amountDefects; i++) {
+                        System.out.println(resumeDefects[i]);
+                        System.out.println(criticalityDefects[i]);
+                        System.out.println(amountDaysDefects[i]);
+                    }
                 } else if (userDo.equals("quit")) {
-                    run = false;
+                    isRun = false;
                 } else {
                     System.out.println("Введите корректное значение");
                 }
