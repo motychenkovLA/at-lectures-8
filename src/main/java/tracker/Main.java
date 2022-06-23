@@ -5,7 +5,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String[] bugArray = new String[10];
+        String[] defectSummary = new String[10];
+        String[] defectSeverity = new String[10];
+        int[] numberOfDays = new int[10];
+        int countDefects = 0;
 
         while (true) {
 
@@ -15,51 +18,37 @@ public class Main {
 
             if (userChoice.equals("add")) {
 
-                boolean addDefectToArray = false;
+                if (countDefects < 10) {
 
-                for (int i = 0; i < bugArray.length; i++) {
+                    System.out.println("Введите резюме дефекта");
+                    String defectSummaryThisDefect = scanner.nextLine();
 
-                    if (bugArray[i] == null) {
-                        System.out.println("Введите резюме дефекта");
-                        String defectSummary = scanner.nextLine();
+                    System.out.println("Введите критичность дефекта\nСписок вариантов:\nTrivial, Minor, Major, Critical, Blocker");
+                    String defectSeverityThisDefect = scanner.nextLine();
 
-                        System.out.println("Введите критичность дефекта\nСписок вариантов:\nTrivial, Minor, Major, Critical, Blocker");
-                        String defectSeverity = scanner.nextLine();
+                    System.out.println("Введите ожидаемое количество дней на исправление дефекта");
+                    int numberOfDaysThisDefect = scanner.nextInt();
 
-                        System.out.println("Введите ожидаемое количество дней на исправление дефекта");
-                        int numberOfDays = scanner.nextInt();
+                    defectSummary[countDefects] = defectSummaryThisDefect;
+                    defectSeverity[countDefects]= defectSeverityThisDefect;
+                    numberOfDays[countDefects] = numberOfDaysThisDefect;
 
-                        bugArray[i] = defectSummary + " | " + defectSeverity + " | " + numberOfDays;
+                    System.out.println("Дефект успешно добавлен" + "\n");
 
-                        addDefectToArray = true;
-
-                        System.out.println("Дефект успешно добавлен" + "\n");
-                        break;
-                    }
+                    countDefects++;
                 }
-                if (!addDefectToArray) {
-                    System.out.println("Невозможно добавить более "+bugArray.length+" дефектов"+"\n");
+                else {
+                    System.out.println("Невозможно добавить более 10 дефектов"+"\n");
                 }
             }
             else if (userChoice.equals("list")) {
-
-                int amountNull = 0;
-
-                for (String defect : bugArray) {
-                    if (defect == null) {
-                        amountNull++;
-                    }
-                }
-                if (amountNull == bugArray.length) {
+                if (countDefects == 0) {
                     System.out.println ("В системе нет ни одного дефекта\n");
-                    }
+                }
                 else {
-                    System.out.println("Список дефектов:");
-                    for (String defect : bugArray) {
-                        if (defect != null)
-                            System.out.println(defect);
+                    for (int i=0; i<countDefects; i++) {
+                        System.out.println(defectSummary[i]+ " | " +defectSeverity[i]+ " | " +numberOfDays[i]);
                     }
-                    System.out.println();
                 }
             }
             else if (userChoice.equals("quit")) {
