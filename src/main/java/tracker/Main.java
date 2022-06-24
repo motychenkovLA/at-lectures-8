@@ -6,10 +6,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        final int maxDefects = 10; //константа - максимальное количество дефектов
-        String[] description = new String[maxDefects];//вводим строковый массив description с количеством элементов, равному максимальному кол-ву дефектов
-        String[] severity = new String[maxDefects];//вводим строковый массив severity с количеством элементов, равному максимальному кол-ву дефектов
-        int[] numberOfDays = new int[maxDefects];//вводим числовой массив numberOfDays с количеством элементов, равному максимальному кол-ву дефектов
+        final int DEFECTS = 10; //константа - максимальное количество дефектов
+        String[] description = new String[DEFECTS];//вводим строковый массив description с количеством элементов, равному максимальному кол-ву дефектов
+        String[] severity = new String[DEFECTS];//вводим строковый массив severity с количеством элементов, равному максимальному кол-ву дефектов
+        int[] numberOfDays = new int[DEFECTS];//вводим числовой массив numberOfDays с количеством элементов, равному максимальному кол-ву дефектов
         int count = 0; //вводим счетчик
         boolean work = true; //флаг завершения цикла
         while (work) {
@@ -20,7 +20,7 @@ public class Main {
             String command = scan.nextLine();
             switch (command) {
                 case "add": //ввод дефекта
-                    if (count < maxDefects) {//проверяем сколько дефектов заведено
+                    if (count < DEFECTS) {//проверяем сколько дефектов заведено
                         System.out.println("Введите краткое описание дефекта:");
                         description[count] = scan.nextLine();
                         System.out.println("Следующий шаг: введите критичность дефекта" +
