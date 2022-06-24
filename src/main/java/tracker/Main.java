@@ -6,9 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        // todo 0 - коментарии дублируют код
-        // todo 1 - код стайл не как у константы, почему 3?
-        final int maxDefects = 3; //константа - максимальное количество дефектов
+        final int maxDefects = 10; //константа - максимальное количество дефектов
         String[] description = new String[maxDefects];//вводим строковый массив description с количеством элементов, равному максимальному кол-ву дефектов
         String[] severity = new String[maxDefects];//вводим строковый массив severity с количеством элементов, равному максимальному кол-ву дефектов
         int[] numberOfDays = new int[maxDefects];//вводим числовой массив numberOfDays с количеством элементов, равному максимальному кол-ву дефектов
@@ -36,8 +34,7 @@ public class Main {
                                 "\n" + severity[count] +
                                 "\n" + numberOfDays[count]);
                         count++;//увеличиваем счетчик
-                    }
-                    else { // todo 1 - какой-то случайный перенос
+                    } else {
                         System.out.println("Закончилось место для заведения дефектов!");
                     }
                     break;
