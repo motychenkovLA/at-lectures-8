@@ -19,7 +19,6 @@ public class Main {
         System.out.println("Добро пожаловать!");
         while (programmIsOn) {
             System.out.println();
-            //System.out.println("Введите команду. Для добавления нового дефекта -\"/add\", для просмотра списка дефектов - \"/list\", для выхода из программы - \"/quit\":");
             System.out.println("Для продолжения введите одну из команд:");
             System.out.println("1. Для добавления нового дефекта -\"/add\"");
             System.out.println("2. Для просмотра списка дефектов - \"/list\"");
