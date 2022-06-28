@@ -20,7 +20,6 @@ public class Main {
                 //добавить дефект
                 case "add":
                     if (i < 10) {
-                        //process
                         System.out.println("Хаюшки! Что у тебя за дефект?");
                         String bugName = inputText.nextLine();
                         System.out.println("Укажи критичность дефекта :\n" + "high\n" + "medium\n"
