@@ -16,8 +16,7 @@ public class Main {
         String bug = "Ваш дефект:\n" + bugName + "\n" + "Критичность - " + bugLevel + "\n"
                 + "Срок исправления - " + bugTime + "\n";
         // todo 3 - булеан превращается сам в себя
-        boolean enoughTime = bugTime<=WORKING_WEEK ? true:false;
-
+        boolean enoughTime = bugTime <= WORKING_WEEK;
         System.out.println(bug + "Будет исправлено в течение рабочей недели (5 дн) - " + enoughTime);
     }
 }
