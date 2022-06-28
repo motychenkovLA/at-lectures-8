@@ -12,17 +12,10 @@ public class Main {
         System.out.println("Ожидаемый срок исправления в днях:");
         int bugTime = inputText.nextInt();
         inputText.nextLine();
-        // todo 3 - не используется
-        //done
         final int WORKING_WEEK = 5;
-        // todo 1 - объявление оторвано от инициации, +1
-        //done
-        // todo 0 - желательно не вылезать за белую полосу (120 символов) / край экрана
-        //done
         String bug = "Ваш дефект:\n" + bugName + "\n" + "Критичность - " + bugLevel + "\n"
                 + "Срок исправления - " + bugTime + "\n";
-        // todo 3 - ТЗ: "займет больше рабочей недели (true/false)", нужно выводить boolean, а не String
-        //done
+        // todo 3 - булеан превращается сам в себя
         boolean enoughTime = bugTime<=WORKING_WEEK ? true:false;
 
         System.out.println(bug + "Будет исправлено в течение рабочей недели (5 дн) - " + enoughTime);
