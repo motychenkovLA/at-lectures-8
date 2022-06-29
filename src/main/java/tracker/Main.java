@@ -6,10 +6,10 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         boolean run = true;
-        final int countOfDefects = 2; //максимальное число хранимых дефектов в программе
-        String[] resume = new String[countOfDefects]; //массив резюме дефекта
-        String [] severity = new String[countOfDefects]; //массив критичности
-        int [] days = new int[countOfDefects]; //массив кол-во дней на исправление
+        final int COUNTOFDEFECTS = 1; //максимальное число хранимых дефектов в программе
+        String[] resume = new String[COUNTOFDEFECTS]; //массив резюме дефекта
+        String[] severity = new String[COUNTOFDEFECTS]; //массив критичности
+        int[] days = new int[COUNTOFDEFECTS]; //массив кол-во дней на исправление
         int count = 0;
 
         while (run) {
@@ -18,39 +18,43 @@ public class Main {
             String choice = scan.nextLine();
 
             switch (choice) {
-                case "add":
-                    if (count > (countOfDefects - 1) ) {
+                case "add": {
+                    if (count > (COUNTOFDEFECTS - 1)) {
                         System.out.print("Заведено максимальное количество дефектов. ");
+                    } else {
+                        System.out.println("Введите резюме дефекта:");
+                        resume[count] = scan.nextLine();
+
+                        System.out.println("Введите критичность дефекта. \n Список вариантов: \n 1 - Тривиальный " +
+                                "\n 2 - Незначительный \n 3 - Значительный \n 4 - Критический \n 5 - Блокирующий");
+                        severity[count] = scan.nextLine();
+
+                        System.out.println("Введите ожидаемое количество дней на исправление дефекта.");
+                        days[count] = scan.nextInt();
+                        scan.nextLine();
                     }
-                    System.out.println("Введите резюме дефекта:");
-                    resume[count] = scan.nextLine();
-
-                    System.out.println("Введите критичность дефекта. \n Список вариантов: \n 1 - Тривиальный " +
-                            "\n 2 - Незначительный \n 3 - Значительный \n 4 - Критический \n 5 - Блокирующий");
-                    severity[count] = scan.nextLine();
-
-                    System.out.println("Введите ожидаемое количество дней на исправление дефекта.");
-                    days[count] = scan.nextInt();
-                    scan.nextLine();
-
                     count++;
                     break;
+                }
 
-                case "list":
-                   for (int j = 0; j < countOfDefects; j++) {
-                     System.out.print("Резюме дефекта: " + resume[j] + " | " + "Критичность: " + severity[j] +
-                             " | " + "количество дней на исправление: " + days[j] + "\n");
+                case "list": {
+                    for (int i = 0; i < count; i++) {
+                        System.out.print("Резюме дефекта: " + resume[i] + " | " + "Критичность: " + severity[i] +
+                                " | " + "количество дней на исправление: " + days[i] + "\n");
                     }
                     break;
+                }
 
-                case "quit":
+                case "quit": {
                     run = false;
                     System.out.print("Вы вышли из главного меню. ");
                     break;
+                }
 
-                default:
+                default: {
                     System.out.print("Неверно введена команда. ");
                     break;
+                }
             }
         }
     }
