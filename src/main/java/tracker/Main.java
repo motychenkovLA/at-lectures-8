@@ -39,12 +39,12 @@ public class Main {
                                 enoughTime);
                         bugs[i] = bug;
                         i++;
-                        String exit = "quit";
+                        final String EXIT = "quit";
                         String addedText;
                         do {
                             System.out.println("Выйдите в главное меню с помощью команды - quit");
                             addedText = inputText.next();
-                        } while (!addedText.equals(exit));
+                        } while (!addedText.equals(EXIT));
                     } else {
                         //ошибка
                         System.out.println("Хватит дефектов!\n");
@@ -52,7 +52,7 @@ public class Main {
                     break;
                 case "list":
                     if (i == 0) {
-                        System.out.println("Пока нет дефектов");
+                        System.out.println("Пока нет дефектов\n");
                     } else {
                         System.out.println("Список дефектов:");
                         for (int j = 0; j < i; j++) {
@@ -64,6 +64,6 @@ public class Main {
                 case "quit":
                     break;
             }
-        } while (cycle);
+        } while (cycle==true);
     }
 }
