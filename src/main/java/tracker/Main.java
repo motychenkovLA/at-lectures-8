@@ -5,18 +5,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner inputText = new Scanner(System.in);
-        // todo 3 - 10 это константа
-        //done
-        // todo 3 - дефекты хранятся как строки, а не как две строки и число
-        //done
         final int MAX_BUGS_COUNT = 10;
         String[] bugDescription = new String[MAX_BUGS_COUNT];
         String[] bugCriticality = new String[MAX_BUGS_COUNT];
         int[] bugFixingTime = new int[MAX_BUGS_COUNT];
 
         boolean active = true;
-        int bugId = 0; // todo 1 - не говорящее имя
-        //done
+        int bugId = 0;
         do {
             System.out.println("---Главное меню---");
             String menu = "Выберете команду:\n " +
@@ -24,8 +19,6 @@ public class Main {
                     "- вывести список (\"list\")\n " +
                     "- выйти из программы (\"quit\") - главное меню";
             System.out.println(menu);
-            // todo 1 - код стайл
-            //done
             String command = inputText.nextLine();
             switch (command) {
                 //добавить дефект
@@ -39,9 +32,10 @@ public class Main {
                         System.out.println("Ожидаемый срок исправления в днях:");
                         int bugTime = inputText.nextInt();
                         inputText.nextLine();
-                        // todo 0 - в третьем дз проверку на неделю убираем
-                        //done
                         int bugNumber = bugId + 1;
+                        // todo 1 - хранить лучше только введенную информацию,
+                        //  все форматирование и оформление делать только на выводе
+                        // todo 0 - вообще сразу после ввода обратно выводить не требуется по ТЗ, тут на усмотрение
                         bugDescription[bugId]="Дефект №" + bugNumber + ":\n" + bugName + "\n";
                         bugCriticality[bugId]="Критичность - " + bugLevel + "\n";
                         bugFixingTime[bugId]=bugTime;
@@ -49,8 +43,6 @@ public class Main {
                                 bugCriticality[bugId] +
                                 "Срок исправления - " + bugFixingTime[bugId] + "\n");
                         bugId++;
-                        // todo 3 - это все зачем вообще? в меню должно автоматом выходить
-                        //done
                     } else {
                         System.out.println("Хватит дефектов!\n");
                     }
@@ -67,15 +59,13 @@ public class Main {
                         }
                         break;
                     }
+                    // todo 5 - не break-ает если список пустой, в результаты выходит из программы
                     //выход
                 case "quit":
-                    // todo 3 - никогда не выйдет из программы
-                    //done
                     active = false;
                     break;
             }
-            // todo 3 - true всегда равно true
-            //done
+            // todo 1 - можно заменить на простой while
         } while (active);
     }
 }
