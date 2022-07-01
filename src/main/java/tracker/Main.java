@@ -56,17 +56,16 @@ public class Main {
                                     "Критичность - " + bugCriticality[i] + "\n" +
                                     "Срок исправления - " + bugFixingTime[i] + "\n");
                         }
-
                     }
+                    break;
                     // todo 5 - не break-ает вообще, в результате выходит из программы
                     //done
                     //выход
                 case "quit":
-                    if(bugId==0){
                         active = false;
-                        System.out.println("Byebye :)");
-                    }else break;
-            }
+                        System.out.println("Bye-bye :)");
         }
     }
 }
+}
+
