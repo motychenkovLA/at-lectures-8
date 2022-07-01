@@ -32,10 +32,6 @@ public class Main {
                         System.out.println("Ожидаемый срок исправления в днях:");
                         int bugTime = inputText.nextInt();
                         inputText.nextLine();
-                        // todo 1 - хранить лучше только введенную информацию,
-                        //  все форматирование и оформление делать только на выводе
-                        // todo 0 - вообще сразу после ввода обратно выводить не требуется по ТЗ, тут на усмотрение
-                        //done
                         bugDescription[bugId]=bugName;
                         bugCriticality[bugId]=bugLevel;
                         bugFixingTime[bugId]=bugTime;
@@ -62,7 +58,7 @@ public class Main {
                         }
 
                     }
-                    // todo 5 - не break-ает если список пустой, в результаты выходит из программы
+                    // todo 5 - не break-ает вообще, в результате выходит из программы
                     //done
                     //выход
                 case "quit":
@@ -71,8 +67,6 @@ public class Main {
                         System.out.println("Byebye :)");
                     }else break;
             }
-            // todo 1 - можно заменить на простой while
-            //done
         }
     }
 }
