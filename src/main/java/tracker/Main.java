@@ -58,8 +58,6 @@ public class Main {
                         }
                     }
                     break;
-                    // todo 5 - не break-ает вообще, в результате выходит из программы
-                    //done
                     //выход
                 case "quit":
                         active = false;
