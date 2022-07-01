@@ -64,6 +64,7 @@ public class Main {
                 case "quit":
                         active = false;
                         System.out.println("Bye-bye :)");
+                        break;
         }
     }
 }
