@@ -6,9 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         final int MAX_AMOUNT_DEFECT = 10;
-        String[] defectSummary = new String[MAX_AMOUNT_DEFECT];
-        String[] defectSeverity = new String[MAX_AMOUNT_DEFECT];
-        int[] numberOfDays = new int[MAX_AMOUNT_DEFECT];
+        Defect[] defects = new Defect[MAX_AMOUNT_DEFECT];
         int countDefects = 0;
 
         while (true) {
@@ -30,9 +28,7 @@ public class Main {
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
                     int numberOfDaysThisDefect = scanner.nextInt();
 
-                    defectSummary[countDefects] = defectSummaryThisDefect;
-                    defectSeverity[countDefects]= defectSeverityThisDefect;
-                    numberOfDays[countDefects] = numberOfDaysThisDefect;
+                    defects[countDefects] = new Defect(1000000+countDefects, defectSummaryThisDefect, defectSeverityThisDefect, numberOfDaysThisDefect);
 
                     System.out.println("Дефект успешно добавлен" + "\n");
 
@@ -48,7 +44,7 @@ public class Main {
                 }
                 else {
                     for (int i=0; i<countDefects; i++) {
-                        System.out.println(defectSummary[i]+ " | " +defectSeverity[i]+ " | " +numberOfDays[i]);
+                        System.out.println(defects[i].getInfo());
                     }
                     System.out.println();
                 }
