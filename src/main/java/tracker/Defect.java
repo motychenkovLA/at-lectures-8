@@ -7,19 +7,10 @@ public class Defect {
     private int amountForCorrect;
 
     public Defect(long id, String resume, String criticality, int amountForCorrect) {
-        if (id < 1000000) {
-            this.id = id + 1000000;
-        } else {
-            this.id = id;
-        }
+        this.id = id;
         this.resume = resume;
         this.criticality = criticality;
         this.amountForCorrect = amountForCorrect;
-    }
-    public void printInfoDefect() {
-        System.out.println("Информация о дефекте: ");
-        System.out.println("Номер " + id + " | " + "Резюме: " + resume + " | " + "Серьезность " + criticality +
-                " | " + "Количество дней на исправление " + amountForCorrect);
     }
 
     public long getId() {
