@@ -6,16 +6,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        //объявляем макисмальный размер массива
-        final int MAX_DEFECT_COUNT = 10;
-        //объявляем массив дефектов
-        Defect[] Defects = new Defect[MAX_DEFECT_COUNT];
+        Repository repository = new Repository(3);
         //переменная отвечающая за работу цикла
         boolean isRun = true;
-        //счетчик заполнения массива
-        int amountDefects = 0;
-        //номер дефекта
-        long id = 1000000;
         //цикл для выбора действия пользователя
         while (isRun) {
             System.out.println("Выберите действие: добавить новый дефект (\"add\"), " +
@@ -25,37 +18,31 @@ public class Main {
             //условный оператор с условием добавления дефекта
             if (userDo.equals("add")) {
                 //условный оператор, позволяющий вводить нужное количество дефектов
-                if (amountDefects < MAX_DEFECT_COUNT) {
-                    System.out.println("Введите резюме дефекта");
-                    String resume = scanner.nextLine();
-                    System.out.println("Введите критичность дефекта (Highest, high, middle, low):");
-                    String criticality = scanner.nextLine();
-                    System.out.println("Введите ожидамое количество дней на исправление дефекта");
-                    int amountDays = scanner.nextInt();
-                    scanner.nextLine();
-                    //выводим информацию о дефекте
-                    System.out.println("Информация о дефекте: ");
-                    System.out.println("Id " + id + " | " + "Резюме: " + resume + " | " + "Серьезность " + criticality +
-                            " | " + "Количество дней на исправление " + amountDays);
-                    //объявляем экзмепляр класса
-                    Defect defect = new Defect(id++, resume, criticality, amountDays);
-                    //заносим дефект в массив
-                    Defects[amountDefects] = defect;
-                    //счетчик зенесенных дефектов
-                    amountDefects++;
-                    //условие, если место в массиве дефектов закончилось
-                } else {
-                    System.out.println("Закончилось место, невозможно ввести новый дефект");
-                }
+                System.out.println("Введите резюме дефекта");
+                String resume = scanner.nextLine();
+                System.out.println("Введите критичность дефекта (Highest, high, middle, low):");
+                String criticality = scanner.nextLine();
+                System.out.println("Введите ожидамое количество дней на исправление дефекта");
+                int amountDays = scanner.nextInt();
+                scanner.nextLine();
+                //объявляем экзмепляр класса
+                Defect defect = new Defect(resume, criticality, amountDays);
+                //выводим информацию о дефекте
+                System.out.println("Информация о дефекте: ");
+                System.out.println("Id " + defect.getId() + " | " + "Резюме: " + resume + " | " + "Серьезность " + criticality +
+                        " | " + "Количество дней на исправление " + amountDays);
+                //заносим дефект в массив
+                repository.add(defect);
                 //если пользователь хочет вывести дефекты на экран
             } else if (userDo.equals("list")) {
                 //цикл для вывода массива дефектов
-                for (int i = 0; i < amountDefects; i++) {
-                    System.out.println(Defects[i].getId());
-                    System.out.println(Defects[i].getAmountForCorrect());
-                    System.out.println(Defects[i].getCriticality());
-                    System.out.println(Defects[i].getResume());
+                for (int i = 0; i < repository.getAmountDefects(); i++) {
+                    System.out.println(repository.arrayDefects[i].getId());
+                    System.out.println(repository.arrayDefects[i].getAmountForCorrect());
+                    System.out.println(repository.arrayDefects[i].getCriticality());
+                    System.out.println(repository.arrayDefects[i].getResume());
                     System.out.println();
+                    System.out.println(repository.getAll().length);
                 }
                 //выход из цикла
             } else if (userDo.equals("quit")) {

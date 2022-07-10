@@ -1,24 +1,21 @@
 package tracker;
 
 public class Defect {
-    private long id;
+    private static long id = 1000000;
+    private final long objectId = id;
     private String resume;
     private String criticality;
     private int amountForCorrect;
 
-    public Defect(long id, String resume, String criticality, int amountForCorrect) {
-        this.id = id;
+    public Defect(String resume, String criticality, int amountForCorrect) {
         this.resume = resume;
         this.criticality = criticality;
         this.amountForCorrect = amountForCorrect;
+        id++;
     }
 
     public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        return objectId;
     }
 
     public String getResume() {
