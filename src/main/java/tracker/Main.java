@@ -5,9 +5,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final int COUNT_BUG = 10;
-        String [] resumes = new String[COUNT_BUG];
-        String [] priorities = new String[COUNT_BUG];
-        int [] days = new int[COUNT_BUG];
+        Defect[] defectsDisplay = new Defect[COUNT_BUG];
+
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
         int count = 0;
@@ -18,23 +17,26 @@ public class Main {
                     "\nВыйти из программы - введите (quit)");
             switch (scanner.nextLine()) {
                 case "add":
-                    if(count >= COUNT_BUG) {
+                    if (count >= COUNT_BUG) {
                         System.out.println("Вы ввели максимальное колличество дефектов");
                         System.out.println();
                         break;
                     }
                     System.out.println("Введите резюме дефекта");
-                    resumes[count] = scanner.nextLine();
+                    String resumes = scanner.nextLine();
                     System.out.println("Введите критичность дефекта из списка : High, Low, Medium");
-                    priorities[count] = scanner.nextLine();
+                    String priorities = scanner.nextLine();
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
-                    days[count] = scanner.nextInt();
+                    int days = scanner.nextInt();
                     scanner.nextLine();
+
+
+                    defectsDisplay[count] = new Defect(resumes, priorities, days);
                     count++;
                     break;
                 case "list":
-                    for(int i = 0;i < count;i++) {
-                        System.out.println(resumes[i]+" | "+priorities[i]+" | "+days[i]);
+                    for (int i = 0; i < count; i++) {
+                        System.out.println(defectsDisplay[i].getDefects());
                     }
                     break;
                 case "quit":
