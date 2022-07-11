@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final int COUNT_BUG = 10;
-        Defect[] defectsDisplay = new Defect[COUNT_BUG];
+        Defect[] defect = new Defect[COUNT_BUG];
 
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
@@ -31,12 +31,12 @@ public class Main {
                     scanner.nextLine();
 
 
-                    defectsDisplay[count] = new Defect(resumes, priorities, days);
+                    defect[count] = new Defect(resumes, priorities, days);
                     count++;
                     break;
                 case "list":
                     for (int i = 0; i < count; i++) {
-                        System.out.println(defectsDisplay[i].getDefects());
+                        System.out.println(defect[i].getDefects());
                     }
                     break;
                 case "quit":

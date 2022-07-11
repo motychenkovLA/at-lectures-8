@@ -2,22 +2,22 @@ package tracker;
 
 public class Defect {
     long id;
-    String resumes;
-    String priorities;
+    String resume;
+    String priority;
     int days;
 
     static int number = 1000000;
 
 
-    public Defect(String resumes, String priorities, int days) {
-        this.resumes = resumes;
-        this.priorities = priorities;
+    public Defect(String resume, String priority, int days) {
+        this.resume = resume;
+        this.priority = priority;
         this.days = days;
         id = number++;
     }
 
     String getDefects() {
-        return id + " | " + resumes + " | " + priorities + " | " + days;
+        return id + " | " + resume + " | " + priority + " | " + days;
     }
 
 
