@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final int COUNT_BUG = 10;
-        Defect[] defectsDisplay = new Defect[COUNT_BUG];
+        Defect[] defectsDisplay = new Defect[COUNT_BUG]; // todo 0 - display не ясно что тут значит
 
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
