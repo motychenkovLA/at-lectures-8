@@ -1,9 +1,9 @@
 package tracker;
 
 public class Repository {
-    Defect[] arrayDefects;
+    private Defect[] arrayDefects;
     private int amountDefects = 0;
-    int amount;
+    private int amount;
 
     public void add(Defect defect) {
         if (amountDefects < arrayDefects.length) {

@@ -37,10 +37,10 @@ public class Main {
             } else if (userDo.equals("list")) {
                 //цикл для вывода массива дефектов
                 for (int i = 0; i < repository.getAmountDefects(); i++) {
-                    System.out.println(repository.arrayDefects[i].getId());
-                    System.out.println(repository.arrayDefects[i].getAmountForCorrect());
-                    System.out.println(repository.arrayDefects[i].getCriticality());
-                    System.out.println(repository.arrayDefects[i].getResume());
+                    System.out.println(repository.getAll()[i].getId());
+                    System.out.println(repository.getAll()[i].getAmountForCorrect());
+                    System.out.println(repository.getAll()[i].getCriticality());
+                    System.out.println(repository.getAll()[i].getResume());
                     System.out.println();
                     System.out.println(repository.getAll().length);
                 }
