@@ -8,7 +8,6 @@ public class Defect {
 
     static int number = 1000000;
 
-
     public Defect(String resume, String priority, int days) {
         this.resume = resume;
         this.priority = priority;
@@ -19,6 +18,4 @@ public class Defect {
     String getDefects() {
         return id + " | " + resume + " | " + priority + " | " + days;
     }
-
-
 }

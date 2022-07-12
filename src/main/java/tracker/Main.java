@@ -4,12 +4,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final int COUNT_BUG = 10;
-        Defect[] defect = new Defect[COUNT_BUG];
 
+        Repository repository = new Repository(10);
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
-        int count = 0;
         while (run) {
             System.out.println("Главное меню:  " +
                     "\nДобавить новый дефевкт - введите (add) " +
@@ -17,7 +15,7 @@ public class Main {
                     "\nВыйти из программы - введите (quit)");
             switch (scanner.nextLine()) {
                 case "add":
-                    if (count >= COUNT_BUG) {
+                    if (repository.maxCount()) {
                         System.out.println("Вы ввели максимальное колличество дефектов");
                         System.out.println();
                         break;
@@ -30,13 +28,13 @@ public class Main {
                     int days = scanner.nextInt();
                     scanner.nextLine();
 
-
-                    defect[count] = new Defect(resumes, priorities, days);
-                    count++;
+                    Defect defect = new Defect(resumes, priorities, days);
+                    repository.add(defect);
                     break;
                 case "list":
-                    for (int i = 0; i < count; i++) {
-                        System.out.println(defect[i].getDefects());
+                    for (Defect def : repository.getAll()) {
+                        if (def != null)
+                            System.out.println(def.getDefects());
                     }
                     break;
                 case "quit":
