@@ -34,6 +34,7 @@ public class Main {
                 case "list":
                     for (int i = 0; i < repository.count;i++) {
 
+                        // todo 3 - дублирует запрос всех дефектов n раз
                         System.out.println(repository.getAll()[i].getDefects());
                     }
                     break;
