@@ -17,6 +17,8 @@ public class Repository {
         return count >= defect.length;
     }
 
+    // todo 3 - возвращает не все дефекты, а все дефекты + горсть нуллов
+    //  + утекает внутреннее состояние, нарушая инкапсуляцию
     public Defect[] getAll() {
         return defect;
     }

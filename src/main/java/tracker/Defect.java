@@ -15,6 +15,7 @@ public class Defect {
         id = number++;
     }
 
+    // todo 3 - get defectS, при этом возвращает одну строку а не массив дефектов
     String getDefects() {
         return id + " | " + resume + " | " + priority + " | " + days;
     }
