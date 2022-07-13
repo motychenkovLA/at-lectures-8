@@ -33,6 +33,7 @@ public class Main {
                     break;
                 case "list":
                     for (int i = 0; i < repository.count;i++) {
+
                         System.out.println(repository.getAll()[i].getDefects());
                     }
                     break;
