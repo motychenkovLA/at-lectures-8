@@ -5,9 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        final int MAX_AMOUNT_DEFECT = 10;
-        Defect[] defects = new Defect[MAX_AMOUNT_DEFECT];
-        int countDefects = 0;
+        Repository repository = new Repository(20);
 
         while (true) {
 
@@ -17,7 +15,7 @@ public class Main {
 
             if (userChoice.equals("add")) {
 
-                if (countDefects < MAX_AMOUNT_DEFECT) {
+                if (repository.getCountDefects() < repository.getDefectsLength()) {
 
                     System.out.println("Введите резюме дефекта");
                     String defectSummaryThisDefect = scanner.nextLine();
@@ -28,23 +26,25 @@ public class Main {
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
                     int numberOfDaysThisDefect = scanner.nextInt();
 
-                    defects[countDefects] = new Defect(1000000+countDefects, defectSummaryThisDefect, defectSeverityThisDefect, numberOfDaysThisDefect);
+                    repository.add(new Defect(defectSummaryThisDefect, defectSeverityThisDefect, numberOfDaysThisDefect));
 
                     System.out.println("Дефект успешно добавлен" + "\n");
 
-                    countDefects++;
                 }
                 else {
-                    System.out.println("Невозможно добавить более 10 дефектов"+"\n");
+                    System.out.println("Невозможно добавить более " + repository.getDefectsLength()+ " дефектов"+"\n");
                 }
             }
             else if (userChoice.equals("list")) {
-                if (countDefects == 0) {
+                if (repository.getCountDefects() == 0) {
                     System.out.println ("В системе нет ни одного дефекта\n");
                 }
                 else {
-                    for (int i=0; i<countDefects; i++) {
-                        System.out.println(defects[i].getInfo());
+                    for (Defect defect : repository.getAll()) {
+                        if (defect == null) {
+                            break;
+                        }
+                        System.out.println(defect.getInfo());
                     }
                     System.out.println();
                 }
