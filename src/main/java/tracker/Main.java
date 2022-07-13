@@ -1,17 +1,15 @@
 package tracker;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        final int DEFECTS = 10; //константа - максимальное количество дефектов
-        String[] description = new String[DEFECTS];//вводим строковый массив description с количеством элементов, равному максимальному кол-ву дефектов
-        String[] severity = new String[DEFECTS];//вводим строковый массив severity с количеством элементов, равному максимальному кол-ву дефектов
-        int[] numberOfDays = new int[DEFECTS];//вводим числовой массив numberOfDays с количеством элементов, равному максимальному кол-ву дефектов
+        final int MAX_DEFECTS = 10; //константа - максимальное количество дефектов
+        Defect defect = new Defect(); // вводим переменную типа Defect
         int count = 0; //вводим счетчик
         boolean work = true; //флаг завершения цикла
+        long idDefect = 1000000;
         while (work) {
             System.out.println("Вы находитесь в главном меню багтрекинговой системы. Выберите действие:" +
                     "\nДобавить новый дефект (введите команду add)" +
@@ -20,28 +18,26 @@ public class Main {
             String command = scan.nextLine();
             switch (command) {
                 case "add": //ввод дефекта
-                    if (count < DEFECTS) {//проверяем сколько дефектов заведено
+                    if (count < MAX_DEFECTS) { //проверяем сколько дефектов заведено
                         System.out.println("Введите краткое описание дефекта:");
-                        description[count] = scan.nextLine();
+                        defect.description[count] = scan.nextLine();
                         System.out.println("Следующий шаг: введите критичность дефекта" +
                                 "\n(Доступны следующие варианты: Тривиальный, Незначительный, Значительный, Критический, Блокирующий)");
-                        severity[count] = scan.nextLine();
+                        defect.severity[count] = scan.nextLine();
                         System.out.println("Следующий шаг: введите ожидаемое количество дней на исправление дефекта: ");
-                        numberOfDays[count] = scan.nextInt();
+                        defect.numberOfDays[count] = scan.nextInt();
                         scan.nextLine();
-                        System.out.println("Вы ввели следующий дефект: " +
-                                "\n" + description[count] +
-                                "\n" + severity[count] +
-                                "\n" + numberOfDays[count]);
+                        defect.id[count] = idDefect++;//увеличиваем id дефекта
+                        defect.printInfo(count); //вызываем метод printInfo для вывода дефекта в консоль
                         count++;//увеличиваем счетчик
                     } else {
                         System.out.println("Закончилось место для заведения дефектов!");
                     }
                     break;
                 case "list": //команда список дефектов
-                    System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление):");
+                    System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление, id дефекта):");
                     for (int i = 0; i < count; i++) { //выводим построково дефекты из массива в количестве i, равному счетчику count
-                        System.out.println(description[i] + " // " + severity[i] + " // " + numberOfDays[i]);
+                        System.out.println(defect.description[i] + " // " + defect.severity[i] + " // " + defect.numberOfDays[i] + " // " + defect.id[i]);
                     }
                     break;
                 case "quit":
