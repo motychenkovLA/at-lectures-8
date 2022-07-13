@@ -32,9 +32,8 @@ public class Main {
                     repository.add(defect);
                     break;
                 case "list":
-                    for (Defect def : repository.getAll()) {
-                        if (def != null)
-                            System.out.println(def.getDefects());
+                    for (int i = 0; i < repository.count;i++) {
+                        System.out.println(repository.getAll()[i].getDefects());
                     }
                     break;
                 case "quit":
