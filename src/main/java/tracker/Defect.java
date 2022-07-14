@@ -1,19 +1,22 @@
 package tracker;
 
 public class Defect {
-    static long number = 1000000;
-    final long id = number++;
+    long id;
     String resume;
     String priority;
     int days;
+
+    static int number = 1000000;
 
     public Defect(String resume, String priority, int days) {
         this.resume = resume;
         this.priority = priority;
         this.days = days;
+        id = number++;
     }
 
-    public String getFields() {
-        return id+" | "+resume+" | "+priority+" | "+days;
+    // todo 3 - get defectS, при этом возвращает одну строку а не массив дефектов
+    String getDefects() {
+        return id + " | " + resume + " | " + priority + " | " + days;
     }
 }

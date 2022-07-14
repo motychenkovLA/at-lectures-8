@@ -1,9 +1,8 @@
 package tracker;
-import java.util.Arrays;
 
 public class Repository {
     private final Defect[] defect;
-    private int count = 0;
+    int count = 0;
 
     public Repository(int countBug) {
         this.defect = new Defect[countBug];
@@ -19,6 +18,6 @@ public class Repository {
     }
 
     public Defect[] getAll() {
-        return Arrays.copyOf(defect,count);
+        return defect;
     }
 }
