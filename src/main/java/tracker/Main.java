@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Repository repository = new Repository(10);
+        Repository repository = new Repository(10); // todo 1 - 10 неплохо бы в константу вынести кстати
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
         while (run) {
@@ -33,7 +33,7 @@ public class Main {
                     break;
                 case "list":
                     for (Defect def : repository.getAll()) {
-                        if (def != null)
+                        if (def != null) // todo 3 - раз getAll всегда возвращает валидный список дефектов, проверка излишня
                             System.out.println(def.getFields());
                     }
                     break;

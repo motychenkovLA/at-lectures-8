@@ -1,7 +1,8 @@
 package tracker;
 
 public class Defect {
-    long id;
+    // todo 3 - дз: Инкапсулировать класс Defect
+    long id; // todo 3 - дз: поле id сделать неизменяемым
     String resume;
     String priority;
     int days;
@@ -15,6 +16,8 @@ public class Defect {
         id = number++;
     }
 
+    // todo 1 - подозрительный модификатор доступа
+    // todo 1 - все еще не понятно почему название во множественном числе, если возвращается один объект
     String getFields() {
         return id + " | " + resume + " | " + priority + " | " + days;
     }
