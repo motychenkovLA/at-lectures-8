@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         final int MAX_DEFECTS = 10; //константа - максимальное количество дефектов
+        // todo 5 - то есть мы взяли и откатили хранение дефекта по полям обратно к хранению не-дефекта?
         String [] arrayOfDefects = new String[MAX_DEFECTS]; //массив для хранения дефектов
         int count = 0; //вводим счетчик
         boolean work = true; //флаг завершения цикла
@@ -21,6 +22,7 @@ public class Main {
                 case "add": //ввод дефекта
                     if (count < MAX_DEFECTS) { //проверяем сколько дефектов заведено
                         Defect defect = new Defect();
+                        // todo 3 - дефект существует в не-инициализированном виде
                         System.out.println("Введите краткое описание дефекта:");
                         defect.description = scan.nextLine();
                         System.out.println("Следующий шаг: введите критичность дефекта" +
@@ -32,6 +34,8 @@ public class Main {
                         defect.id = idDefect++;//увеличиваем id дефекта
                         defect.printInfoDefect(); //вызываем метод printInfo для вывода дефекта в консоль
                         arrayOfDefects[count] = defect.getInfoDefect(); //вызываем метод getInfoDefect для записи дефекта в массив
+                        // todo 5 - после этого дефект улетает в мусор, не понятно зачем он вообще нужен тогда в нашей программе,
+                        //  набор переменных можно было объявить и здесь, короче бы код вышел
                         count++;//увеличиваем счетчик
                     } else {
                         System.out.println("Закончилось место для заведения дефектов!");
@@ -39,6 +43,7 @@ public class Main {
                     break;
                 case "list": //команда список дефектов
                     System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление, id дефекта):");
+                    // todo 1 - отступ
                    for (int i = 0; i < count; i++) { //выводим построково дефекты из массива в количестве i, равному счетчику count
                        System.out.println(arrayOfDefects[i]);
                    }

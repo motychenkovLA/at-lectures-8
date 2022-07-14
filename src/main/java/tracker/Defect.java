@@ -7,6 +7,7 @@ public class Defect {
     String severity;
     int numberOfDays;
 
+    // todo 3 - Defect работает с консолью, а должен моделировать дефект
     void printInfoDefect (){
         System.out.println("Вы ввели следующий дефект: " +
                 "\n" + description +
