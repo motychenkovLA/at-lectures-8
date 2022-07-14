@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.Arrays;
+
 public class Repository {
     private final Defect[] defect;
     int count = 0;
@@ -18,6 +20,6 @@ public class Repository {
     }
 
     public Defect[] getAll() {
-        return defect;
+        return Arrays.copyOf(defect,count);
     }
 }
