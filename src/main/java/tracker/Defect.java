@@ -6,7 +6,7 @@ public class Defect {
     private String priority;
     private int days;
 
-    static int number = 1000000;
+    private static int number = 1000000;
 
     public Defect(String resume, String priority, int days) {
         this.resume = resume;
