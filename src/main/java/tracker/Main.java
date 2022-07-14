@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-        Repository repository = new Repository(10);
+        final int COUNT_BUG = 10;
+        Repository repository = new Repository(COUNT_BUG);
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
         while (run) {
@@ -15,7 +15,7 @@ public class Main {
                     "\nВыйти из программы - введите (quit)");
             switch (scanner.nextLine()) {
                 case "add":
-                    if (repository.maxCount()) {
+                    if (repository.full()) {
                         System.out.println("Вы ввели максимальное колличество дефектов");
                         System.out.println();
                         break;
@@ -33,8 +33,7 @@ public class Main {
                     break;
                 case "list":
                     for (Defect def : repository.getAll()) {
-                        if (def != null)
-                            System.out.println(def.getFields());
+                        System.out.println(def.getField());
                     }
                     break;
                 case "quit":

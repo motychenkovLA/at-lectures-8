@@ -1,10 +1,10 @@
 package tracker;
 
 public class Defect {
-    long id;
-    String resume;
-    String priority;
-    int days;
+    private final long id = number++;
+    private String resume;
+    private String priority;
+    private int days;
 
     static int number = 1000000;
 
@@ -12,10 +12,9 @@ public class Defect {
         this.resume = resume;
         this.priority = priority;
         this.days = days;
-        id = number++;
     }
 
-    String getFields() {
+    public String getField() {
         return id + " | " + resume + " | " + priority + " | " + days;
     }
 }

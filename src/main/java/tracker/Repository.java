@@ -3,8 +3,9 @@ package tracker;
 import java.util.Arrays;
 
 public class Repository {
+
     private final Defect[] defect;
-    int count = 0;
+    private int count = 0;
 
     public Repository(int countBug) {
         this.defect = new Defect[countBug];
@@ -15,11 +16,11 @@ public class Repository {
         count++;
     }
 
-    public boolean maxCount() {
+    public boolean full() {
         return count >= defect.length;
     }
 
     public Defect[] getAll() {
-        return Arrays.copyOf(defect,count);
+        return Arrays.copyOf(defect, count);
     }
 }
