@@ -7,7 +7,6 @@ public class Main {
         final int COUNT_BUG = 10;
         Repository repository = new Repository(COUNT_BUG);
         Scanner scanner = new Scanner(System.in);
-        boolean loop = true;
         boolean run = true;
         while (run) {
             System.out.println("Главное меню:  " +
@@ -21,9 +20,6 @@ public class Main {
                         System.out.println();
                         break;
                     }
-                    if (!loop) {
-                        loop = true;
-                    }
                     System.out.println("Введите резюме дефекта");
                     String resumes = scanner.nextLine();
                     System.out.println("Введите критичность дефекта из списка : High, Low, Medium");
@@ -32,7 +28,7 @@ public class Main {
                     int days = scanner.nextInt();
                     scanner.nextLine();
                     Attachment attachment = null;
-                    while (loop) {
+                    while (attachment == null) {
                         System.out.println("Выберите тип вложения" +
                                 "\nДля добавления комментарий - введите \"comments\"" +
                                 "\nДля добавления ссылки на другой дефект - введите \"link\"");
@@ -41,14 +37,12 @@ public class Main {
                                 System.out.println("Введите комменатарий:");
                                 String comment = scanner.nextLine();
                                 attachment = new CommentAttachment(comment);
-                                loop = false;
                                 break;
                             case "link":
                                 System.out.println("Введите id дефекта:");
                                 int link = scanner.nextInt();
                                 scanner.nextLine();
                                 attachment = new DefectAttachment(link);
-                                loop = false;
                                 break;
                             default:
                                 break;

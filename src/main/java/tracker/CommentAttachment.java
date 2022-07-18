@@ -9,6 +9,6 @@ public class CommentAttachment extends Attachment {
 
     @Override
     public String asString() {
-        return comments;
+        return "Комментарий: "+comments;
     }
 }
