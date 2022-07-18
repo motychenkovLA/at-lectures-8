@@ -7,6 +7,7 @@ public class Defect {
     private String defectSummary;
     private String defectSeverity;
     private int numberOfDays;
+    private Attachment defectAttachment;
 
     public Defect (String defectSummary, String defectSeverity, int numberOfDays) {
         this.defectSummary = defectSummary;
@@ -14,6 +15,15 @@ public class Defect {
         this.numberOfDays = numberOfDays;
         contDefectID++;
     }
+
+    public Defect (String defectSummary, String defectSeverity, int numberOfDays, Attachment defectAttachment) {
+        this.defectSummary = defectSummary;
+        this.defectSeverity = defectSeverity;
+        this.numberOfDays = numberOfDays;
+        this.defectAttachment = defectAttachment;
+        contDefectID++;
+    }
+
 
     public long getID() {
         return ID;
@@ -44,6 +54,10 @@ public class Defect {
     }
 
     String getInfo () {
-        return this.ID + " | " + this.defectSummary + " | " +this.defectSeverity + " | " + numberOfDays;
+        String info = this.ID + " | " + this.defectSummary + " | " +this.defectSeverity + " | " + this.numberOfDays;
+        if (this.defectAttachment != null) {
+            info = info + this.defectAttachment.asString();
+        }
+        return info;
     }
 }
