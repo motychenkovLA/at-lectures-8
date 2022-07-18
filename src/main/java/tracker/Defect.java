@@ -6,11 +6,13 @@ public class Defect {
     private String resume;
     private String criticality;
     private int amountForCorrect;
+    private Attachment attachment;
 
-    public Defect(String resume, String criticality, int amountForCorrect) {
+    public Defect(String resume, String criticality, int amountForCorrect, Attachment attachment) {
         this.resume = resume;
         this.criticality = criticality;
         this.amountForCorrect = amountForCorrect;
+        this.attachment = attachment;
         id++;
     }
 
@@ -40,5 +42,9 @@ public class Defect {
 
     public void setAmountForCorrect(int amountForCorrect) {
         this.amountForCorrect = amountForCorrect;
+    }
+
+    public Attachment getAttachment() {
+        return attachment;
     }
 }

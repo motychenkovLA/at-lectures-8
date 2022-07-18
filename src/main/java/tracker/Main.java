@@ -25,12 +25,28 @@ public class Main {
                 System.out.println("Введите ожидамое количество дней на исправление дефекта");
                 int amountDays = scanner.nextInt();
                 scanner.nextLine();
-                //объявляем экзмепляр класса
-                Defect defect = new Defect(resume, criticality, amountDays);
+                System.out.println("Выберите тип вложения: \"Комментарий\" (comment) или " +
+                        "\"Ссылка на другой дефект\" (link)");
+                String typeAttachment = scanner.nextLine();
+                Attachment attachment = null;
+                if (typeAttachment.equals("comment")) {
+                        System.out.println("Введите комментарий:");
+                        String comment = scanner.nextLine();
+                        attachment = new CommentAttachment(comment);
+                } else if (typeAttachment.equals("link")) {
+                        System.out.println("Введите id дефекта:");
+                        int idDefect = scanner.nextInt();
+                        scanner.nextLine();
+                        attachment = new DefectAttachment(idDefect);
+                } else {
+                        System.out.println("Введите корреткное значение вложения");
+                }
+                //объявляем экзмепляр класса Defect
+                Defect defect = new Defect(resume, criticality, amountDays, attachment);
                 //выводим информацию о дефекте
                 System.out.println("Информация о дефекте: ");
                 System.out.println("Id " + defect.getId() + " | " + "Резюме: " + resume + " | " + "Серьезность " + criticality +
-                        " | " + "Количество дней на исправление " + amountDays);
+                        " | " + "Количество дней на исправление " + amountDays + " | " + " Комментарий или id дефекта: " + attachment.asString());
                 //заносим дефект в массив
                 repository.add(defect);
                 //если пользователь хочет вывести дефекты на экран
@@ -41,8 +57,8 @@ public class Main {
                     System.out.println(repository.getAll()[i].getAmountForCorrect());
                     System.out.println(repository.getAll()[i].getCriticality());
                     System.out.println(repository.getAll()[i].getResume());
+                    System.out.println(repository.getAll()[i].getAttachment().asString());
                     System.out.println();
-                    System.out.println(repository.getAll().length);
                 }
                 //выход из цикла
             } else if (userDo.equals("quit")) {
