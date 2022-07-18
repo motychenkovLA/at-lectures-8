@@ -7,7 +7,7 @@ public class Main {
         final int COUNT_BUG = 10;
         Repository repository = new Repository(COUNT_BUG);
         Scanner scanner = new Scanner(System.in);
-        boolean loop = true;
+        boolean loop = true; // todo 3 - объявлена слишком далеко от использования, дублирует более простое условие
         boolean run = true;
         while (run) {
             System.out.println("Главное меню:  " +

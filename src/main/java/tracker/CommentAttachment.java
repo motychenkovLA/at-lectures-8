@@ -9,6 +9,8 @@ public class CommentAttachment extends Attachment {
 
     @Override
     public String asString() {
+        // todo 1 - в такой реализации не особо видна разница между комментом и дефектом,
+        //  тут бы какой-нибудь префикс типа "коммент: ..."
         return comments;
     }
 }
