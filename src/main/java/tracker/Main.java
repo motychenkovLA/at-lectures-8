@@ -1,15 +1,16 @@
 package tracker;
 import java.util.Scanner;
 
+
 public class Main {
+
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
         boolean run = true;
-        final int COUNTOFDEFECTS = 1; //максимальное число хранимых дефектов в программе
-        String[] resume = new String[COUNTOFDEFECTS]; //массив резюме дефекта
-        String[] severity = new String[COUNTOFDEFECTS]; //массив критичности
-        int[] days = new int[COUNTOFDEFECTS]; //массив кол-во дней на исправление
+        final int COUNTOFDEFECTS = 10; //максимальное число хранимых дефектов в программе
+        Defect [] arrayOfDefects = new Defect[COUNTOFDEFECTS];
+        long idDefect = 1000000;
         int count = 0;
 
         while (run) {
@@ -23,15 +24,18 @@ public class Main {
                         System.out.print("Заведено максимальное количество дефектов. ");
                     } else {
                         System.out.println("Введите резюме дефекта:");
-                        resume[count] = scan.nextLine();
+                        String resume = scan.nextLine();
 
                         System.out.println("Введите критичность дефекта. \n Список вариантов: \n 1 - Тривиальный " +
                                 "\n 2 - Незначительный \n 3 - Значительный \n 4 - Критический \n 5 - Блокирующий");
-                        severity[count] = scan.nextLine();
+                        String severity = scan.nextLine();
 
                         System.out.println("Введите ожидаемое количество дней на исправление дефекта.");
-                        days[count] = scan.nextInt();
-                        scan.nextLine();
+                        int days = scan.nextInt();
+
+                        long id = idDefect + count;
+                        Defect defect = new Defect(id, resume, severity, days);
+                        arrayOfDefects[count] = defect;
                     }
                     count++;
                     break;
@@ -39,20 +43,19 @@ public class Main {
 
                 case "list": {
                     for (int i = 0; i < count; i++) {
-                        System.out.print("Резюме дефекта: " + resume[i] + " | " + "Критичность: " + severity[i] +
-                                " | " + "количество дней на исправление: " + days[i] + "\n");
+                        System.out.println(arrayOfDefects[i].getInfo());
                     }
                     break;
                 }
 
                 case "quit": {
                     run = false;
-                    System.out.print("Вы вышли из главного меню. ");
+                    System.out.println("Вы вышли из главного меню. ");
                     break;
                 }
 
                 default: {
-                    System.out.print("Неверно введена команда. ");
+                    System.out.println("Неверно введена команда. ");
                     break;
                 }
             }
