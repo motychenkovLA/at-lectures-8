@@ -7,6 +7,7 @@ public class Defect {
     private String criticality;
     private int amountForCorrect;
     private Attachment attachment;
+    private StatusDefect status = StatusDefect.OPEN;
 
     public Defect(String resume, String criticality, int amountForCorrect, Attachment attachment) {
         this.resume = resume;
@@ -14,6 +15,12 @@ public class Defect {
         this.amountForCorrect = amountForCorrect;
         this.attachment = attachment;
         id++;
+    }
+
+    public void printCriticality() {
+        for (Criticality criticalityDefect : Criticality.values()) {
+            System.out.println(criticalityDefect);
+        }
     }
 
     public long getId() {
@@ -46,5 +53,13 @@ public class Defect {
 
     public Attachment getAttachment() {
         return attachment;
+    }
+
+    public StatusDefect getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusDefect status) {
+        this.status = status;
     }
 }

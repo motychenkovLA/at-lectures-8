@@ -12,7 +12,7 @@ public class Main {
         //цикл для выбора действия пользователя
         while (isRun) {
             System.out.println("Выберите действие: добавить новый дефект (\"add\"), " +
-                    "вывести список (\"list\"), выйти из программы (\"quit\") - главное меню");
+                    "вывести список (\"list\"), " + "изменить статус (\"change\"), " + "выйти из программы (\"quit\") - главное меню");
             //объявляем и вводим переменную действия пользователя
             String userDo = scanner.nextLine();
             //условный оператор с условием добавления дефекта
@@ -20,7 +20,9 @@ public class Main {
                 //условный оператор, позволяющий вводить нужное количество дефектов
                 System.out.println("Введите резюме дефекта");
                 String resume = scanner.nextLine();
-                System.out.println("Введите критичность дефекта (Highest, high, middle, low):");
+                System.out.println("Введите критичность дефекта: " +
+                        Criticality.valueOf("HIGHEST") + ", " + Criticality.valueOf("HIGH") + ", " +
+                        Criticality.valueOf("MIDDLE") + ", " + Criticality.valueOf("LOW"));
                 String criticality = scanner.nextLine();
                 System.out.println("Введите ожидамое количество дней на исправление дефекта");
                 int amountDays = scanner.nextInt();
@@ -46,7 +48,8 @@ public class Main {
                 //выводим информацию о дефекте
                 System.out.println("Информация о дефекте: ");
                 System.out.println("Id " + defect.getId() + " | " + "Резюме: " + resume + " | " + "Серьезность " + criticality +
-                        " | " + "Количество дней на исправление " + amountDays + " | " + " Комментарий или id дефекта: " + attachment.asString());
+                        " | " + "Количество дней на исправление " + amountDays + " | " + " Комментарий или id дефекта: " +
+                        attachment.toString() + " | " + "Статус:" + defect.getStatus());
                 //заносим дефект в массив
                 repository.add(defect);
                 //если пользователь хочет вывести дефекты на экран
@@ -57,14 +60,41 @@ public class Main {
                     System.out.println(repository.getAll()[i].getAmountForCorrect());
                     System.out.println(repository.getAll()[i].getCriticality());
                     System.out.println(repository.getAll()[i].getResume());
-                    System.out.println(repository.getAll()[i].getAttachment().asString());
+                    System.out.println(repository.getAll()[i].getAttachment().toString());
+                    System.out.println(repository.getAll()[i].getStatus());
                     System.out.println();
                 }
                 //выход из цикла
             } else if (userDo.equals("quit")) {
                 isRun = false;
-                //если пользователь ввел некорреткное значение
-            } else {
+            } else if (userDo.equals("change")) {
+                System.out.println("Введите id дефекта: ");
+                long idForChange = scanner.nextInt();
+                scanner.nextLine();
+                for (Defect defectFromArray:repository.getAll()) {
+                    if (idForChange == defectFromArray.getId()) {
+                        System.out.println("Введите статус дефекта: " + StatusDefect.valueOf("OPEN") + ", "
+                                + StatusDefect.valueOf("ANALYSIS") + ", " + StatusDefect.valueOf("CORRECTION") + ", "
+                                + StatusDefect.valueOf("TESTING") + ", " + StatusDefect.valueOf("CLOSE"));
+                        String newStatusDefect = scanner.nextLine();
+                        if (StatusDefect.OPEN.toString().equals(newStatusDefect)) {
+                            defectFromArray.setStatus(StatusDefect.OPEN);
+                        } else if (StatusDefect.ANALYSIS.toString().equals(newStatusDefect)) {
+                            defectFromArray.setStatus(StatusDefect.ANALYSIS);
+                        } else if (StatusDefect.CORRECTION.toString().equals(newStatusDefect)) {
+                            defectFromArray.setStatus(StatusDefect.CORRECTION);
+                        } else if (StatusDefect.TESTING.toString().equals(newStatusDefect)) {
+                            defectFromArray.setStatus(StatusDefect.TESTING);
+                        } else if (StatusDefect.CLOSE.toString().equals(newStatusDefect)) {
+                            defectFromArray.setStatus(StatusDefect.CLOSE);
+                        } else {
+                            System.out.println("Введите корректное значение");
+                        }
+                    }
+                }
+            }
+            //если пользователь ввел некорреткное значение
+            else {
                 System.out.println("Введите корректное значение");
             }
         }

@@ -25,6 +25,10 @@ public class Repository {
         return amountDefects;
     }
 
+    public Defect[] getArrayDefects() {
+        return arrayDefects;
+    }
+
     public Repository(int amount) {
         this.amount = amount;
         arrayDefects = new Defect[amount];

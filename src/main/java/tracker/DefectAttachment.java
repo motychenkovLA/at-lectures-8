@@ -7,7 +7,7 @@ public class DefectAttachment extends Attachment {
     }
 
     @Override
-    public String asString() {
+    public String toString() {
         return String.valueOf(idDefect);
     }
 }
