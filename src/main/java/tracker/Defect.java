@@ -4,12 +4,12 @@ public class Defect {
     private static long id = 1000000;
     private final long objectId = id;
     private String resume;
-    private String criticality;
+    private Criticality criticality;
     private int amountForCorrect;
     private Attachment attachment;
     private StatusDefect status = StatusDefect.OPEN;
 
-    public Defect(String resume, String criticality, int amountForCorrect, Attachment attachment) {
+    public Defect(String resume, Criticality criticality, int amountForCorrect, Attachment attachment) {
         this.resume = resume;
         this.criticality = criticality;
         this.amountForCorrect = amountForCorrect;
@@ -35,11 +35,11 @@ public class Defect {
         this.resume = resume;
     }
 
-    public String getCriticality() {
+    public Criticality getCriticality() {
         return criticality;
     }
 
-    public void setCriticality(String criticality) {
+    public void setCriticality(Criticality criticality) {
         this.criticality = criticality;
     }
 

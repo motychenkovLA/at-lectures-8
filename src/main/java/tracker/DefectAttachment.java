@@ -2,12 +2,14 @@ package tracker;
 
 public class DefectAttachment extends Attachment {
 
-    public DefectAttachment(int idDefect) {
-        super(idDefect);
-    }
+    int idDefect;
 
     @Override
     public String toString() {
         return String.valueOf(idDefect);
+    }
+
+    public DefectAttachment(int idDefect) {
+        this.idDefect = idDefect;
     }
 }

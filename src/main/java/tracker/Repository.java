@@ -21,6 +21,22 @@ public class Repository {
         return defectsForReturn;
     }
 
+    public void changeStatus(String newStatusDefect, Defect defectFromArray) {
+        if (StatusDefect.OPEN.toString().equals(newStatusDefect)) {
+            defectFromArray.setStatus(StatusDefect.OPEN);
+        } else if (StatusDefect.ANALYSIS.toString().equals(newStatusDefect)) {
+            defectFromArray.setStatus(StatusDefect.ANALYSIS);
+        } else if (StatusDefect.CORRECTION.toString().equals(newStatusDefect)) {
+            defectFromArray.setStatus(StatusDefect.CORRECTION);
+        } else if (StatusDefect.TESTING.toString().equals(newStatusDefect)) {
+            defectFromArray.setStatus(StatusDefect.TESTING);
+        } else if (StatusDefect.CLOSE.toString().equals(newStatusDefect)) {
+            defectFromArray.setStatus(StatusDefect.CLOSE);
+        } else {
+            System.out.println("Введите корректное значение");
+        }
+    }
+
     public int getAmountDefects() {
         return amountDefects;
     }
