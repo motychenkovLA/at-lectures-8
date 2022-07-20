@@ -1,14 +1,16 @@
 package tracker;
 
+// todo 1 - неиспользуемый импорт
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        // todo 0 - в целом довольно избыточные комменты, дублирующие код, желательно почистить
         final int MAX_DEFECTS = 10; //константа - максимальное количество дефектов
         Repository repository = new Repository(MAX_DEFECTS); //создаём экземпляр класса Repository
-        int count = 0; //вводим счетчик
+        int count = 0; //вводим счетчик // todo 3 - зачем мы тут что-то считаем, если этим уже занимается репо?
         boolean work = true; //флаг завершения цикла
         while (work) {
             System.out.println("Вы находитесь в главном меню багтрекинговой системы. Выберите действие:" +
@@ -43,6 +45,7 @@ public class Main {
                         System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление):");
                         Defect[] defectForList = repository.getAll();//создаём объект типа Defect, в который возвращаем имеющиеся дефекты
                         for (int i = 0; i < count; i++) {
+                            // todo 1 - отступ
                         System.out.println(defectForList[i].getInfoDefect());//применяем метод для каждого дефекта
                         }
                     }
