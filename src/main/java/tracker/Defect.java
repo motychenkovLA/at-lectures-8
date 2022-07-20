@@ -2,22 +2,26 @@ package tracker;
 
 public class Defect {
 
-    long id;
-    String description;
-    String severity;
-    int numberOfDays;
+    private static long counter = 1000000; 
+    private final long id = counter;
+    private final String description;
+    private final String severity;
+    private final int numberOfDays;
 
-    public Defect (String description, String severity, int numberOfDays, long id) {
+    public Defect (String description, String severity, int numberOfDays) {
         this.description = description;
         this.severity = severity;
         this.numberOfDays = numberOfDays;
-        this.id = id;
+        counter++;
     }
 
     String getInfoDefect (){
         return (description + " // " + severity + " // "  + numberOfDays + " // " + id);
     }
+
 }
+
+
 
 
 

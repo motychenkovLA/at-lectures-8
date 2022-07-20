@@ -7,10 +7,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         final int MAX_DEFECTS = 10; //константа - максимальное количество дефектов
-        Defect [] arrayOfDefects = new Defect[MAX_DEFECTS]; //массив для хранения дефектов
+        Repository repository = new Repository(MAX_DEFECTS); //создаём экземпляр класса Repository
         int count = 0; //вводим счетчик
         boolean work = true; //флаг завершения цикла
-        long idDefect = 1000000; //начальный id дефекта
         while (work) {
             System.out.println("Вы находитесь в главном меню багтрекинговой системы. Выберите действие:" +
                     "\nДобавить новый дефект (введите команду add)" +
@@ -28,23 +27,24 @@ public class Main {
                         System.out.println("Следующий шаг: введите ожидаемое количество дней на исправление дефекта: ");
                         int numberOfDays = scan.nextInt();//добавляем переменную для занесение в поле numberOfDays
                         scan.nextLine();
-                        long id = idDefect+count;//добавляем переменную для занесение в поле id и увеличиваем её с каждым циклом
-                        Defect defect = new Defect(description, severity, numberOfDays, id);//создаём объект типа Defect с обязательными полями description, severity, numberOfDays, id
-                        arrayOfDefects[count] = defect;// добавляем созданный объект в массив arrayOfDefects
-                        System.out.println("Вы ввели следующую информацию: " +
-                                "\n" + description +
-                                "\n" + severity +
-                                "\n" + numberOfDays +
-                                "\n" + id);
+                        Defect defect = new Defect(description, severity, numberOfDays);//создаём объект типа Defect с обязательными полями description, severity, numberOfDays
+                        System.out.println("Вы ввели следующий дефект:");
+                        System.out.println(defect.getInfoDefect());
+                        repository.add(defect);//вызываем метод add для добавления объекта в поле defects переменной repository
                         count++;//увеличиваем счетчик
                     } else {
                         System.out.println("Закончилось место для заведения дефектов!");
                     }
                     break;
                 case "list": //команда список дефектов
-                    System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление, id дефекта):");
-                    for (int i = 0; i < count; i++) {
-                      System.out.println(arrayOfDefects[i].getInfoDefect());//выводим построково дефекты из массива в количестве i, равному счетчику count
+                    if (count==0) {
+                        System.out.println("Дефектов не заведено!");
+                    } else {
+                        System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление):");
+                        Defect[] defectForList = repository.getAll();//создаём объект типа Defect, в который возвращаем имеющиеся дефекты
+                        for (int i = 0; i < count; i++) {
+                        System.out.println(defectForList[i].getInfoDefect());//применяем метод для каждого дефекта
+                        }
                     }
                     break;
                 case "quit":
