@@ -16,7 +16,7 @@ public class Main {
             String command = scan.nextLine();
             switch (command) {
                 case "add":
-                    if (repository.lengthOfArray()) {
+                    if (repository.isFilled()) {
                         //создаём переменную типа Defect и помещаем её в поле defects переменной repository
                         System.out.println("Введите краткое описание дефекта:");
                         String description = scan.nextLine();
@@ -35,14 +35,13 @@ public class Main {
                     }
                     break;
                 case "list":
-                    if (!repository.lengthOfArray()) { // todo 5 - если нет свободного места, пишем что дефектов не заведено, логически не верно
+                    if (repository.getCount() == 0) {
                         System.out.println("Дефектов не заведено!");
                     } else {
                         System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление):");
                         Defect [] defectsForArray = repository.getAll();
-                        // todo 1 - listOfDefects это единственный дефект, почему он list?
-                        for (Defect listOfDefects: defectsForArray) {
-                            System.out.println(listOfDefects.getInfoDefect());
+                        for (Defect defForOut: defectsForArray) {
+                            System.out.println(defForOut.getInfoDefect());
                         }
                     }
                     break;
