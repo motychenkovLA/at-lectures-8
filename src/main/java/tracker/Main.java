@@ -1,17 +1,13 @@
 package tracker;
 
-// todo 1 - неиспользуемый импорт
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        // todo 0 - в целом довольно избыточные комменты, дублирующие код, желательно почистить
-        final int MAX_DEFECTS = 10; //константа - максимальное количество дефектов
-        Repository repository = new Repository(MAX_DEFECTS); //создаём экземпляр класса Repository
-        int count = 0; //вводим счетчик // todo 3 - зачем мы тут что-то считаем, если этим уже занимается репо?
-        boolean work = true; //флаг завершения цикла
+        final int MAX_DEFECTS = 10;
+        Repository repository = new Repository(MAX_DEFECTS);
+        boolean work = true;
         while (work) {
             System.out.println("Вы находитесь в главном меню багтрекинговой системы. Выберите действие:" +
                     "\nДобавить новый дефект (введите команду add)" +
@@ -19,34 +15,33 @@ public class Main {
                     "\nВернуться в главное меню (введите команду quit)");
             String command = scan.nextLine();
             switch (command) {
-                case "add": //ввод дефекта
-                    if (count < MAX_DEFECTS) { //проверяем сколько дефектов заведено
+                case "add":
+                    if (repository.lengthOfArray()) {
+                        //создаём переменную типа Defect и помещаем её в поле defects переменной repository
                         System.out.println("Введите краткое описание дефекта:");
-                        String description = scan.nextLine();//добавляем переменную для занесение в поле description
+                        String description = scan.nextLine();
                         System.out.println("Следующий шаг: введите критичность дефекта" +
                                 "\n(Доступны следующие варианты: Тривиальный, Незначительный, Значительный, Критический, Блокирующий)");
-                        String severity = scan.nextLine();//добавляем переменную для занесение в поле severity
+                        String severity = scan.nextLine();
                         System.out.println("Следующий шаг: введите ожидаемое количество дней на исправление дефекта: ");
-                        int numberOfDays = scan.nextInt();//добавляем переменную для занесение в поле numberOfDays
+                        int numberOfDays = scan.nextInt();
                         scan.nextLine();
-                        Defect defect = new Defect(description, severity, numberOfDays);//создаём объект типа Defect с обязательными полями description, severity, numberOfDays
+                        Defect defect = new Defect(description, severity, numberOfDays);
                         System.out.println("Вы ввели следующий дефект:");
                         System.out.println(defect.getInfoDefect());
-                        repository.add(defect);//вызываем метод add для добавления объекта в поле defects переменной repository
-                        count++;//увеличиваем счетчик
+                        repository.add(defect);
                     } else {
                         System.out.println("Закончилось место для заведения дефектов!");
                     }
                     break;
-                case "list": //команда список дефектов
-                    if (count==0) {
+                case "list":
+                    if (!repository.lengthOfArray()) {
                         System.out.println("Дефектов не заведено!");
                     } else {
                         System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление):");
-                        Defect[] defectForList = repository.getAll();//создаём объект типа Defect, в который возвращаем имеющиеся дефекты
-                        for (int i = 0; i < count; i++) {
-                            // todo 1 - отступ
-                        System.out.println(defectForList[i].getInfoDefect());//применяем метод для каждого дефекта
+                        Defect [] defectsForArray = repository.getAll();
+                        for (Defect listOfDefects: defectsForArray) {
+                            System.out.println(listOfDefects.getInfoDefect());
                         }
                     }
                     break;
