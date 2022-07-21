@@ -35,11 +35,12 @@ public class Main {
                     }
                     break;
                 case "list":
-                    if (!repository.lengthOfArray()) {
+                    if (!repository.lengthOfArray()) { // todo 5 - если нет свободного места, пишем что дефектов не заведено, логически не верно
                         System.out.println("Дефектов не заведено!");
                     } else {
                         System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление):");
                         Defect [] defectsForArray = repository.getAll();
+                        // todo 1 - listOfDefects это единственный дефект, почему он list?
                         for (Defect listOfDefects: defectsForArray) {
                             System.out.println(listOfDefects.getInfoDefect());
                         }
