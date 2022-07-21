@@ -23,18 +23,7 @@ public class Main {
                 System.out.println("Введите критичность дефекта: " +
                         Arrays.toString(Criticality.values()));
                 String criticalityIn = scanner.nextLine();
-                Criticality criticality = null;
-                    if (Criticality.HIGHEST.toString().equals(criticalityIn)) {
-                        criticality = Criticality.HIGHEST;
-                    } else if (Criticality.HIGH.toString().equals(criticalityIn)) {
-                        criticality = Criticality.HIGH;
-                    } else if (Criticality.MIDDLE.toString().equals(criticalityIn)) {
-                        criticality = Criticality.MIDDLE;
-                    } else if (Criticality.LOW.toString().equals(criticalityIn)) {
-                        criticality = Criticality.LOW;
-                    } else {
-                        System.out.println("Введите корректное значение");
-                    }
+                Criticality criticality = Criticality.valueOf(criticalityIn);
                 System.out.println("Введите ожидамое количество дней на исправление дефекта");
                 int amountDays = scanner.nextInt();
                 scanner.nextLine();
@@ -86,7 +75,7 @@ public class Main {
                     if (idForChange == defectFromArray.getId()) {
                         System.out.println("Введите статус дефекта: " + Arrays.toString(StatusDefect.values()));
                         String newStatusDefect = scanner.nextLine();
-                        repository.changeStatus(newStatusDefect, defectFromArray);
+                        defectFromArray.setStatus(StatusDefect.valueOf(newStatusDefect));
                         break;
                     } else {
                         System.out.println("Введите корректный статус");
