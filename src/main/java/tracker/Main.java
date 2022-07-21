@@ -41,7 +41,7 @@ public class Main {
                             System.out.println("Зарегистрирован дефект: \n" + a);
                     break;
                 case "quit":
-                    System.out.println("Пока! ");
+                    System.out.println("Пока!!! ");
                     break;
             }
         }
