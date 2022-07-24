@@ -28,4 +28,18 @@ public class Repository {
         return defects.length;
     }
 
+    public boolean existenceOfSuchID (long defectAttach) {
+        boolean existenceOfSuchID = false;
+        for (Defect defect : defects) {
+            if (defect == null) {
+                break;
+            }
+            else if (defect.getID() == defectAttach) {
+                existenceOfSuchID = true;
+                break;
+            }
+        }
+        return existenceOfSuchID;
+    }
+
 }
