@@ -10,8 +10,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Repository repository = new Repository(20);
 
-        label:
-        while (true) {
+            while (true) {
 
             System.out.println("Что нужно сделать?\nadd - добавить новый дефект\n" +
                     "list - вывести список дефектов\nchange - изменить статус дефекта\nquit - выйти из программы");
@@ -20,7 +19,6 @@ public class Main {
 
             switch (userChoice) {
                 case "add":
-
                     if (repository.getCountDefects() < repository.getDefectsLength()) {
 
                         System.out.println("Введите резюме дефекта");
@@ -105,7 +103,7 @@ public class Main {
                     break;
                 case "quit":
                     System.out.println("Выход из программы");
-                    break label;
+                    break;
 
                 default:
                     System.out.println("Необходимо ввести одно из трех значений!\n");
