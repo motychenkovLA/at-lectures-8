@@ -15,7 +15,7 @@ public class Repository {
         return countDefects;
     }
 
-    void add (Defect defect) {
+    public void add (Defect defect) {
         defects[countDefects] = defect;
         countDefects++;
     }
@@ -41,5 +41,4 @@ public class Repository {
         }
         return existenceOfSuchID;
     }
-
 }

@@ -19,12 +19,8 @@ public class Defect {
     }
 
     public Defect (Status defectStatus, String defectSummary, Severity defectSeverity, int numberOfDays, Attachment defectAttachment) {
-        this.defectStatus = defectStatus;
-        this.defectSummary = defectSummary;
-        this.defectSeverity = defectSeverity;
-        this.numberOfDays = numberOfDays;
+        this (defectStatus, defectSummary, defectSeverity, numberOfDays);
         this.defectAttachment = defectAttachment;
-        contDefectID++;
     }
 
 
