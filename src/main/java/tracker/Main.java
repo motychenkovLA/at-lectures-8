@@ -11,9 +11,10 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String[] defectNames = new String[DEFECTS_AMOUNT_MAX];
-        String[] defectPriorities = new String[DEFECTS_AMOUNT_MAX];
-        int[] defectFixDays = new int[DEFECTS_AMOUNT_MAX];
+        Defects [] listOfDefects = new Defects[DEFECTS_AMOUNT_MAX];
+      //  String[] defectNames = new String[DEFECTS_AMOUNT_MAX];
+      //  String[] defectPriorities = new String[DEFECTS_AMOUNT_MAX];
+     //   int[] defectFixDays = new int[DEFECTS_AMOUNT_MAX];
         int defectsStored = 0;
         boolean programmIsOn = true;
         System.out.println("Добро пожаловать!");
@@ -31,33 +32,42 @@ public class Main {
                         break;
                     }
                     System.out.print("Введите название дефекта: ");
-                    String name = in.nextLine();
-                    defectNames[defectsStored] = name;
-                    String priorityInput = "";
+                    String defectName = in.nextLine();
+                  //  defectNames[defectsStored] = name;
+                    String defectPriority = "";
                     boolean isPriorityIncorrect = true;
                     while (isPriorityIncorrect) {
                         System.out.printf("Введите приоритет дефекта ( %s, %s, %s, %s): ", PRIORITY_LOW, PRIORITY_MEDIUM, PRIORITY_HIGH, PRIORITY_CRITICAL);
-                        priorityInput = in.nextLine();
-                        if (PRIORITY_LOW.equalsIgnoreCase(priorityInput)
-                                || PRIORITY_MEDIUM.equalsIgnoreCase(priorityInput)
-                                || PRIORITY_HIGH.equalsIgnoreCase(priorityInput)
-                                || PRIORITY_CRITICAL.equalsIgnoreCase(priorityInput)) {
+                        defectPriority = in.nextLine();
+                        if (PRIORITY_LOW.equalsIgnoreCase(defectPriority)
+                                || PRIORITY_MEDIUM.equalsIgnoreCase(defectPriority)
+                                || PRIORITY_HIGH.equalsIgnoreCase(defectPriority)
+                                || PRIORITY_CRITICAL.equalsIgnoreCase(defectPriority)) {
                             isPriorityIncorrect = false;
                         }
-                        defectPriorities[defectsStored] = priorityInput;
+                      //  defectPriorities[defectsStored] = priorityInput;
                     }
                     System.out.print("Введите количество дней на исправление дефекта: ");
-                    int numDays = in.nextInt();
-                    defectFixDays[defectsStored] = numDays;
+                    int defectFixDays = in.nextInt();
+                   // defectFixDays[defectsStored] = numDays;
                     in.nextLine();
-                    String defectSummary = String.format("Название: %s | Приоритет: %s | Дней на исправление: %d", name, priorityInput, numDays);
-                    System.out.println(defectSummary);
+                    Defects defect = new Defects(defectName, defectPriority, defectFixDays);
+                    listOfDefects [defectsStored] = defect;
                     defectsStored++;
+                    //String defectSummary = String.format("Название: %s | Приоритет: %s | Дней на исправление: %d", defectName, defectPriority, defectFixDays);
+                    String defectSummary = defect.getDefectInfo();
+                    System.out.println(defectSummary);
+
                     break;
                 case "/list":
+                    if (defectsStored < 1) {
+                        System.out.println("Пока что вы не завели ни одного дефекта!");
+                        break;
+                    }
                     System.out.println("Список дефектов:");
                     for (int i = 0; i < defectsStored; i++) {
-                        System.out.println("Названиe дефекта: " + defectNames[i] + " | Название приоритета: " + defectPriorities[i] + " | Дней на исправление: " + defectFixDays[i]);
+                        System.out.println (listOfDefects[i].getDefectInfo());
+                     //   System.out.println("Названиe дефекта: " + defectNames[i] + " | Название приоритета: " + defectPriorities[i] + " | Дней на исправление: " + defectFixDays[i]);
                     }
                     break;
                 case "/quit":
