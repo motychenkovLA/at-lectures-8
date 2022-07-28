@@ -71,6 +71,7 @@ public class Main {
                         System.out.println(value);
                     }
                     Status status = Status.valueOf(scanner.nextLine());
+                    // todo 3 - репо достаем дефект по ид, это должен быть метод у репо
                     for (Defect def: repository.getAll()) {
                         if (id == def.getId()) {
                             def.setStatus(status);

@@ -5,7 +5,7 @@ public enum Status {
     CLOSE("Закрыт"),
     IN_PROGRESS("В работе"),
     REVIEW("На анализе");
-    String name;
+    String name;// todo 3 - не приватное, не финальное
 
     Status (String name) {
         this.name = name;
