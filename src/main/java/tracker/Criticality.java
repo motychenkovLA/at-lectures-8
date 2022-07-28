@@ -1,8 +1,12 @@
 package tracker;
 
 public enum Criticality {
-    // todo 1 - не по код стайлу
-    High,
-    Low,
-    Medium;
+    High("Высокий"),
+    Low("Низкий"),
+    Medium("Средний");
+    String name;
+
+    Criticality (String name) {
+        this.name = name;
+    }
 }

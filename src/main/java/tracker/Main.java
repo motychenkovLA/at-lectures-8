@@ -71,11 +71,9 @@ public class Main {
                         System.out.println(value);
                     }
                     Status status = Status.valueOf(scanner.nextLine());
-                    // todo 5 - ищет дефект, у которого индекс в массиве равен введенному ид;
-                    //  вместо того чтоб искать дефект, у которого ид равен введенному ид.
-                    for (int i = 0; i < repository.getCount(); i++) {
-                        if (id == i) {
-                            repository.getAll()[i].setStatus(status);
+                    for (Defect def: repository.getAll()) {
+                        if (id == def.getId()) {
+                            def.setStatus(status);
                         }
                     }
                     break;
