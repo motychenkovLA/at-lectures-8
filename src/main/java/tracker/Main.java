@@ -71,7 +71,7 @@ public class Main {
                         System.out.println(value);
                     }
                     Status status = Status.valueOf(scanner.nextLine());
-                    for (Defect repo: repository.getAll()) {
+                    for (Defect repo : repository.getAll()) {
                         if (id == repo.getId()) {
                             repo.setStatus(status);
                         }
