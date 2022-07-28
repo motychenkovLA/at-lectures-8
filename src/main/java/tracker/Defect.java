@@ -27,6 +27,6 @@ public class Defect {
     }
 
     public String getField() {
-        return id + " | " + resume + " | " + criticality.name + " | " + days + " | " + attachment.toString() + " | " + status.name;
+        return id + " | " + resume + " | " + criticality.getName() + " | " + days + " | " + attachment.toString() + " | " + status.getName();
     }
 }

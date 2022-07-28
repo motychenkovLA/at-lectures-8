@@ -5,7 +5,12 @@ public enum Status {
     CLOSE("Закрыт"),
     IN_PROGRESS("В работе"),
     REVIEW("На анализе");
-    String name;
+
+    private final String name;
+
+    public String getName() {
+        return name;
+    }
 
     Status (String name) {
         this.name = name;
