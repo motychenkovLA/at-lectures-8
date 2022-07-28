@@ -8,7 +8,7 @@ public class Defect {
     private final Attachment attachment;
     private final Criticality criticality;
 
-    private static int number = 0;
+    private static int number = 1000000;
 
     public Defect(String resume, Criticality criticality, int days, Attachment attachment) {
         this.resume = resume;
@@ -18,11 +18,15 @@ public class Defect {
         this.status = Status.OPEN;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public void setStatus(Status status) {
         this.status = status;
     }
 
     public String getField() {
-        return id + " | " + resume + " | " + criticality + " | " + days + " | " + attachment.toString() + " | " + status;
+        return id + " | " + resume + " | " + criticality.name + " | " + days + " | " + attachment.toString() + " | " + status.name;
     }
 }

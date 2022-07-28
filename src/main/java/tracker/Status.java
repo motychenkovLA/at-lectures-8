@@ -1,8 +1,13 @@
 package tracker;
 
 public enum Status {
-    OPEN,
-    CLOSE,
-    IN_PROGRESS,
-    REVIEW;
+    OPEN("Открыт"),
+    CLOSE("Закрыт"),
+    IN_PROGRESS("В работе"),
+    REVIEW("На анализе");
+    String name;
+
+    Status (String name) {
+        this.name = name;
+    }
 }

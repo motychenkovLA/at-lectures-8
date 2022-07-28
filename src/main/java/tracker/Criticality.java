@@ -1,7 +1,12 @@
 package tracker;
 
 public enum Criticality {
-    High,
-    Low,
-    Medium;
+    High("Высокий"),
+    Low("Низкий"),
+    Medium("Средний");
+    String name;
+
+    Criticality(String name) {
+        this.name = name;
+    }
 }

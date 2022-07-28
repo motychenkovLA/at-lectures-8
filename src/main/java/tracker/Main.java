@@ -72,9 +72,9 @@ public class Main {
                     }
                     Status status = Status.valueOf(scanner.nextLine());
 
-                    for (int i = 0; i < repository.getCount(); i++) {
-                        if (id == i) {
-                            repository.getAll()[i].setStatus(status);
+                    for (Defect def : repository.getAll()) {
+                        if (id == def.getId()) {
+                            def.setStatus(status);
                         }
                     }
                     break;
