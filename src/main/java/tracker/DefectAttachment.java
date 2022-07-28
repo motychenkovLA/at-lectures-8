@@ -10,6 +10,6 @@ public class DefectAttachment extends Attachment {
 
     @Override
     public String toString() {
-        return "id другого дефекта: "+Long.toString(idDefect);
+        return "id другого дефекта: " + Long.toString(idDefect);
     }
 }
