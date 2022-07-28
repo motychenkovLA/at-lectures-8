@@ -3,20 +3,26 @@ package tracker;
 public class Defect {
     private final long id = number++;
     private final String resume;
-    private final String priority;
+    private Status status;
     private final int days;
     private final Attachment attachment;
+    private final Criticality criticality;
 
-    private static int number = 1000000;
+    private static int number = 0;
 
-    public Defect(String resume, String priority, int days, Attachment attachment) {
+    public Defect(String resume, Criticality criticality, int days, Attachment attachment) {
         this.resume = resume;
-        this.priority = priority;
+        this.criticality = criticality;
         this.days = days;
         this.attachment = attachment;
+        this.status = Status.OPEN;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getField() {
-        return id + " | " + resume + " | " + priority + " | " + days +" | "+attachment.asString();
+        return id + " | " + resume + " | " + criticality + " | " + days + " | " + attachment.toString() + " | " + status;
     }
 }

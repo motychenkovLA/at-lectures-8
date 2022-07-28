@@ -9,9 +9,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
         while (run) {
-            System.out.println("Главное меню:  " +
+            System.out.println("Главное меню:" +
                     "\nДобавить новый дефевкт - введите \"add\" " +
                     "\nВывести список дефектов - введите \"list\" " +
+                    "\nИзменить статус дефекта - введите \"change\"" +
                     "\nВыйти из программы - введите \"quit\"");
             switch (scanner.nextLine()) {
                 case "add":
@@ -22,14 +23,18 @@ public class Main {
                     }
                     System.out.println("Введите резюме дефекта");
                     String resumes = scanner.nextLine();
-                    System.out.println("Введите критичность дефекта из списка : High, Low, Medium");
-                    String priorities = scanner.nextLine();
+                    System.out.println("Введите критичность дефекта из списка : ");
+                    Criticality[] valuesCriticality = Criticality.values();
+                    for (Criticality value : valuesCriticality) {
+                        System.out.println(value);
+                    }
+                    Criticality priorities = Criticality.valueOf(scanner.nextLine());
                     System.out.println("Введите ожидаемое количество дней на исправление дефекта");
                     int days = scanner.nextInt();
                     scanner.nextLine();
                     Attachment attachment = null;
                     while (attachment == null) {
-                        System.out.println("Выберите тип вложения" +
+                        System.out.println("Выберите тип вложения:" +
                                 "\nДля добавления комментарий - введите \"comments\"" +
                                 "\nДля добавления ссылки на другой дефект - введите \"link\"");
                         switch (scanner.nextLine()) {
@@ -54,6 +59,23 @@ public class Main {
                 case "list":
                     for (Defect def : repository.getAll()) {
                         System.out.println(def.getField());
+                    }
+                    break;
+                case "change":
+                    System.out.println("Введите id дефекта:");
+                    long id = scanner.nextLong();
+                    scanner.nextLine();
+                    System.out.println("Измените статус дефекта на один из вариантов: ");
+                    Status[] valuesStatus = Status.values();
+                    for (Status value : valuesStatus) {
+                        System.out.println(value);
+                    }
+                    Status status = Status.valueOf(scanner.nextLine());
+
+                    for (int i = 0; i < repository.getCount();i++) {
+                        if (id == i) {
+                            repository.getAll()[i].setStatus(status);
+                        }
                     }
                     break;
                 case "quit":

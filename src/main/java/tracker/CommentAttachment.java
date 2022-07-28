@@ -4,11 +4,12 @@ public class CommentAttachment extends Attachment {
     private final String comments;
 
     public CommentAttachment(String comments) {
+
         this.comments = comments;
     }
 
     @Override
-    public String asString() {
+    public String toString() {
         return "Комментарий: "+comments;
     }
 }
