@@ -7,6 +7,7 @@ public class Repository {
     private final Defect[] defect;
     private int count = 0;
 
+    // todo 0 - методы лучше после конструктора указывать
     public int getCount() {
         return count;
     }

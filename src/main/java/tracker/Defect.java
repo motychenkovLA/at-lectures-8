@@ -8,7 +8,7 @@ public class Defect {
     private final Attachment attachment;
     private final Criticality criticality;
 
-    private static int number = 0;
+    private static int number = 0; // todo 5 - дз 4 тз: ид дефектов начинаются с 1_000_000
 
     public Defect(String resume, Criticality criticality, int days, Attachment attachment) {
         this.resume = resume;
