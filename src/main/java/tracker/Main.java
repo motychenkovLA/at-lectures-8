@@ -16,7 +16,7 @@ public class Main {
             String command = scan.nextLine();
             switch (command) {
                 case "add":
-                    if (repository.isFilled()) {
+                    if (repository.isNotFull()) {
                         //создаём переменную типа Defect и помещаем её в поле defects переменной repository
                         System.out.println("Введите краткое описание дефекта:");
                         String description = scan.nextLine();
@@ -26,7 +26,28 @@ public class Main {
                         System.out.println("Следующий шаг: введите ожидаемое количество дней на исправление дефекта: ");
                         int numberOfDays = scan.nextInt();
                         scan.nextLine();
-                        Defect defect = new Defect(description, severity, numberOfDays);
+                        System.out.println("Выберите тип вложения: " +
+                                "\n" + "Введите команду comment для ввода комментария" +
+                                "\n" +"Введите команду link для ссылки на другой дефект");
+                        String choiceOfAttachment = scan.nextLine();
+                        Attachment attachment = null;
+                        switch (choiceOfAttachment) {
+                            case "comment":
+                                System.out.println("Введите коммент к дефекту");
+                                String comment = scan.nextLine();
+                                attachment = new CommentAttachment(comment);
+                                break;
+                            case "link":
+                                System.out.println("Введите ссылку на другой дефект");
+                                long link = scan.nextLong();
+                                scan.nextLine();
+                                attachment = new DefectAttachment(link);
+                                break;
+                            default:
+                                System.out.println("Вы ввели некорректное значение");
+                        }
+                        Defect defect = new Defect(description, severity, numberOfDays, attachment);
+                        //System.out.println(attachment);
                         System.out.println("Вы ввели следующий дефект:");
                         System.out.println(defect.getInfoDefect());
                         repository.add(defect);
@@ -35,7 +56,7 @@ public class Main {
                     }
                     break;
                 case "list":
-                    if (repository.getCount() == 0) {
+                    if (repository.isEmpty() == 0) {
                         System.out.println("Дефектов не заведено!");
                     } else {
                         System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление):");

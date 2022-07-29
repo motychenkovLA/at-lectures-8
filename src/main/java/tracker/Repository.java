@@ -17,7 +17,7 @@ public class Repository {
         count++;
     }
 
-    public boolean isFilled () {
+    public boolean isNotFull () {
         return count <= defects.length;
     }
 
@@ -25,7 +25,7 @@ public class Repository {
         return Arrays.copyOf(defects,count);
     }
 
-    public int getCount() {
+    public int isEmpty() {
         return count;
     }
 
