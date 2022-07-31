@@ -12,10 +12,7 @@ public class Repository {
     }
 
     public boolean checkRepositoryIsFull() {
-        if (defectsStored >= DEFECTS_AMOUNT_MAX) {
-            return true;
-        }
-        return false;
+        return defectsStored >= DEFECTS_AMOUNT_MAX;
     }
 
     public String getRepositoryIsFullText (){
@@ -24,10 +21,7 @@ public class Repository {
     }
 
     public boolean checkRepositoryIsEmpty () {
-        if (defectsStored == 0) {
-            return true;
-        }
-        return false;
+        return defectsStored == 0;
     }
     public String getRepositoryIsEmptyText (){
         return  "Пока что вы не завели ни одного дефекта!";
