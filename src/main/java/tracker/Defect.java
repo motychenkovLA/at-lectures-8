@@ -1,16 +1,18 @@
 package tracker;
 
 public class Defect {
-    long id;
-    String resume;
-    String severity;
-    int days;
+    private static long idDefect = 1000000;
+    private final long id;
+    private final String resume;
+    private final String severity;
+    private final int days;
 
-    public Defect(long id, String resume, String severity, int days) {
-        this.id = id;
+    public Defect(String resume, String severity, int days) {
         this.resume = resume;
         this.severity = severity;
         this.days = days;
+        id = idDefect;
+        idDefect++;
     }
 
     String getInfo () {

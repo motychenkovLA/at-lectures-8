@@ -9,9 +9,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         boolean run = true;
         final int COUNTOFDEFECTS = 10; //максимальное число хранимых дефектов в программе
-        Defect [] arrayOfDefects = new Defect[COUNTOFDEFECTS];
-        long idDefect = 1000000;
-        int count = 0;
+        Repository repository = new Repository(COUNTOFDEFECTS);
 
         while (run) {
             System.out.println("Введите команду для выбора действия. \n add - Добавить новый дефект." +
@@ -20,9 +18,8 @@ public class Main {
 
             switch (choice) {
                 case "add": {
-                    if (count > (COUNTOFDEFECTS - 1)) {
-                        System.out.print("Заведено максимальное количество дефектов. ");
-                    } else {
+                    if (repository.addNewDefect()) {
+
                         System.out.println("Введите резюме дефекта:");
                         String resume = scan.nextLine();
 
@@ -32,18 +29,20 @@ public class Main {
 
                         System.out.println("Введите ожидаемое количество дней на исправление дефекта.");
                         int days = scan.nextInt();
-
-                        long id = idDefect + count;
-                        Defect defect = new Defect(id, resume, severity, days);
-                        arrayOfDefects[count] = defect;
+                        scan.nextLine();
+                        Defect defect = new Defect(resume, severity, days);
+                        repository.add(defect);
                     }
-                    count++;
+                    else {
+                        System.out.print("Заведено максимальное количество дефектов. ");
+                    }
                     break;
                 }
 
                 case "list": {
-                    for (int i = 0; i < count; i++) {
-                        System.out.println(arrayOfDefects[i].getInfo());
+                    Defect [] defectsArray = repository.getAll();
+                    for (Defect defForOut: defectsArray) {
+                        System.out.println(defForOut.getInfo());
                     }
                     break;
                 }
