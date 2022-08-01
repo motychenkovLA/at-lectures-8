@@ -25,8 +25,7 @@ public class Repository {
         return Arrays.copyOf(defects,count);
     }
 
-    // todo 1 - 'is' возвращают boolean, здесь инт
-    public int isEmpty() {
+    public int ifEmpty() {
         return count;
     }
 

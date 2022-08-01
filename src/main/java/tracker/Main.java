@@ -26,11 +26,13 @@ public class Main {
                         System.out.println("Следующий шаг: введите ожидаемое количество дней на исправление дефекта: ");
                         int numberOfDays = scan.nextInt();
                         scan.nextLine();
-                        System.out.println("Выберите тип вложения: " +
-                                "\n" + "Введите команду comment для ввода комментария" +
-                                "\n" +"Введите команду link для ссылки на другой дефект");
-                        String choiceOfAttachment = scan.nextLine();
                         Attachment attachment = null;
+                        //цикл для вложения
+                        while (attachment == null) {
+                            System.out.println("Выберите тип вложения: " +
+                                    "\n" + "Введите команду comment для ввода комментария" +
+                                    "\n" +"Введите команду link для ссылки на другой дефект");
+                            String choiceOfAttachment = scan.nextLine();
                         switch (choiceOfAttachment) {
                             case "comment":
                                 System.out.println("Введите коммент к дефекту");
@@ -44,9 +46,10 @@ public class Main {
                                 attachment = new DefectAttachment(link);
                                 break;
                             default:
-                                System.out.println("Вы ввели некорректное значение");
+                                System.out.println("Вы ввели некорректное значение!" + "\n");
+                                break;
                         }
-                        // todo 5 - при вводе не comment и не link программа падает
+                        }
                         Defect defect = new Defect(description, severity, numberOfDays, attachment);
                         //System.out.println(attachment);
                         System.out.println("Вы ввели следующий дефект:");
@@ -57,7 +60,7 @@ public class Main {
                     }
                     break;
                 case "list":
-                    if (repository.isEmpty() == 0) {
+                    if (repository.ifEmpty() == 0) {
                         System.out.println("Дефектов не заведено!");
                     } else {
                         System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление):");
