@@ -7,10 +7,8 @@ public class CommentAttachment extends Attachment {
     public CommentAttachment(String comment) {
         this.comment = comment;
     }
-
-    // todo 1 - выравнивание
     @Override
-        public String asString () {
-            return comment;
-        }
+    public String asString () {
+        return comment;
     }
+}

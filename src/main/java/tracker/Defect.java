@@ -17,11 +17,9 @@ public class Defect {
         id = counter;
         counter++;
     }
-
-    // todo 1 - выравнивание
     public String getInfoDefect (){
-            return description + " // " + severity + " // " + numberOfDays + " // " + id + " // " + attachment.asString();
-        }
+        return description + " // " + severity + " // " + numberOfDays + " // " + id + " // " + attachment.asString();
+    }
 }
 
 

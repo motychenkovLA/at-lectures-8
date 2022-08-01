@@ -25,8 +25,7 @@ public class Repository {
         return Arrays.copyOf(defects,count);
     }
 
-    // todo 1 - чем это отличается эт геттера для count? почему тогда не getCount?
-    public int ifEmpty() {
+    public int getCount() {
         return count;
     }
 

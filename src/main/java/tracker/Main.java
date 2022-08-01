@@ -28,7 +28,6 @@ public class Main {
                         scan.nextLine();
                         Attachment attachment = null;
                         //цикл для вложения
-                        // todo 1 - выравнивание
                         while (attachment == null) {
                             System.out.println("Выберите тип вложения: " +
                                     "\n" + "Введите команду comment для ввода комментария" +
@@ -49,10 +48,9 @@ public class Main {
                             default:
                                 System.out.println("Вы ввели некорректное значение!" + "\n");
                                 break;
-                        }
+                            }
                         }
                         Defect defect = new Defect(description, severity, numberOfDays, attachment);
-                        //System.out.println(attachment);
                         System.out.println("Вы ввели следующий дефект:");
                         System.out.println(defect.getInfoDefect());
                         repository.add(defect);
@@ -61,7 +59,7 @@ public class Main {
                     }
                     break;
                 case "list":
-                    if (repository.ifEmpty() == 0) {
+                    if (repository.getCount() == 0) {
                         System.out.println("Дефектов не заведено!");
                     } else {
                         System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление):");
