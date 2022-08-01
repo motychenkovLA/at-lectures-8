@@ -33,22 +33,22 @@ public class Main {
                                     "\n" + "Введите команду comment для ввода комментария" +
                                     "\n" +"Введите команду link для ссылки на другой дефект");
                             String choiceOfAttachment = scan.nextLine();
-                        switch (choiceOfAttachment) {
-                            case "comment":
-                                System.out.println("Введите коммент к дефекту");
-                                String comment = scan.nextLine();
-                                attachment = new CommentAttachment(comment);
-                                break;
-                            case "link":
-                                System.out.println("Введите ссылку на другой дефект");
-                                long link = scan.nextLong();
-                                scan.nextLine();
-                                attachment = new DefectAttachment(link);
-                                break;
-                            default:
-                                System.out.println("Вы ввели некорректное значение!" + "\n");
-                                break;
-                            }
+                            switch (choiceOfAttachment) {
+                                case "comment":
+                                    System.out.println("Введите коммент к дефекту");
+                                    String comment = scan.nextLine();
+                                    attachment = new CommentAttachment(comment);
+                                    break;
+                                case "link":
+                                    System.out.println("Введите ссылку на другой дефект");
+                                    long link = scan.nextLong();
+                                    scan.nextLine();
+                                    attachment = new DefectAttachment(link);
+                                    break;
+                                default:
+                                    System.out.println("Вы ввели некорректное значение!" + "\n");
+                                    break;
+                                }
                         }
                         Defect defect = new Defect(description, severity, numberOfDays, attachment);
                         System.out.println("Вы ввели следующий дефект:");
