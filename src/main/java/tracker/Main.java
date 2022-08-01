@@ -25,8 +25,6 @@ public class Main {
                         System.out.println("Следующий шаг: введите критичность дефекта" +
                                 "\n" + Arrays.toString(Severity.values()));
                         Severity severity = Severity.valueOf(scan.nextLine());
-                        //String severity = scan.nextLine();
-                        //Severity.valueOf(severity);
                         System.out.println("Следующий шаг: введите ожидаемое количество дней на исправление дефекта: ");
                         int numberOfDays = scan.nextInt();
                         scan.nextLine();
@@ -54,8 +52,7 @@ public class Main {
                                     break;
                                 }
                         }
-                        Status status = Status.OPEN;
-                        Defect defect = new Defect(description, severity, numberOfDays, attachment, status);
+                        Defect defect = new Defect(description, severity, numberOfDays, attachment);
                         System.out.println("Вы ввели следующий дефект:");
                         System.out.println(defect.getInfoDefect());
                         repository.add(defect);
@@ -75,22 +72,27 @@ public class Main {
                     }
                     break;
                 case "change":
-                    //меняем статус
-                    System.out.println("Ввести id дефекта:");
-                    long id = scan.nextLong();
-                    scan.nextLine();
-                    // todo 3 - тут уже может быть кривой id, тогда нет смысла просить от пользователя статус
-                    System.out.println("Ввести новый статус дефекта:" +
-                            "\n" + Arrays.toString(Status.values()));
-                    Status status = Status.valueOf(scan.nextLine());
-                    Defect [] arrayChangeStatus = repository.getAll();
-                    for (Defect defForChange: arrayChangeStatus) {
-                        if (id == defForChange.getId()){
-                            defForChange.setStatus(status);
+                    if (repository.getCount() == 0) {
+                        System.out.println("Дефектов не заведено!");
+                    } else {
+                        //меняем статус
+                        System.out.println("Ввести id дефекта:");
+                        long id = scan.nextLong();
+                        scan.nextLine();
+                        Defect[] arrayChangeStatus = repository.getAll();
+                        for (Defect defForChange : arrayChangeStatus) {
+                            if (id == defForChange.getId()) {
+                                System.out.println("Ввести новый статус дефекта:" +
+                                        "\n" + Arrays.toString(Status.values()));
+                                Status status = Status.valueOf(scan.nextLine());
+                                defForChange.setStatus(status);
+                                System.out.println("Статус успешно изменён!");
+                                System.out.println(" ");
+                            } else {
+                                System.out.println("Такого дефекта нет!");
+                            }
                         }
                     }
-                    System.out.println("Статус успешно изменён!");
-                    System.out.println(" ");
                     break;
                 case "quit":
                     System.out.println("Завершение работы программы");

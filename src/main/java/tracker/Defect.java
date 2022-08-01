@@ -10,12 +10,12 @@ public class Defect {
     private final Attachment attachment;
     private Status status;
 
-    public Defect (String description, Severity severity, int numberOfDays, Attachment attachment, Status status) {
+    public Defect (String description, Severity severity, int numberOfDays, Attachment attachment) {
         this.description = description;
         this.severity = severity;
         this.numberOfDays = numberOfDays;
         this.attachment = attachment;
-        this.status = status; // todo 3 - ТЗ: "новые дефекты всегда имеют статус Открыто", с таким конструктором не выполняется
+        this.status = Status.OPEN;
         id = counter;
         counter++;
     }
