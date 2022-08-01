@@ -18,6 +18,7 @@ public class Defect {
         counter++;
     }
 
+    // todo 1 - выравнивание
     public String getInfoDefect (){
             return description + " // " + severity + " // " + numberOfDays + " // " + id + " // " + attachment.asString();
         }

@@ -28,6 +28,7 @@ public class Main {
                         scan.nextLine();
                         Attachment attachment = null;
                         //цикл для вложения
+                        // todo 1 - выравнивание
                         while (attachment == null) {
                             System.out.println("Выберите тип вложения: " +
                                     "\n" + "Введите команду comment для ввода комментария" +
