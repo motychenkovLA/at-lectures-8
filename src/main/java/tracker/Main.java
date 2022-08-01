@@ -46,6 +46,7 @@ public class Main {
                             default:
                                 System.out.println("Вы ввели некорректное значение");
                         }
+                        // todo 5 - при вводе не comment и не link программа падает
                         Defect defect = new Defect(description, severity, numberOfDays, attachment);
                         //System.out.println(attachment);
                         System.out.println("Вы ввели следующий дефект:");
