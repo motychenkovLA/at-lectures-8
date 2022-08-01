@@ -1,9 +1,9 @@
 package tracker;
 
 public enum Criticality {
-    High("High"),
-    Low("Low"),
-    Medium("Medium");
+    HIGH("Высокий"),
+    LOW("Низкий"),
+    MEDIUM("Средний");
     private final String name;
 
     public String getName() {
