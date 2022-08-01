@@ -8,7 +8,7 @@ public class DefectAttachment extends Attachment{
         this.idDefects = idDefects;
     }
     @Override
-    public String asString () {
+    public String toString () {
         return Long.toString(idDefects);
     }
 }

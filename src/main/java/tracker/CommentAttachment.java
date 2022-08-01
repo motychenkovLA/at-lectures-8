@@ -8,7 +8,7 @@ public class CommentAttachment extends Attachment {
         this.comment = comment;
     }
     @Override
-    public String asString () {
+    public String toString () {
         return comment;
     }
 }

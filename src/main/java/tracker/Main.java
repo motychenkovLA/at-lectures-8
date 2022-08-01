@@ -1,5 +1,6 @@
 package tracker;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -12,7 +13,8 @@ public class Main {
             System.out.println("Вы находитесь в главном меню багтрекинговой системы. Выберите действие:" +
                     "\nДобавить новый дефект (введите команду add)" +
                     "\nВывести список дефектов (введите команду list)" +
-                    "\nВернуться в главное меню (введите команду quit)");
+                    "\nВернуться в главное меню (введите команду quit)" +
+                    "\nИзменить статус дефекта (введите команду change)");
             String command = scan.nextLine();
             switch (command) {
                 case "add":
@@ -21,8 +23,10 @@ public class Main {
                         System.out.println("Введите краткое описание дефекта:");
                         String description = scan.nextLine();
                         System.out.println("Следующий шаг: введите критичность дефекта" +
-                                "\n(Доступны следующие варианты: Тривиальный, Незначительный, Значительный, Критический, Блокирующий)");
-                        String severity = scan.nextLine();
+                                "\n" + Arrays.toString(Severity.values()));
+                        Severity severity = Severity.valueOf(scan.nextLine());
+                        //String severity = scan.nextLine();
+                        //Severity.valueOf(severity);
                         System.out.println("Следующий шаг: введите ожидаемое количество дней на исправление дефекта: ");
                         int numberOfDays = scan.nextInt();
                         scan.nextLine();
@@ -50,7 +54,8 @@ public class Main {
                                     break;
                                 }
                         }
-                        Defect defect = new Defect(description, severity, numberOfDays, attachment);
+                        Status status = Status.OPEN;
+                        Defect defect = new Defect(description, severity, numberOfDays, attachment, status);
                         System.out.println("Вы ввели следующий дефект:");
                         System.out.println(defect.getInfoDefect());
                         repository.add(defect);
@@ -62,12 +67,29 @@ public class Main {
                     if (repository.getCount() == 0) {
                         System.out.println("Дефектов не заведено!");
                     } else {
-                        System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление):");
+                        System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление, id, вложение, статус):");
                         Defect [] defectsForArray = repository.getAll();
                         for (Defect defForOut: defectsForArray) {
                             System.out.println(defForOut.getInfoDefect());
                         }
                     }
+                    break;
+                case "change":
+                    //меняем статус
+                    System.out.println("Ввести id дефекта:");
+                    long id = scan.nextLong();
+                    scan.nextLine();
+                    System.out.println("Ввести новый статус дефекта:" +
+                            "\n" + Arrays.toString(Status.values()));
+                    Status status = Status.valueOf(scan.nextLine());
+                    Defect [] arrayChangeStatus = repository.getAll();
+                    for (Defect defForChange: arrayChangeStatus) {
+                        if (id == defForChange.getId()){
+                            defForChange.setStatus(status);
+                        }
+                    }
+                    System.out.println("Статус успешно изменён!");
+                    System.out.println(" ");
                     break;
                 case "quit":
                     System.out.println("Завершение работы программы");
