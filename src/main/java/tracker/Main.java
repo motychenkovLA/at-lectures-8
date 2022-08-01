@@ -79,6 +79,7 @@ public class Main {
                     System.out.println("Ввести id дефекта:");
                     long id = scan.nextLong();
                     scan.nextLine();
+                    // todo 3 - тут уже может быть кривой id, тогда нет смысла просить от пользователя статус
                     System.out.println("Ввести новый статус дефекта:" +
                             "\n" + Arrays.toString(Status.values()));
                     Status status = Status.valueOf(scan.nextLine());

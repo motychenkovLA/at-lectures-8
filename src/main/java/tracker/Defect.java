@@ -15,7 +15,7 @@ public class Defect {
         this.severity = severity;
         this.numberOfDays = numberOfDays;
         this.attachment = attachment;
-        this.status = status;
+        this.status = status; // todo 3 - ТЗ: "новые дефекты всегда имеют статус Открыто", с таким конструктором не выполняется
         id = counter;
         counter++;
     }
