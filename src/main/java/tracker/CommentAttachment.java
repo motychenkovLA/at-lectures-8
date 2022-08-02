@@ -1,14 +1,15 @@
 package tracker;
 
-public class CommentAttachment extends Attachment{
-public String commentAttachment;
+public class CommentAttachment implements Attachment {
+    public String commentAttachment;
 
-public CommentAttachment (String CommentAttachment) {
-this.commentAttachment = CommentAttachment;
-}
-@Override
-public String asString () {
-    return " | Комментарий: " + commentAttachment;
-}
+    public CommentAttachment(String CommentAttachment) {
+        this.commentAttachment = CommentAttachment;
+    }
+
+    @Override
+    public String toString() {
+        return " | Комментарий: " + commentAttachment;
+    }
 
 }
