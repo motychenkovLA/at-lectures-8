@@ -1,7 +1,6 @@
 package tracker;
 import java.util.Scanner;
 
-
 public class Main {
 
     public static void main(String[] args) {
@@ -30,7 +29,25 @@ public class Main {
                         System.out.println("Введите ожидаемое количество дней на исправление дефекта.");
                         int days = scan.nextInt();
                         scan.nextLine();
-                        Defect defect = new Defect(resume, severity, days);
+
+                        System.out.println("Выберите тип вложения: \n comment - Комментарий. +" +
+                                "\n link - Ссылка на другой дефект");
+                        String attachmentType = scan.nextLine();
+                        Attachment attachment = null;
+                        if (attachmentType.equals("comment")) {
+                            System.out.println("Введите комментарий к дефекту:");
+                            String comment = scan.nextLine();
+                            attachment = new CommentAttachment(comment);
+                        }
+                        else {
+                            System.out.println("Введите ссылку на другой дефект:");
+                            int link = scan.nextInt();
+                            attachment = new DefectAttachment(link);
+                            scan.nextLine();
+                        }
+
+                        Defect defect = new Defect(resume, severity, days, attachment);
+                        System.out.println("Дефект добавлен.");
                         repository.add(defect);
                     }
                     else {

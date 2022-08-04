@@ -1,22 +1,24 @@
 package tracker;
 
 public class Defect {
-    private static long idDefect = 1000000;
-    private final long id;
+    private static long createIdDefect = 1000000;
+    private final long ID;
     private final String resume;
-    private final String severity;
-    private final int days;
+    private String severity;
+    private int days;
+    private Attachment attachment;
 
-    public Defect(String resume, String severity, int days) {
+    public Defect (String resume, String severity, int days, Attachment attachment) {
         this.resume = resume;
         this.severity = severity;
         this.days = days;
-        id = idDefect;
-        idDefect++;
+        this.attachment = attachment;
+        ID = createIdDefect;
+        createIdDefect++;
     }
 
     String getInfo () {
-        return ("ID дефекта: " + id + " Резюме дефекта: " + resume + " | " + "Критичность: " + severity +
-                       " | " + "Количество дней на исправление: " + days + "\n");
+        return ("ID дефекта: " + ID + " Резюме дефекта: " + resume + " | " + "Критичность: " + severity +
+                " | " + "Количество дней на исправление: " + days + "\n");
     }
 }
