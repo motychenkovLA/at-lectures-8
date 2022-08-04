@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.Objects;
+
 public class Defect {
 
     private static long contDefectID = 1000000;
@@ -66,5 +68,22 @@ public class Defect {
             info = info + this.defectAttachment;
         }
         return info;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Defect)) return false;
+        Defect defect = (Defect) o;
+        return getID() == defect.getID() && getNumberOfDays() == defect.getNumberOfDays()
+                && getDefectStatus() == defect.getDefectStatus() && Objects.equals(getDefectSummary(),
+                defect.getDefectSummary()) && getDefectSeverity() == defect.getDefectSeverity() &&
+                Objects.equals(defectAttachment, defect.defectAttachment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getID(), getDefectStatus(), getDefectSummary(),
+                getDefectSeverity(), getNumberOfDays(), defectAttachment);
     }
 }
