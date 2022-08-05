@@ -22,4 +22,7 @@ public class Repository {
     public boolean addNewDefect() {
         return count <= defects.length;
     }
+    public int getCount (){
+        return count;
+    }
 }

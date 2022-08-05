@@ -1,5 +1,6 @@
 package tracker;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
@@ -12,7 +13,7 @@ public class Main {
 
         while (run) {
             System.out.println("Введите команду для выбора действия. \n add - Добавить новый дефект." +
-                    " \n list - Вывод списка дефектов. \n quit - Выход.");
+                    " \n list - Вывод списка дефектов. \n change - Изменить статус дефекта. \n quit - Выход.");
             String choice = scan.nextLine();
 
             switch (choice) {
@@ -22,9 +23,9 @@ public class Main {
                         System.out.println("Введите резюме дефекта:");
                         String resume = scan.nextLine();
 
-                        System.out.println("Введите критичность дефекта. \n Список вариантов: \n 1 - Тривиальный " +
-                                "\n 2 - Незначительный \n 3 - Значительный \n 4 - Критический \n 5 - Блокирующий");
-                        String severity = scan.nextLine();
+                        System.out.println("Введите критичность дефекта:"  + Arrays.toString(Severity.values()));
+                        //String severity = scan.nextLine();
+                        Severity severity = Severity.valueOf(scan.nextLine());
 
                         System.out.println("Введите ожидаемое количество дней на исправление дефекта.");
                         int days = scan.nextInt();
@@ -60,6 +61,27 @@ public class Main {
                     Defect [] defectsArray = repository.getAll();
                     for (Defect defForOut: defectsArray) {
                         System.out.println(defForOut.getInfo());
+                    }
+                    break;
+                }
+
+                case "change":{
+                    if(repository.getCount() == 0){
+                        System.out.println("В системе нет дефектов. ");
+                    } else {
+                        System.out.println("Введите ссылку на дефект.");
+                        long id = scan.nextLong();
+                        Defect [] changeStatus = repository.getAll();
+                        for (Defect defectForChange : changeStatus)
+                            if (id != defectForChange.getID()){
+                                System.out.println("Дефекта с такой ссылкой не существует.");
+                            } else {
+                                System.out.println("Введите критичность дефекта:"  + Arrays.toString(Status.values()));
+                                String severity = scan.nextLine();
+                                Status status = Status.valueOf(scan.nextLine());
+                                defectForChange.setStatus(status);
+                                System.out.println("Статус дефекта " + id +" изменён.");
+                            }
                     }
                     break;
                 }
