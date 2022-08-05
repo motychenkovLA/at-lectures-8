@@ -73,7 +73,7 @@ public class Defect {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Defect)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Defect defect = (Defect) o;
         return getID() == defect.getID() && getNumberOfDays() == defect.getNumberOfDays()
                 && getDefectStatus() == defect.getDefectStatus() && Objects.equals(getDefectSummary(),

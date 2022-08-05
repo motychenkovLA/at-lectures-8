@@ -18,7 +18,7 @@ public class CommentAttachment extends Attachment {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof CommentAttachment)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         CommentAttachment that = (CommentAttachment) o;
         return Objects.equals(commentAttachment, that.commentAttachment);
     }

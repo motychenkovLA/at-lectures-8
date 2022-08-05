@@ -18,7 +18,7 @@ public class DefectAttachment extends Attachment{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DefectAttachment)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         DefectAttachment that = (DefectAttachment) o;
         return defectAttachment == that.defectAttachment;
     }
