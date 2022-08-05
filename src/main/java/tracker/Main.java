@@ -10,8 +10,9 @@ public class Main {
         //переменная отвечающая за работу цикла
         boolean isRun = true;
         //цикл для выбора действия пользователя
+        try(Scanner scanner = new Scanner(System.in);) {
         while (isRun) {
-            try(Scanner scanner = new Scanner(System.in);) {
+
                 System.out.println("Выберите действие: добавить новый дефект (\"add\"), " +
                         "вывести список (\"list\"), " + "изменить статус (\"change\"), " + "выйти из программы (\"quit\") - главное меню");
                 //объявляем и вводим переменную действия пользователя
@@ -88,9 +89,10 @@ public class Main {
                     System.out.println("Введите корректное значение");
                 }
             }
-            catch (IllegalArgumentException e){
-                System.out.println("Вы ввели неправильное значение. Пожалуйста, начните сначала.");
+
             }
+        catch (IllegalArgumentException e){
+            System.out.println("Вы ввели неправильное значение. Пожалуйста, начните сначала.");
         }
     }
 }
