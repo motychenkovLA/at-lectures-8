@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.Objects;
+
 public class DefectAttachment extends Attachment {
 
     int idDefect;
@@ -11,5 +13,19 @@ public class DefectAttachment extends Attachment {
 
     public DefectAttachment(int idDefect) {
         this.idDefect = idDefect;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        DefectAttachment that = (DefectAttachment) o;
+        return idDefect == that.idDefect;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), idDefect);
     }
 }
