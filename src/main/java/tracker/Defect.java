@@ -33,7 +33,18 @@ public class Defect {
         this.status = status;
     }
 
-    // todo 3 - ТЗ: реализовать методы equals(...) и hashCode() у Defect
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Defect defect = (Defect) o;
+        return id == defect.id &
+                description.equals(defect.description) &
+                severity.equals(defect.severity) &
+                numberOfDays == defect.numberOfDays &
+                attachment.equals(defect.attachment) &
+                status.equals(defect.status);
+    }
 }
 
 
