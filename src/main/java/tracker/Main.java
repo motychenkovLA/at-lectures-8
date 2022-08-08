@@ -90,6 +90,8 @@ public class Main {
                         while (id <= 0) {
                             try {
                                 id = Long.parseLong(scanner.nextLine());
+                                // todo 3 - раз уже есть целый getId который возвращает дефект по ид,
+                                //  то можно не id хранить в переменной а сразу дефект и ...(продолжение ниже)
                                 if (repository.getId(id) == null) {
                                     System.out.println("Введенный id отсутствует в списке дефектов."+
                                             "\nВведите id дефекта:");
@@ -110,6 +112,7 @@ public class Main {
                         while (status == null) {
                             try {
                                 status = Status.valueOf(scanner.nextLine());
+                                // todo (продолжение) и не дергать второй рза вот так, потому что дефект уже был надйен
                                 for (Defect repo : repository.getAll()) {
                                     if (id == repo.getId()) {
                                         repo.setStatus(status);
