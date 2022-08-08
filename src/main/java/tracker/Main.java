@@ -1,6 +1,7 @@
 package tracker;
 
 import java.util.Arrays;
+// todo 0 - не используемый импорт
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -57,6 +58,7 @@ public class Main {
         } else {
             //меняем статус
             System.out.println("Ввести id дефекта:");
+            // todo 3 - можно упасть на nextLong
             long id = scan.nextLong();
             scan.nextLine();
             Defect[] arrayChangeStatus = repository.getAll();
@@ -69,7 +71,7 @@ public class Main {
                         try {
                             status = Status.valueOf(scan.nextLine());
                             defForChange.setStatus(status);
-                        }
+                        } // todo 0 - catch не переносят
                         catch (IllegalArgumentException e) {
                             System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                         }
@@ -79,6 +81,7 @@ public class Main {
                     System.out.println(" ");
                     break;
                 } else {
+                    // todo 3 - спам + неверное сообщение об ошибке
                     System.out.println("Такого дефекта нет!");
                 }
             }
@@ -97,7 +100,7 @@ public class Main {
             while (severity == null) {
                 try {
                     severity = Severity.valueOf(scan.nextLine());
-                }
+                } // todo 0 - catch не переносят
                 catch (IllegalArgumentException e) {
                     System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                 }
@@ -106,8 +109,9 @@ public class Main {
             Integer numberOfDays = null;
             while (numberOfDays == null){
                 try {
+                    // todo 3 - а почему не nextInt или Integer.parseInt? зачем целая обертка?
                     numberOfDays = Integer.valueOf(scan.nextLine());
-                }
+                } // todo 0 - catch не переносят
                 catch (NumberFormatException e){
                     System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                 }
@@ -131,7 +135,7 @@ public class Main {
                         while (link == null) {
                             try {
                                 link = Long.valueOf(scan.nextLine());
-                            }
+                            } // todo 0 - catch не переносят
                             catch (NumberFormatException e) {
                                 System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                             }
@@ -149,7 +153,7 @@ public class Main {
             System.out.println("Вы ввели следующий дефект:");
             System.out.println(defect.getInfoDefect());
             repository.add(defect);
-        }
+        } // todo 0 - else не переносят
         else {
             System.out.println("Закончилось место для заведения дефектов!");
         }

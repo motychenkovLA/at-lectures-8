@@ -21,6 +21,7 @@ public class Defect {
         counter++;
     }
 
+    // todo 3 - это toString
     public String getInfoDefect (){
         return description + " // " + severity + " // " + numberOfDays + " // " + id + " // " + attachment.toString() + " // " + status;
     }
@@ -45,6 +46,8 @@ public class Defect {
                 attachment.equals(defect.attachment) &
                 status.equals(defect.status);
     }
+
+    // todo 3 - hash code ?
 }
 
 
