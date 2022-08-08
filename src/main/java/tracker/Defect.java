@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.Objects;
+
 public class Defect {
 
 
@@ -47,7 +49,11 @@ public class Defect {
                 status.equals(defect.status);
     }
 
-    // todo 3 - hash code ?
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description, severity, numberOfDays, attachment, status);
+    }
 }
 
 

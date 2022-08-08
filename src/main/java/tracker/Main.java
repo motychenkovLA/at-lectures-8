@@ -1,8 +1,6 @@
 package tracker;
 
 import java.util.Arrays;
-// todo 0 - не используемый импорт
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -58,9 +56,16 @@ public class Main {
         } else {
             //меняем статус
             System.out.println("Ввести id дефекта:");
-            // todo 3 - можно упасть на nextLong
-            long id = scan.nextLong();
-            scan.nextLine();
+            boolean flag = true;
+            long id = 0;
+            while (flag) {
+                try {
+                    id = Long.parseLong(scan.nextLine());
+                    flag = false;
+                } catch (NumberFormatException e) {
+                    System.out.println("Введено некорректное значение, попробуйте ещё раз!");
+                }
+            }
             Defect[] arrayChangeStatus = repository.getAll();
             for (Defect defForChange : arrayChangeStatus) {
                 if (id == defForChange.getId()) {
@@ -71,19 +76,16 @@ public class Main {
                         try {
                             status = Status.valueOf(scan.nextLine());
                             defForChange.setStatus(status);
-                        } // todo 0 - catch не переносят
-                        catch (IllegalArgumentException e) {
+                        } catch (IllegalArgumentException e) {
                             System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                         }
                     }
-
                     System.out.println("Статус успешно изменён!");
                     System.out.println(" ");
-                    break;
                 } else {
-                    // todo 3 - спам + неверное сообщение об ошибке
-                    System.out.println("Такого дефекта нет!");
+                    System.out.println("Такого дефекта нет! Возврат в главное меню");
                 }
+                break;
             }
         }
     }
@@ -95,24 +97,20 @@ public class Main {
             String description = scan.nextLine();
             System.out.println("Следующий шаг: введите критичность дефекта" +
                     "\n" + Arrays.toString(Severity.values()));
-            //Severity severity = Severity.valueOf(scan.nextLine());
             Severity severity = null;
             while (severity == null) {
                 try {
                     severity = Severity.valueOf(scan.nextLine());
-                } // todo 0 - catch не переносят
-                catch (IllegalArgumentException e) {
+                } catch (IllegalArgumentException e) {
                     System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                 }
             }
             System.out.println("Следующий шаг: введите ожидаемое количество дней на исправление дефекта: ");
-            Integer numberOfDays = null;
-            while (numberOfDays == null){
+            int numberOfDays = 0;
+            while (numberOfDays == 0){
                 try {
-                    // todo 3 - а почему не nextInt или Integer.parseInt? зачем целая обертка?
-                    numberOfDays = Integer.valueOf(scan.nextLine());
-                } // todo 0 - catch не переносят
-                catch (NumberFormatException e){
+                    numberOfDays = Integer.parseInt(scan.nextLine());
+                } catch (NumberFormatException e) {
                     System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                 }
             }
@@ -131,17 +129,14 @@ public class Main {
                         break;
                     case "link":
                         System.out.println("Введите ссылку на другой дефект");
-                        Long link = null;
-                        while (link == null) {
+                        long link = 0;
+                        while (link == 0) {
                             try {
-                                link = Long.valueOf(scan.nextLine());
-                            } // todo 0 - catch не переносят
-                            catch (NumberFormatException e) {
+                                link = Long.parseLong(scan.nextLine());
+                            } catch (NumberFormatException e) {
                                 System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                             }
                         }
-                        //long link = scan.nextLong();
-                        //scan.nextLine();
                         attachment = new DefectAttachment(link);
                         break;
                     default:
@@ -153,8 +148,7 @@ public class Main {
             System.out.println("Вы ввели следующий дефект:");
             System.out.println(defect.getInfoDefect());
             repository.add(defect);
-        } // todo 0 - else не переносят
-        else {
+        } else {
             System.out.println("Закончилось место для заведения дефектов!");
         }
     }
