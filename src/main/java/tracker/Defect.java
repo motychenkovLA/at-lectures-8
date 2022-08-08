@@ -2,6 +2,7 @@ package tracker;
 
 public class Defect {
 
+
     private static long counter = 1000000;
     private final long id;
     private final String description;
@@ -19,6 +20,7 @@ public class Defect {
         id = counter;
         counter++;
     }
+
     public String getInfoDefect (){
         return description + " // " + severity + " // " + numberOfDays + " // " + id + " // " + attachment.toString() + " // " + status;
     }
