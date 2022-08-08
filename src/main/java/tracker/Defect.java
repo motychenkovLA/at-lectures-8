@@ -3,8 +3,10 @@ package tracker;
 import java.util.Objects;
 
 public class Defect {
+    // todo * - немного обманывающие названия, лучше last/next/currentId для static и просто id для самого дефекта
     private static long id = 1000000;
-    private final long objectId = id;
+    private final long objectId = id; // todo * - objectId инициализируется здесь,
+                                      //   а id увеличивается в конструкторе, связанная логика разорвана по разным местам
     private String resume;
     private Criticality criticality;
     private int amountForCorrect;
@@ -19,6 +21,7 @@ public class Defect {
         id++;
     }
 
+    // todo * - дефект не должен ничего печатать, консоль не его ответственность
     public void printCriticality() {
         for (Criticality criticalityDefect : Criticality.values()) {
             System.out.println(criticalityDefect);

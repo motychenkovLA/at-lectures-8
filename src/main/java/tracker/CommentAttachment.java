@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class CommentAttachment extends Attachment {
 
+    // todo * - private final
     String comment;
 
     @Override
@@ -11,6 +12,7 @@ public class CommentAttachment extends Attachment {
         return comment;
     }
 
+    // todo * - конструкторы объявляют до методов
     public CommentAttachment(String comment) {
         this.comment = comment;
     }

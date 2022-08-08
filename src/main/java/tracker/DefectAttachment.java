@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class DefectAttachment extends Attachment {
 
+    // todo * - private final
     int idDefect;
 
     @Override
@@ -11,6 +12,7 @@ public class DefectAttachment extends Attachment {
         return String.valueOf(idDefect);
     }
 
+    // todo * - конструкторы объявляют до методов
     public DefectAttachment(int idDefect) {
         this.idDefect = idDefect;
     }
