@@ -87,7 +87,6 @@ public class Main {
                     case "change":
                         System.out.println("Введите id дефекта:");
                         long id = 0;
-                        boolean checkId = true;
                         while (id <= 0) {
                             try {
                                 id = Long.parseLong(scanner.nextLine());
