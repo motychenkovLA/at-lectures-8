@@ -46,6 +46,7 @@ public class Defect {
         return Objects.hash(id, resume, status, days, attachment, criticality);
     }
 
+    // todo 3 - это toString()
     public String getField() {
         return id + " | " + resume + " | " + criticality.getName() + " | " + days + " | " + attachment.toString() + " | " + status.getName();
     }

@@ -46,9 +46,10 @@ public class Main {
                             try {
                                 days = Integer.parseInt(scanner.nextLine());
                             } catch (NumberFormatException e) {
-
+                                // todo 3 - пустой catch не хорошо
                             }
                             if (days <= 0) {
+                                // todo 3 - почему это не вывести просто в catch-е
                                 System.out.println("Введите целое положительное число");
                             }
                         }
@@ -70,9 +71,10 @@ public class Main {
                                         try {
                                             link = Integer.parseInt(scanner.nextLine());
                                         } catch (NumberFormatException e) {
-
+                                            // todo 3 - пустой catch не хорошо
                                         }
                                         if (link <= 0) {
+                                            // todo 3 - почему это не вывести просто в catch-е
                                             System.out.println("Введите целое положительное число");
                                         }
                                     }
@@ -98,8 +100,9 @@ public class Main {
                             try {
                                 id = Long.parseLong(scanner.nextLine());
                             } catch (NumberFormatException e) {
-
+                                // todo 3 - пустой catch не хорошо
                             }
+                            // todo 3 - если не был введен id то смысла нет его искать в репо
                             for (Defect repo : repository.getAll()) {
                                 if (id == repo.getId()) {
                                     checkId = false;
