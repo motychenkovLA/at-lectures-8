@@ -46,9 +46,6 @@ public class Main {
                             try {
                                 days = Integer.parseInt(scanner.nextLine());
                             } catch (NumberFormatException e) {
-
-                            }
-                            if (days <= 0) {
                                 System.out.println("Введите целое положительное число");
                             }
                         }
@@ -70,9 +67,6 @@ public class Main {
                                         try {
                                             link = Integer.parseInt(scanner.nextLine());
                                         } catch (NumberFormatException e) {
-
-                                        }
-                                        if (link <= 0) {
                                             System.out.println("Введите целое положительное число");
                                         }
                                     }
@@ -87,23 +81,23 @@ public class Main {
                         break;
                     case "list":
                         for (Defect def : repository.getAll()) {
-                            System.out.println(def.getField());
+                            System.out.println(def.toString());
                         }
                         break;
                     case "change":
                         System.out.println("Введите id дефекта:");
                         long id = 0;
                         boolean checkId = true;
-                        while (checkId) {
+                        while (id <= 0) {
                             try {
                                 id = Long.parseLong(scanner.nextLine());
-                            } catch (NumberFormatException e) {
+                                if (repository.getId(id) == null) {
+                                    System.out.println("Введенный id отсутствует в списке дефектов."+
+                                            "\nВведите id дефекта:");
+                                }
 
-                            }
-                            for (Defect repo : repository.getAll()) {
-                                if (id == repo.getId()) {
-                                    checkId = false;
-                                } else System.out.println("Введенный id отсутствует в списке дефектов." +
+                            } catch (NumberFormatException e) {
+                                System.out.println("Введенный id отсутствует в списке дефектов." +
                                         "\nВведите id дефекта:");
                             }
                         }
