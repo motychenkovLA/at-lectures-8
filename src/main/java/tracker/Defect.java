@@ -32,6 +32,8 @@ public class Defect {
     public void setStatus (Status status){
         this.status = status;
     }
+
+    // todo 3 - ТЗ: реализовать методы equals(...) и hashCode() у Defect
 }
 
 

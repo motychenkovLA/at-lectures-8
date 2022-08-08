@@ -58,7 +58,7 @@ public class Main {
                                 System.out.println("Вы ввели следующий дефект:");
                                 System.out.println(defect.getInfoDefect());
                                 repository.add(defect);
-                            }
+                            } // todo 3 - слишком большой try, если опечататься в конце ввода дефекта придется перенабирать все с самого начала
                             catch (IllegalArgumentException e) {
                                 System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                             }
@@ -97,10 +97,11 @@ public class Main {
                                         System.out.println(" ");
                                         break;
                                     } else {
+                                        // todo 3 - спамит в консоль неправильные сообщения об ошибке
                                         System.out.println("Такого дефекта нет!");
                                     }
                                 }
-                            }
+                            }// todo 3 - аналогично
                             catch (IllegalArgumentException e) {
                                 System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                             }
