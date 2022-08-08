@@ -23,8 +23,8 @@ public class Defect {
         counter++;
     }
 
-    // todo 3 - это toString
-    public String getInfoDefect (){
+
+    public String toString (){
         return description + " // " + severity + " // " + numberOfDays + " // " + id + " // " + attachment.toString() + " // " + status;
     }
 

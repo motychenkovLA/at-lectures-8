@@ -45,7 +45,7 @@ public class Main {
             System.out.println("Список заведённых дефектов (описание, критичность, кол-во дней на исправление, id, вложение, статус):");
             Defect[] defectsForArray = repository.getAll();
             for (Defect defForOut : defectsForArray) {
-                System.out.println(defForOut.getInfoDefect());
+                System.out.println(defForOut.toString());
             }
         }
     }
@@ -146,7 +146,7 @@ public class Main {
             }
             Defect defect = new Defect(description, severity, numberOfDays, attachment);
             System.out.println("Вы ввели следующий дефект:");
-            System.out.println(defect.getInfoDefect());
+            System.out.println(defect);
             repository.add(defect);
         } else {
             System.out.println("Закончилось место для заведения дефектов!");
