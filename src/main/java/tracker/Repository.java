@@ -1,5 +1,7 @@
 package tracker;
 
+import jdk.nashorn.internal.runtime.arrays.ArrayIndex;
+
 import java.util.Arrays;
 
 public class Repository {
@@ -31,19 +33,13 @@ public class Repository {
 
     public boolean checkId (long id) {
         for (Defect defect: defects) {
-            try {
                 long idForComparison = defect.getId();
                 if (idForComparison == id) {
                     return true;
                 }
-            } catch (NullPointerException e) {
-                System.out.println("Введено некорректное значение, возврат в главное меню");
-                break;
-            }
         }
         return false;
     }
-
 }
 
 

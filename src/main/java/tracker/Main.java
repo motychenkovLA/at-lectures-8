@@ -57,38 +57,38 @@ public class Main {
             //меняем статус
             System.out.println("Ввести id дефекта:");
             boolean flag = true;
-            long id = 0;
+            long id;
             while (flag) {
                 try {
                     id = Long.parseLong(scan.nextLine());
                     flag = false;
-                } catch (NumberFormatException e) {
-                    System.out.println("Введено некорректное значение, попробуйте ещё раз!");
-                }
-            }
-                if (repository.checkId(id)) {
-                    System.out.println("Ввести новый статус дефекта:" +
-                            "\n" + Arrays.toString(Status.values()));
-                    Status status = null;
-                    while (status == null) {
-                        try {
-                            status = Status.valueOf(scan.nextLine());
-                            Defect[] defect = repository.getAll();
-                            for (Defect defectForChange: defect){
-                                long idForChange = defectForChange.getId();
-                                if (idForChange == id) {
-                                    defectForChange.setStatus(status);
+                    if (repository.checkId(id)) {
+                        System.out.println("Ввести новый статус дефекта:" +
+                                "\n" + Arrays.toString(Status.values()));
+                        Status status = null;
+                        while (status == null) {
+                            try {
+                                status = Status.valueOf(scan.nextLine());
+                                Defect[] defect = repository.getAll();
+                                for (Defect defectForChange: defect){
+                                    long idForChange = defectForChange.getId();
+                                    if (idForChange == id) {
+                                        defectForChange.setStatus(status);
+                                    }
                                 }
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                             }
-                        } catch (IllegalArgumentException e) {
-                            System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                         }
-                    }
-                    System.out.println("Статус успешно изменён!");
-                    System.out.println(" ");
+                        System.out.println("Статус успешно изменён!");
+                        System.out.println(" ");
+                        }
+                    } catch (NumberFormatException | NullPointerException e) {
+                        System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                 }
             }
         }
+    }
 
     public static void add(Repository repository, Scanner scan) {
         if (repository.isNotFull()) {
