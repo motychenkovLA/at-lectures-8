@@ -66,29 +66,29 @@ public class Main {
                     System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                 }
             }
-            Defect[] arrayChangeStatus = repository.getAll();
-            for (Defect defForChange : arrayChangeStatus) {
-                if (id == defForChange.getId()) {
+                if (repository.checkId(id)) {
                     System.out.println("Ввести новый статус дефекта:" +
                             "\n" + Arrays.toString(Status.values()));
                     Status status = null;
                     while (status == null) {
                         try {
                             status = Status.valueOf(scan.nextLine());
-                            defForChange.setStatus(status);
+                            Defect[] defect = repository.getAll();
+                            for (Defect defectForChange: defect){
+                                long idForChange = defectForChange.getId();
+                                if (idForChange == id) {
+                                    defectForChange.setStatus(status);
+                                }
+                            }
                         } catch (IllegalArgumentException e) {
                             System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                         }
                     }
                     System.out.println("Статус успешно изменён!");
                     System.out.println(" ");
-                } else {
-                    System.out.println("Такого дефекта нет! Возврат в главное меню");
                 }
-                break;
             }
         }
-    }
 
     public static void add(Repository repository, Scanner scan) {
         if (repository.isNotFull()) {
