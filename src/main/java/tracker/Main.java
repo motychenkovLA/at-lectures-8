@@ -50,41 +50,43 @@ public class Main {
         }
     }
 
-    public static void change(Repository repository,Scanner scan) {
-        if (repository.getCount() == 0) {
-            System.out.println("Дефектов не заведено!");
-        } else {
-            //меняем статус
-            System.out.println("Ввести id дефекта:");
-            boolean flag = true;
-            long id;
-            while (flag) {
-                try {
-                    id = Long.parseLong(scan.nextLine());
-                    flag = false;
-                    if (repository.checkId(id)) {
-                        System.out.println("Ввести новый статус дефекта:" +
-                                "\n" + Arrays.toString(Status.values()));
-                        Status status = null;
-                        while (status == null) {
-                            try {
-                                status = Status.valueOf(scan.nextLine());
-                                Defect[] defect = repository.getAll();
-                                for (Defect defectForChange: defect){
-                                    long idForChange = defectForChange.getId();
-                                    if (idForChange == id) {
-                                        defectForChange.setStatus(status);
-                                    }
-                                }
-                            } catch (IllegalArgumentException e) {
-                                System.out.println("Введено некорректное значение, попробуйте ещё раз!");
-                            }
-                        }
+public static void change(Repository repository,Scanner scan) {
+    if (repository.getCount() == 0) {
+        System.out.println("Дефектов не заведено!");
+    } else {
+        //меняем статус
+        System.out.println("Ввести id дефекта:");
+        Long id = null;
+        while (id == null) {
+            try {
+                id = Long.parseLong(scan.nextLine());
+                if (repository.checkId(id)) {
+                    break;
+                } else {
+                    id = null;
+                    System.out.println("Такого дефекта нет, попробуйте ещё раз!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Введено некорректное значение, попробуйте ещё раз!");
+            }
+        }
+        System.out.println("Ввести новый статус дефекта:" +
+                "\n" + Arrays.toString(Status.values()));
+        Status status = null;
+        while (status == null) {
+            try {
+                status = Status.valueOf(scan.nextLine());
+                Defect[] defect = repository.getAll();
+                for (Defect defectForChange: defect){
+                    long idForChange = defectForChange.getId();
+                    if (idForChange == id) {
+                        defectForChange.setStatus(status);
                         System.out.println("Статус успешно изменён!");
                         System.out.println(" ");
                         }
-                    } catch (NumberFormatException | NullPointerException e) {
-                        System.out.println("Введено некорректное значение, попробуйте ещё раз!");
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Введено некорректное значение, попробуйте ещё раз!");
                 }
             }
         }
