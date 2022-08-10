@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -9,7 +11,7 @@ public class Main {
         boolean run = true;
         try (Scanner scanner = new Scanner(System.in)) {
 
-            Repository repository = new Repository(20);
+            Map<Long, Defect> repository = new HashMap<>();
 
             while (run) {
 
@@ -33,107 +35,106 @@ public class Main {
                         run = false;
                         break;
                     default:
-                        System.out.println("Необходимо ввести одно из трех значений!\n");
+                        System.out.println("Необходимо ввести одно из четырех значений!\n");
                         break;
                 }
             }
         }
     }
-    private static void addDefect (Repository repository, Scanner scanner) {
-        if (repository.getCountDefects() < repository.getDefectsLength()) {
+    private static void addDefect (Map<Long, Defect> repository, Scanner scanner) {
 
-            System.out.println("Введите резюме дефекта");
-            String defectSummaryThisDefect = scanner.nextLine();
+        System.out.println("Введите резюме дефекта");
+        String defectSummaryThisDefect = scanner.nextLine();
 
-            System.out.println("Введите критичность дефекта из списка:");
-            Severity[] valuesSeverity = Severity.values();
-            for (Severity value : valuesSeverity) {
-                System.out.println(value);
+        System.out.println("Введите критичность дефекта из списка:");
+        Severity[] valuesSeverity = Severity.values();
+        for (Severity value : valuesSeverity) {
+            System.out.println(value);
+        }
+        Severity defectSeverityThisDefect;
+        while (true) {
+            try {
+                defectSeverityThisDefect = Severity.valueOf(scanner.nextLine().toUpperCase());
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Необходимо ввести критичность из списка!");
             }
-            Severity defectSeverityThisDefect;
-            while (true) {
-                try {
-                    defectSeverityThisDefect = Severity.valueOf(scanner.nextLine().toUpperCase());
-                    break;
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Необходимо ввести критичность из списка!");
-                }
+        }
+        System.out.println("Введите ожидаемое количество дней на исправление дефекта");
+        int numberOfDaysThisDefect;
+        while (true) {
+            try {
+                numberOfDaysThisDefect = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Необходимо ввести число!");
             }
-            System.out.println("Введите ожидаемое количество дней на исправление дефекта");
-            int numberOfDaysThisDefect;
-            while (true) {
-                try {
-                    numberOfDaysThisDefect = Integer.parseInt(scanner.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Необходимо ввести число!");
-                }
-            }
+        }
 
-            Status defectStatusThisDefect = Status.OPEN;
+        Status defectStatusThisDefect = Status.OPEN;
 
-            System.out.println("Нужно добавить вложение?\n1 - Вложение не требуется\n" +
-                    "2 - Вложение-комментарий\n3 - Вложение-ссылка на дефект");
-            int typeAttachment;
-            while (true) {
-                try {
-                    typeAttachment = Integer.parseInt(scanner.nextLine());
-                    if (typeAttachment != 1 & typeAttachment != 2 & typeAttachment != 3)
-                        throw new NumberFormatException();
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Необходимо ввести число - 1, 2, 3");
-                }
+        System.out.println("Нужно добавить вложение?\n1 - Вложение не требуется\n" +
+                "2 - Вложение-комментарий\n3 - Вложение-ссылка на дефект");
+        int typeAttachment;
+        while (true) {
+            try {
+                typeAttachment = Integer.parseInt(scanner.nextLine());
+                if (typeAttachment != 1 & typeAttachment != 2 & typeAttachment != 3)
+                    throw new NumberFormatException();
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Необходимо ввести число - 1, 2, 3");
             }
-            if (typeAttachment == 2) {
-                System.out.println("Введите вложение-комментарий");
-                CommentAttachment commentAttachment = new CommentAttachment(scanner.nextLine());
-                repository.add(new Defect(defectStatusThisDefect, defectSummaryThisDefect, defectSeverityThisDefect, numberOfDaysThisDefect, commentAttachment));
-            } else if (typeAttachment == 3) {
-                System.out.println("Введи вложение-ссылку на дефект");
+        }
+        if (typeAttachment == 2) {
+            System.out.println("Введите вложение-комментарий");
+            CommentAttachment commentAttachment = new CommentAttachment(scanner.nextLine());
+            Defect defect = new Defect(defectStatusThisDefect, defectSummaryThisDefect, defectSeverityThisDefect, numberOfDaysThisDefect, commentAttachment);
+            repository.put(defect.getID(), defect);
+        } else if (typeAttachment == 3) {
+            if (repository.isEmpty()) {
+                System.out.println("В системе нет ни одного дефекта, ссылка на дефект не будет добавлена!\n");
+                Defect defect = new Defect(defectStatusThisDefect, defectSummaryThisDefect, defectSeverityThisDefect, numberOfDaysThisDefect);
+                repository.put(defect.getID(), defect);
+            } else {
+                System.out.println("Введите вложение-ссылку на дефект");
                 long defectAttach;
                 while (true) {
                     try {
                         defectAttach = Long.parseLong(scanner.nextLine());
-                        if (!repository.existenceOfSuchID(defectAttach))
-                            throw new NumberFormatException("Нет такого ID");
+                        if (!repository.containsKey(defectAttach))
+                            throw new NumberFormatException();
                         break;
                     } catch (NumberFormatException e) {
                         System.out.println("Введите корреткный ID! Возможные варианты: ");
-                        for (Defect defect : repository.getAll()) {
-                            if (defect == null) {
-                                break;
-                            }
-                            System.out.println(defect.getID());
+                        for (Long defectKey : repository.keySet()) {
+                            System.out.println(defectKey);
                         }
                     }
                 }
                 DefectAttachment defectAttachment = new DefectAttachment(defectAttach);
-                repository.add(new Defect(defectStatusThisDefect, defectSummaryThisDefect, defectSeverityThisDefect, numberOfDaysThisDefect, defectAttachment));
-            } else {
-                repository.add(new Defect(defectStatusThisDefect, defectSummaryThisDefect, defectSeverityThisDefect, numberOfDaysThisDefect));
+                Defect defect = new Defect(defectStatusThisDefect, defectSummaryThisDefect, defectSeverityThisDefect, numberOfDaysThisDefect, defectAttachment);
+                repository.put(defect.getID(), defect);
+            }
+        } else {
+                Defect defect = new Defect(defectStatusThisDefect, defectSummaryThisDefect, defectSeverityThisDefect, numberOfDaysThisDefect);
+                repository.put(defect.getID(), defect);
             }
             System.out.println("Дефект успешно добавлен" + "\n");
-
-        } else {
-            System.out.println("Невозможно добавить более " + repository.getDefectsLength() + " дефектов" + "\n");
         }
-    }
-    private static void listDefect (Repository repository) {
-        if (repository.getCountDefects() == 0) {
+
+    private static void listDefect (Map<Long, Defect> repository) {
+        if (repository.isEmpty()) {
             System.out.println("В системе нет ни одного дефекта\n");
         } else {
-            for (Defect defect : repository.getAll()) {
-                if (defect == null) {
-                    break;
-                }
+            for (Defect defect : repository.values()) {
                 System.out.println(defect.getInfo());
             }
             System.out.println();
         }
     }
-    private static void changeDefectStatus (Repository repository, Scanner scanner) {
-        if (repository.getCountDefects() == 0) {
+    private static void changeDefectStatus (Map<Long, Defect> repository, Scanner scanner) {
+        if (repository.isEmpty()) {
             System.out.println("В системе нет ни одного дефекта\n");
         } else {
             System.out.println("Введите ссылку на дефект, для которого нужно изменить статус");
@@ -141,16 +142,20 @@ public class Main {
             while (true) {
                 try {
                     defectAttach = Long.parseLong(scanner.nextLine());
-                    if (!repository.existenceOfSuchID(defectAttach)) throw new NumberFormatException();
+                    if (!repository.containsKey(defectAttach)) throw new NumberFormatException();
                     break;
                 } catch (NumberFormatException e) {
                     System.out.println("Введите корреткный ID! Возможные варианты: ");
-                    for (Defect defect : repository.getAll()) {
-                        if (defect == null) {
-                            break;
-                        }
-                        System.out.println(defect.getID());
+                    for (Long defectKey : repository.keySet()) {
+                        System.out.println(defectKey);
                     }
+                }
+            }
+            Status oldStatus = null;
+            for (Defect defect : repository.values()) {
+                if (defect.getID() == defectAttach) {
+                    oldStatus = defect.getDefectStatus();
+                    break;
                 }
             }
             System.out.println("Введите новый статус из списка:");
@@ -168,11 +173,15 @@ public class Main {
                     System.out.println("Необходимо ввести статус из списка!");
                 }
             }
-            for (Defect defect : repository.getAll()) {
-                if (defect.getID() == defectAttach) {
-                    defect.setDefectStatus(defectStatus);
-                    System.out.println("Статус дефекта успешно изменен!\n");
-                    break;
+            if (!Transition.SET_TRANSITION.contains(new Transition(oldStatus, defectStatus))) {
+                System.out.println("Такой переход между статусами невалиден, статус изменен не будет\n");
+            } else {
+                for (Defect defect : repository.values()) {
+                    if (defect.getID() == defectAttach) {
+                        defect.setDefectStatus(defectStatus);
+                        System.out.println("Статус дефекта успешно изменен!\n");
+                        break;
+                    }
                 }
             }
         }

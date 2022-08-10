@@ -75,15 +75,11 @@ public class Defect {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Defect defect = (Defect) o;
-        return getID() == defect.getID() && getNumberOfDays() == defect.getNumberOfDays()
-                && getDefectStatus() == defect.getDefectStatus() && Objects.equals(getDefectSummary(),
-                defect.getDefectSummary()) && getDefectSeverity() == defect.getDefectSeverity() &&
-                Objects.equals(defectAttachment, defect.defectAttachment);
+        return ID == defect.ID;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getID(), getDefectStatus(), getDefectSummary(),
-                getDefectSeverity(), getNumberOfDays(), defectAttachment);
+        return Objects.hash(ID);
     }
 }
