@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class CommentAttachment extends Attachment {
 
-    String comment;
+    private final String comment;
+
+    public CommentAttachment(String comment) {
+        this.comment = comment;
+    }
 
     @Override
     public String toString() {
         return comment;
-    }
-
-    public CommentAttachment(String comment) {
-        this.comment = comment;
     }
 
     @Override

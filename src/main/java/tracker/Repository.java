@@ -3,15 +3,14 @@ package tracker;
 public class Repository {
     private Defect[] arrayDefects;
     private int amountDefects = 0;
-    private int amount;
+
+    public Repository(int amount) {
+        arrayDefects = new Defect[amount];
+    }
 
     public void add(Defect defect) {
-        if (amountDefects < arrayDefects.length) {
             arrayDefects[amountDefects] = defect;
             amountDefects++;
-        } else {
-            System.out.println("Закончилось место, невозможно ввести новый дефект");
-        }
     }
 
     public Defect[] getAll() {
@@ -27,13 +26,5 @@ public class Repository {
 
     public Defect[] getArrayDefects() {
         return arrayDefects;
-    }
-
-    public Repository(int amount) {
-        this.amount = amount;
-        arrayDefects = new Defect[amount];
-    }
-
-    public Repository() {
     }
 }

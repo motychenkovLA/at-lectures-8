@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class DefectAttachment extends Attachment {
 
-    int idDefect;
+    private final int idDefect;
+
+    public DefectAttachment(int idDefect) {
+        this.idDefect = idDefect;
+    }
 
     @Override
     public String toString() {
         return String.valueOf(idDefect);
-    }
-
-    public DefectAttachment(int idDefect) {
-        this.idDefect = idDefect;
     }
 
     @Override

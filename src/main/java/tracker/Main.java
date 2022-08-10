@@ -6,71 +6,65 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Repository repository = new Repository(3);
+        final int arraySizeDefect = 10;
+        Repository repository = new Repository(arraySizeDefect);
         //переменная отвечающая за работу цикла
         Criticality criticality;
-        int amountDays;
         Attachment attachment;
         boolean isRun = true;
 
-        try(Scanner scanner = new Scanner(System.in);) {
+        try (Scanner scanner = new Scanner(System.in);) {
             //цикл для выбора действия пользователя
-        while (isRun) {
-
+            while (isRun) {
                 String userDo = doIn(scanner);
                 //условный оператор с условием добавления дефекта
-                if (userDo.equals("add")) {
-                    String resume = resumeDefectIn(scanner);
-                    criticality = criticalityDefectIn(scanner);
-                    int amountDay = amountDayIn(scanner);
-                    attachment = typeAttachmentIn(scanner);
-                    //объявляем экзмепляр класса Defect
-                    Defect defect = new Defect(resume, criticality, amountDay, attachment);
-                    //выводим информацию о дефекте
-                    System.out.println("Информация о дефекте: ");
-                    System.out.println("Id " + defect.getId() + " | " + "Резюме: " + resume + " | " + "Серьезность " + criticality +
-                            " | " + "Количество дней на исправление " + amountDay + " | " + " Комментарий или id дефекта: " +
-                            attachment + " | " + "Статус:" + defect.getStatus());
-                    //заносим дефект в массив
-                    repository.add(defect);
-                    //если пользователь хочет вывести дефекты на экран
-                } else if (userDo.equals("list")) {
-                    //цикл для вывода массива дефектов
-                    for (int i = 0; i < repository.getAmountDefects(); i++) {
-                        System.out.println(repository.getAll()[i].getId());
-                        System.out.println(repository.getAll()[i].getAmountForCorrect());
-                        System.out.println(repository.getAll()[i].getCriticality());
-                        System.out.println(repository.getAll()[i].getResume());
-                        System.out.println(repository.getAll()[i].getAttachment().toString());
-                        System.out.println(repository.getAll()[i].getStatus());
-                        System.out.println();
-                    }
-                    //выход из цикла
-                } else if (userDo.equals("quit")) {
-                    isRun = false;
-                } else if (userDo.equals("change")) {
-                    System.out.println("Введите id дефекта: ");
-                    long idForChange = scanner.nextLong();
-                    scanner.nextLine();
-                    for (Defect defectFromArray : repository.getAll()) {
-                        if (idForChange == defectFromArray.getId()) {
-                            System.out.println("Введите статус дефекта: " + Arrays.toString(StatusDefect.values()));
-                            String newStatusDefect = scanner.nextLine();
-                            defectFromArray.setStatus(StatusDefect.valueOf(newStatusDefect));
-                            break;
+                switch (userDo) {
+                    case "add":
+                        if (repository.getAmountDefects() < arraySizeDefect) {
+                            String resume = resumeDefectIn(scanner);
+                            criticality = criticalityDefectIn(scanner);
+                            int amountDay = amountDayIn(scanner);
+                            attachment = typeAttachmentIn(scanner);
+                            //объявляем экзмепляр класса Defect
+                            Defect defect = new Defect(resume, criticality, amountDay, attachment);
+                            //выводим информацию о дефекте
+                            System.out.println("Информация о дефекте: ");
+                            System.out.println("Id " + defect.getId() + " | " + "Резюме: " + resume + " | " + "Серьезность " + criticality +
+                                    " | " + "Количество дней на исправление " + amountDay + " | " + " Комментарий или id дефекта: " +
+                                    attachment + " | " + "Статус:" + defect.getStatus());
+                            //заносим дефект в массив
+                            repository.add(defect);
+                            //если пользователь хочет вывести дефекты на экран
                         } else {
-                            System.out.println("Введите корректный статус");
+                            System.out.println("Закончилось место, невозможно ввести новый дефект");
                         }
-                    }
-                }
-                //если пользователь ввел некорреткное значение
-                else {
-                    System.out.println("Введите корректное значение");
+                        break;
+                    case "list":
+                        for (Defect defect : repository.getArrayDefects()) {
+                            System.out.println(defect);
+                        }
+                        //выход из цикла
+                        break;
+                    case "quit":
+                        isRun = false;
+                        break;
+                    case "change":
+                        long idForChange;
+                        for (Defect defectFromArray : repository.getAll()) {
+                            idForChange = idForChangeIn(scanner, defectFromArray);
+                            if (idForChange == defectFromArray.getId()) {
+                                defectFromArray.setStatus(StatusDefect.valueOf(statusDefectIn(scanner)));
+                                break;
+                            }
+                        }
+                        break;
+                    //если пользователь ввел некорреткное значение
+                    default:
+                        System.out.println("Введите корректное значение");
+                        break;
                 }
             }
-
-            }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("Вы ввели неправильное значение. Пожалуйста, начните сначала.");
         }
     }
@@ -93,59 +87,95 @@ public class Main {
         Criticality criticality = null;
         System.out.println("Введите критичность дефекта: " +
                 Arrays.toString(Criticality.values()));
-        while (true) {
+        do {
             try {
                 String criticalityIn = scanner.nextLine();
                 criticality = Criticality.valueOf(criticalityIn);
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println("Введите критичность корректно");
             }
-            if (criticality != null) {break;}
-        }
+        } while (criticality == null);
         return criticality;
     }
 
+    public static String statusDefectIn(Scanner scanner) {
+        StatusDefect statusDefect = null;
+        String newStatusDefect = "NEW";
+        System.out.println("Введите статус дефекта: " + Arrays.toString(StatusDefect.values()));
+        do {
+            try {
+                newStatusDefect = scanner.nextLine();
+                statusDefect = StatusDefect.valueOf(newStatusDefect);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Введите статус корректно");
+            }
+        } while (statusDefect == null);
+        return newStatusDefect;
+    }
+
     public static int amountDayIn(Scanner scanner) {
-        int amountDays;
+        int amountDays = -1;
         System.out.println("Введите ожидамое количество дней на исправление дефекта");
-        while (true) {
+        while (amountDays < 0) {
             try {
                 amountDays = scanner.nextInt();
-            }catch (IllegalArgumentException | InputMismatchException e){
-                amountDays = -1;
-            }
-            scanner.nextLine();
-            if (amountDays > 0) {break;}
-            else {
+                if (amountDays < 0) {
+                    throw new IllegalArgumentException();
+                }
+            } catch (IllegalArgumentException | InputMismatchException e) {
                 System.out.println("Введите корректное ожидамое количество дней на исправление дефекта ещё раз");
             }
+            scanner.nextLine();
         }
         return amountDays;
+    }
+
+    public static long idForChangeIn(Scanner scanner, Defect defectFromArray) {
+        long idForChange = -1L;
+        System.out.println("Введите id дефекта: ");
+        while (idForChange != defectFromArray.getId()) {
+            try {
+                idForChange = scanner.nextLong();
+                if (idForChange != defectFromArray.getId()) {
+                    throw new IllegalArgumentException();
+                }
+            } catch (IllegalArgumentException | InputMismatchException e) {
+                System.out.println("Дефекта с таким id не существует, введите корректный id");
+            }
+            scanner.nextLine();
+        }
+        return idForChange;
     }
 
     public static Attachment typeAttachmentIn(Scanner scanner) {
         Attachment attachment = null;
         System.out.println("Выберите тип вложения: \"Комментарий\" (comment) или " +
                 "\"Ссылка на другой дефект\" (link)");
-        boolean isRun = true;
-        while (isRun) {
+//        boolean isRun = true;
+        while (attachment == null) {
             String typeAttachment = scanner.nextLine();
             if (typeAttachment.equals("comment")) {
                 System.out.println("Введите комментарий:");
                 String comment = scanner.nextLine();
                 attachment = new CommentAttachment(comment);
-                isRun = false;
+//                isRun = false;
             } else if (typeAttachment.equals("link")) {
                 System.out.println("Введите id дефекта:");
                 int idDefect = scanner.nextInt();
                 scanner.nextLine();
                 attachment = new DefectAttachment(idDefect);
-                isRun = false;
+//                isRun = false;
             } else {
                 System.out.println("Введите корректное значение вложения");
             }
         }
         return attachment;
+    }
+
+    public void printCriticality() {
+        for (Criticality criticalityDefect : Criticality.values()) {
+            System.out.println(criticalityDefect);
+        }
     }
 
 

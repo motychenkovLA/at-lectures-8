@@ -3,8 +3,8 @@ package tracker;
 import java.util.Objects;
 
 public class Defect {
-    private static long id = 1000000;
-    private final long objectId = id;
+    private static long lastId = 1000000;
+    private final long id = lastId++;
     private String resume;
     private Criticality criticality;
     private int amountForCorrect;
@@ -16,17 +16,10 @@ public class Defect {
         this.criticality = criticality;
         this.amountForCorrect = amountForCorrect;
         this.attachment = attachment;
-        id++;
-    }
-
-    public void printCriticality() {
-        for (Criticality criticalityDefect : Criticality.values()) {
-            System.out.println(criticalityDefect);
-        }
     }
 
     public long getId() {
-        return objectId;
+        return id;
     }
 
     public String getResume() {
@@ -70,7 +63,7 @@ public class Defect {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Defect defect = (Defect) o;
-        return objectId == defect.objectId
+        return id == defect.id
                 && amountForCorrect == defect.amountForCorrect
                 && resume.equals(defect.resume)
                 && criticality == defect.criticality
@@ -80,6 +73,18 @@ public class Defect {
 
     @Override
     public int hashCode() {
-        return Objects.hash(objectId, resume, criticality, amountForCorrect, attachment, status);
+        return Objects.hash(id, resume, criticality, amountForCorrect, attachment, status);
+    }
+
+    @Override
+    public String toString() {
+        return "Defect{" +
+                "id=" + id +
+                ", resume='" + resume + '\'' +
+                ", criticality=" + criticality +
+                ", amountForCorrect=" + amountForCorrect +
+                ", attachment=" + attachment +
+                ", status=" + status +
+                '}';
     }
 }
