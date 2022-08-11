@@ -36,6 +36,10 @@ public class Defect {
         this.status = status;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

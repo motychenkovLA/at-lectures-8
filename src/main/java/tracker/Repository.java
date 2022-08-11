@@ -1,43 +1,36 @@
 package tracker;
 
-import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Repository {
 
-    private final Defect [] defects;
-    private int count = 0;
+    private final Map <Long, Defect> repository= new HashMap <> ();
+    //private final Defect [] defects;
     //конструктор, который на вход принимает максимальное количество дефектов и говорит, что объявляется массив ЭТИХ элементов типа Defect в количестве, равному значению на входе
-    public Repository(int maxDefects) {
-        this.defects = new Defect[maxDefects];
+    // public Repository(int maxDefects) {
+    //    this.defects = new Defect[maxDefects];
+    //}
+
+    public void add (Defect defect){
+        repository.put(defect.getId(), defect);
     }
 
-    //метод add, который говорит, что i-й элемент поля defects = тому значению, который пришёл на вход метода (типа конструктор?)
-    public void add (Defect defect) {
-        this.defects[count] = defect;
-        count++;
+    public boolean isEmpty () {
+          return repository.isEmpty();
     }
 
-    public boolean isNotFull () {
-        return count <= defects.length;
-    }
-
-    public Defect [] getAll() {
-        return Arrays.copyOf(defects,count);
-    }
-
-    public int getCount() {
-        return count;
+    public Collection<Defect> getAll () {
+        return repository.values();
     }
 
     public boolean checkId (long id) {
-        for (Defect defect : defects) {
-            if (defect == null) {
-                break;
-            } else if (defect.getId() == id) {
-                return true;
-            }
-        }
-        return false;
+        return repository.containsKey(id);
+    }
+
+    public Defect getDefect (long id) {
+        return repository.get(id);
     }
 }
 
