@@ -116,15 +116,22 @@ public class Main {
                 } else checkId = false;
                 System.out.println("Измените статус дефекта на один из вариантов: ");
                 Status[] valuesStatus = Status.values();
-
                 for (Status value : valuesStatus) {
                     System.out.println(value);
                 }
                 Status to;
-                while (true) {
+                boolean checkStatus = true;
+                while (checkStatus) {
+
                     try {
                         to = Status.valueOf(scanner.nextLine());
-                        break;
+                        if (Transition.checkTransition(def.getStatus(), to)) {
+                            def.setStatus(to);
+                            checkStatus = false;
+                        } else {
+                            System.out.println("Переход в этот статус невозможен");
+                        }
+
                     } catch (IllegalArgumentException e) {
                         System.out.println("Измените статус дефекта на один из вариантов: ");
                         valuesStatus = Status.values();
@@ -133,12 +140,6 @@ public class Main {
                         }
                     }
                 }
-                if (Transition.checkTransition(def.getStatus(), to)) {
-                    def.setStatus(to);
-                } else {
-                    System.out.println("Переход в этот статус невозможен");
-                }
-                break;
             } catch (NumberFormatException e) {
                 System.out.println("Введенный id отсутствует в списке дефектов." +
                         "\nВведите id дефекта:");
