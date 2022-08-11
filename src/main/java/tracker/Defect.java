@@ -23,6 +23,9 @@ public class Defect {
     public long getId() {
         return id;
     }
+    public Status getStatus() {
+        return status;
+    }
 
     public void setStatus(Status status) {
         this.status = status;
