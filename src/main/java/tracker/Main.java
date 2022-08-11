@@ -6,9 +6,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final int arraySizeDefect = 10;
+        final int arraySizeDefect = 5;
         Repository repository = new Repository(arraySizeDefect);
-        //переменная отвечающая за работу цикла
+//        repository.add(new Defect("res1", Criticality.LOW, 12, new CommentAttachment("comm1")));
+//        repository.add(new Defect("res2", Criticality.HIGH, 1, new CommentAttachment("comm2")));
+//        repository.add(new Defect("res3", Criticality.HIGHEST, 10, new CommentAttachment("comm3")));
         Criticality criticality;
         Attachment attachment;
         boolean isRun = true;
@@ -17,7 +19,6 @@ public class Main {
             //цикл для выбора действия пользователя
             while (isRun) {
                 String userDo = doIn(scanner);
-                //условный оператор с условием добавления дефекта
                 switch (userDo) {
                     case "add":
                         if (repository.getAmountDefects() < arraySizeDefect) {
@@ -34,7 +35,6 @@ public class Main {
                                     attachment + " | " + "Статус:" + defect.getStatus());
                             //заносим дефект в массив
                             repository.add(defect);
-                            //если пользователь хочет вывести дефекты на экран
                         } else {
                             System.out.println("Закончилось место, невозможно ввести новый дефект");
                         }
@@ -49,16 +49,9 @@ public class Main {
                         isRun = false;
                         break;
                     case "change":
-                        long idForChange;
-                        for (Defect defectFromArray : repository.getAll()) {
-                            idForChange = idForChangeIn(scanner, defectFromArray);
-                            if (idForChange == defectFromArray.getId()) {
-                                defectFromArray.setStatus(StatusDefect.valueOf(statusDefectIn(scanner)));
-                                break;
-                            }
-                        }
+                        Defect concreteDefect = getDefectById(scanner, repository);
+                        concreteDefect.setStatus((statusDefectIn(scanner)));
                         break;
-                    //если пользователь ввел некорреткное значение
                     default:
                         System.out.println("Введите корректное значение");
                         break;
@@ -72,7 +65,6 @@ public class Main {
     public static String doIn(Scanner scanner) {
         System.out.println("Выберите действие: добавить новый дефект (\"add\"), " +
                 "вывести список (\"list\"), " + "изменить статус (\"change\"), " + "выйти из программы (\"quit\") - главное меню");
-        //объявляем и вводим переменную действия пользователя
         String userDo = scanner.nextLine();
         return userDo;
     }
@@ -98,19 +90,20 @@ public class Main {
         return criticality;
     }
 
-    public static String statusDefectIn(Scanner scanner) {
+    public static StatusDefect statusDefectIn(Scanner scanner) {
         StatusDefect statusDefect = null;
-        String newStatusDefect = "NEW";
-        System.out.println("Введите статус дефекта: " + Arrays.toString(StatusDefect.values()));
+        scanner.nextLine();
+        System.out.println("Введите статус дефекта: " +
+                Arrays.toString(StatusDefect.values()));
         do {
             try {
-                newStatusDefect = scanner.nextLine();
+                String newStatusDefect = scanner.nextLine();
                 statusDefect = StatusDefect.valueOf(newStatusDefect);
             } catch (IllegalArgumentException e) {
                 System.out.println("Введите статус корректно");
             }
         } while (statusDefect == null);
-        return newStatusDefect;
+        return statusDefect;
     }
 
     public static int amountDayIn(Scanner scanner) {
@@ -130,41 +123,45 @@ public class Main {
         return amountDays;
     }
 
-    public static long idForChangeIn(Scanner scanner, Defect defectFromArray) {
-        long idForChange = -1L;
+    public static Defect getDefectById(Scanner scanner, Repository repository) {
+
+        long defectId = 0;
         System.out.println("Введите id дефекта: ");
-        while (idForChange != defectFromArray.getId()) {
+        while (true) {
             try {
-                idForChange = scanner.nextLong();
-                if (idForChange != defectFromArray.getId()) {
+                defectId = scanner.nextLong();
+                if (defectId > 999999) {
+                    for (Defect d: repository.getAll()){
+                        if(d.getId() == defectId){
+                            return d;
+                        }
+                    }
+                    throw new InputMismatchException();
+                } else {
                     throw new IllegalArgumentException();
                 }
             } catch (IllegalArgumentException | InputMismatchException e) {
-                System.out.println("Дефекта с таким id не существует, введите корректный id");
+                System.out.println("Дефекта с таким id не существует или введен неправильный id. Введите корректный id");
             }
             scanner.nextLine();
         }
-        return idForChange;
     }
 
     public static Attachment typeAttachmentIn(Scanner scanner) {
         Attachment attachment = null;
         System.out.println("Выберите тип вложения: \"Комментарий\" (comment) или " +
                 "\"Ссылка на другой дефект\" (link)");
-//        boolean isRun = true;
         while (attachment == null) {
             String typeAttachment = scanner.nextLine();
             if (typeAttachment.equals("comment")) {
                 System.out.println("Введите комментарий:");
                 String comment = scanner.nextLine();
                 attachment = new CommentAttachment(comment);
-//                isRun = false;
             } else if (typeAttachment.equals("link")) {
                 System.out.println("Введите id дефекта:");
                 int idDefect = scanner.nextInt();
                 scanner.nextLine();
                 attachment = new DefectAttachment(idDefect);
-//                isRun = false;
             } else {
                 System.out.println("Введите корректное значение вложения");
             }
