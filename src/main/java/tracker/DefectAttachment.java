@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class DefectAttachment extends Attachment {
 
-    private final int idDefect;
+    private final long idDefect;
 
-    public DefectAttachment(int idDefect) {
+    public DefectAttachment(long idDefect) {
         this.idDefect = idDefect;
     }
 

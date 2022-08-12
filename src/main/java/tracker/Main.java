@@ -6,13 +6,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final int arraySizeDefect = 5;
-        Repository repository = new Repository(arraySizeDefect);
-//        repository.add(new Defect("res1", Criticality.LOW, 12, new CommentAttachment("comm1")));
-//        repository.add(new Defect("res2", Criticality.HIGH, 1, new CommentAttachment("comm2")));
-//        repository.add(new Defect("res3", Criticality.HIGHEST, 10, new CommentAttachment("comm3")));
-        Criticality criticality;
-        Attachment attachment;
+        final int ARRAY_SIZE_DEFECT = 5;
+        Repository repository = new Repository(ARRAY_SIZE_DEFECT);
+
         boolean isRun = true;
 
         try (Scanner scanner = new Scanner(System.in);) {
@@ -21,11 +17,13 @@ public class Main {
                 String userDo = doIn(scanner);
                 switch (userDo) {
                     case "add":
-                        if (repository.getAmountDefects() < arraySizeDefect) {
+                        if (repository.getAmountDefects() < ARRAY_SIZE_DEFECT) {
                             String resume = resumeDefectIn(scanner);
+                            Criticality criticality;
+                            Attachment attachment;
                             criticality = criticalityDefectIn(scanner);
                             int amountDay = amountDayIn(scanner);
-                            attachment = typeAttachmentIn(scanner);
+                            attachment = typeAttachmentIn(scanner, repository);
                             //объявляем экзмепляр класса Defect
                             Defect defect = new Defect(resume, criticality, amountDay, attachment);
                             //выводим информацию о дефекте
@@ -40,9 +38,7 @@ public class Main {
                         }
                         break;
                     case "list":
-                        for (Defect defect : repository.getArrayDefects()) {
-                            System.out.println(defect);
-                        }
+                        System.out.println(repository.getAllDefectsInfo());
                         //выход из цикла
                         break;
                     case "quit":
@@ -113,7 +109,7 @@ public class Main {
             try {
                 amountDays = scanner.nextInt();
                 if (amountDays < 0) {
-                    throw new IllegalArgumentException();
+                    System.out.println("Введите значение больше нуля");
                 }
             } catch (IllegalArgumentException | InputMismatchException e) {
                 System.out.println("Введите корректное ожидамое количество дней на исправление дефекта ещё раз");
@@ -127,43 +123,48 @@ public class Main {
 
         long defectId = 0;
         System.out.println("Введите id дефекта: ");
-        while (true) {
+        Defect defect = null;
+        while (defect == null) {
             try {
-                defectId = scanner.nextLong();
-                if (defectId > 999999) {
-                    for (Defect d: repository.getAll()){
-                        if(d.getId() == defectId){
-                            return d;
-                        }
-                    }
-                    throw new InputMismatchException();
-                } else {
-                    throw new IllegalArgumentException();
+                defect = repository.getDefectById(scanner.nextLong());
+                if (defect == null) {
+                    System.out.println("Дефекта с таким id не существует или введен неправильный id. Введите корректный id");
                 }
             } catch (IllegalArgumentException | InputMismatchException e) {
-                System.out.println("Дефекта с таким id не существует или введен неправильный id. Введите корректный id");
+                System.out.println("Введите корректный id");
+                scanner.nextLine();
             }
-            scanner.nextLine();
+
         }
+        return defect;
     }
 
-    public static Attachment typeAttachmentIn(Scanner scanner) {
+    public static Attachment typeAttachmentIn(Scanner scanner, Repository repository) {
         Attachment attachment = null;
         System.out.println("Выберите тип вложения: \"Комментарий\" (comment) или " +
                 "\"Ссылка на другой дефект\" (link)");
         while (attachment == null) {
             String typeAttachment = scanner.nextLine();
-            if (typeAttachment.equals("comment")) {
-                System.out.println("Введите комментарий:");
-                String comment = scanner.nextLine();
-                attachment = new CommentAttachment(comment);
-            } else if (typeAttachment.equals("link")) {
-                System.out.println("Введите id дефекта:");
-                int idDefect = scanner.nextInt();
-                scanner.nextLine();
-                attachment = new DefectAttachment(idDefect);
-            } else {
-                System.out.println("Введите корректное значение вложения");
+
+            switch (typeAttachment){
+                case "comment":
+                    System.out.println("Введите комментарий:");
+                    attachment = new CommentAttachment(scanner.nextLine());
+                    break;
+                case "link":
+                    while (attachment == null) {
+                        try{
+                            long id = getDefectById(scanner, repository).getId();
+                            attachment = new DefectAttachment(id);
+                        }catch (IllegalArgumentException | InputMismatchException e){
+                            System.out.println("Введите id корректно");
+                        }
+                        scanner.nextLine();
+                    }
+                    break;
+                default:
+                    System.out.println("Введите корректное значение вложения");
+                    break;
             }
         }
         return attachment;

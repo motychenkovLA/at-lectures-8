@@ -24,7 +24,29 @@ public class Repository {
         return amountDefects;
     }
 
-    public Defect[] getArrayDefects() {
-        return arrayDefects;
+    public String getAllDefectsInfo(){
+
+        String resultString = "";
+        for (Defect defect : arrayDefects) {
+            if (defect != null) {
+                resultString += defect.toString() + "\n";
+            }
+        }
+        if (resultString.equals("")){
+            resultString = "Нет ни одного дефекта";
+        }
+
+        return resultString;
+    }
+
+    public Defect getDefectById(long id){
+        Defect defect = null;
+
+        for (Defect d: arrayDefects){
+            if (d != null && d.getId() == id){
+                defect = d;
+            }
+        }
+        return defect;
     }
 }
