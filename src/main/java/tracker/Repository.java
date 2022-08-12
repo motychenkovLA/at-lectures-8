@@ -24,6 +24,7 @@ public class Repository {
         return amountDefects;
     }
 
+    // todo 3 - вообще наружу этот массив отдавать это нарушение инкапсуляции
     public Defect[] getArrayDefects() {
         return arrayDefects;
     }

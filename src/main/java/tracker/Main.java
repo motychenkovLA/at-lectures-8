@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final int arraySizeDefect = 5;
+        final int arraySizeDefect = 5; // todo 1 - вообще это константа, а код стайл как от обычной переменной
         Repository repository = new Repository(arraySizeDefect);
-//        repository.add(new Defect("res1", Criticality.LOW, 12, new CommentAttachment("comm1")));
+//        repository.add(new Defect("res1", Criticality.LOW, 12, new CommentAttachment("comm1"))); // todo 0 - не надо оставлять комменты
 //        repository.add(new Defect("res2", Criticality.HIGH, 1, new CommentAttachment("comm2")));
 //        repository.add(new Defect("res3", Criticality.HIGHEST, 10, new CommentAttachment("comm3")));
-        Criticality criticality;
+        Criticality criticality; // todo 1 - объявлены далеко от использования
         Attachment attachment;
         boolean isRun = true;
 
@@ -40,6 +40,7 @@ public class Main {
                         }
                         break;
                     case "list":
+                        // todo 5 - зачем тут выводятся нуллы?
                         for (Defect defect : repository.getArrayDefects()) {
                             System.out.println(defect);
                         }
@@ -113,6 +114,9 @@ public class Main {
             try {
                 amountDays = scanner.nextInt();
                 if (amountDays < 0) {
+                    // todo 1 - ну вот так не очень хорошо делать (выкидывать и тут же ловить),
+                    //  получается что try-catch просто используется вместо if-else.
+                    //  конкретно здесь можно например выводить другое сообщение об ошибке вместо выброса исключения
                     throw new IllegalArgumentException();
                 }
             } catch (IllegalArgumentException | InputMismatchException e) {
@@ -130,12 +134,20 @@ public class Main {
         while (true) {
             try {
                 defectId = scanner.nextLong();
+                // todo 1 - не особо нужный if
                 if (defectId > 999999) {
+                    // todo 3 - в идеале поиск по ид должен производить сам репо
                     for (Defect d: repository.getAll()){
                         if(d.getId() == defectId){
                             return d;
+                            // todo 3 - в случае выполнения условия возвращаемся из метода,
+                            //  весь остальной код здесь тогда не выполняется,
+                            //  в том числе и scanner.nextLine()
                         }
                     }
+                    // todo 3 - аналогично комменту выше по поводу выкидывания и мгновенного отлавливания исключений.
+                    //   эта строчка достижима только если введено валидное число (иначе ушли бы в catch)
+                    //   + не найден дефект (иначе ушли бы в return), этого достаточно чтобы вывести сообщение об ошибке
                     throw new InputMismatchException();
                 } else {
                     throw new IllegalArgumentException();
@@ -159,6 +171,7 @@ public class Main {
                 attachment = new CommentAttachment(comment);
             } else if (typeAttachment.equals("link")) {
                 System.out.println("Введите id дефекта:");
+                // todo 0 - проглядели в прошлом дз, тут можно упасть если не число ввелось
                 int idDefect = scanner.nextInt();
                 scanner.nextLine();
                 attachment = new DefectAttachment(idDefect);
