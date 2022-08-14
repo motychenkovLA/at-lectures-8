@@ -1,6 +1,9 @@
 package tracker;
 
+import java.util.IntSummaryStatistics;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,6 +15,7 @@ public class Main {
                         "\nДобавить новый дефевкт - введите \"add\" " +
                         "\nВывести список дефектов - введите \"list\" " +
                         "\nИзменить статус дефекта - введите \"change\"" +
+                        "\nВывести статистику - введите \"stats\"" +
                         "\nВыйти из программы - введите \"quit\"");
                 switch (scanner.nextLine()) {
                     case "add":
@@ -25,7 +29,9 @@ public class Main {
                     case "change":
                         change(scanner, repository);
                         break;
-
+                    case "stats":
+                        stats(repository);
+                        break;
                     case "quit":
                         run = false;
                         break;
@@ -147,6 +153,20 @@ public class Main {
 
         }
 
+    }
+
+    public static void stats(Repository repository) {
+        Map<Status, Long> stat = repository.getAll().stream()
+                .collect(Collectors.groupingBy(Defect::getStatus, Collectors.counting()));
+
+        stat.forEach((Status, Long) -> System.out.println("Количество дефектов в статусе " + Status.getName() +
+                " равно " + Long));
+
+        IntSummaryStatistics intSummaryStatistics = repository.getAll().stream()
+                .collect(Collectors.summarizingInt(Defect::getDays));
+        System.out.println("Максимальное количество дней на исправление: " + intSummaryStatistics.getMax() + "\n" +
+                "Минимальное количество дней на исправление: " + intSummaryStatistics.getMin() + "\n" +
+                "Среднее количество дней на исправление: " + intSummaryStatistics.getAverage() + "\n");
     }
 
 }

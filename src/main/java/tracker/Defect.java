@@ -20,6 +20,10 @@ public class Defect {
         this.status = Status.OPEN;
     }
 
+    public int getDays() {
+        return days;
+    }
+
     public long getId() {
         return id;
     }
