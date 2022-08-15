@@ -1,6 +1,7 @@
 package tracker;
 
 import java.util.HashMap;
+import java.util.IntSummaryStatistics;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class Main {
             while (run) {
 
                 System.out.println("Что нужно сделать?\nadd - добавить новый дефект\n" +
-                        "list - вывести список дефектов\nchange - изменить статус дефекта\nquit - выйти из программы");
+                        "list - вывести список дефектов\nchange - изменить статус дефекта\nstats - вывести статистику\nquit - выйти из программы\"");
 
                 String userChoice = scanner.nextLine();
 
@@ -30,12 +31,15 @@ public class Main {
                     case "change":
                         changeDefectStatus(repository, scanner);
                         break;
+                    case "stats":
+                        showStatistics(repository);
+                        break;
                     case "quit":
                         System.out.println("Выход из программы");
                         run = false;
                         break;
                     default:
-                        System.out.println("Необходимо ввести одно из четырех значений!\n");
+                        System.out.println("Необходимо ввести одно из пяти значений!\n");
                         break;
                 }
             }
@@ -184,6 +188,60 @@ public class Main {
                     }
                 }
             }
+        }
+    }
+    private static void showStatistics (Map<Long, Defect> repository) {
+        if (repository.isEmpty()) {
+            System.out.println("В системе нет ни одного дефекта\n");
+        }
+        else {
+            IntSummaryStatistics dayCountStream = repository
+                    .values()
+                    .stream()
+                    .mapToInt(Defect::getNumberOfDays)
+                    .summaryStatistics();
+            System.out.println
+                    ("Максимальное количество дней на исправление: " + dayCountStream.getMax() + "\n" +
+                     "Среднее количество дней на исправление: " + dayCountStream.getAverage() + "\n" +
+                     "Минимальное количество дней на исправление: " + dayCountStream.getMin() + "\n");
+
+            long countOPEN = repository
+                    .values()
+                    .stream()
+                    .filter(defect -> defect.getDefectStatus() == Status.OPEN)
+                    .count();
+
+            long countASSIGNED = repository
+                    .values()
+                    .stream()
+                    .filter(defect -> defect.getDefectStatus() == Status.ASSIGNED)
+                    .count();
+
+            long countFIXED = repository
+                    .values()
+                    .stream()
+                    .filter(defect -> defect.getDefectStatus() == Status.FIXED)
+                    .count();
+
+            long countVERIFIED = repository
+                    .values()
+                    .stream()
+                    .filter(defect -> defect.getDefectStatus() == Status.VERIFIED)
+                    .count();
+
+            long countCLOSED = repository
+                    .values()
+                    .stream()
+                    .filter(defect -> defect.getDefectStatus() == Status.CLOSED)
+                    .count();
+
+            System.out.println
+                    ("Статус   | Количество дефектов в этом статусе " + "\n" + "\n" +
+                            "OPEN     | " + countOPEN + "\n" +
+                            "ASSIGNED | " + countASSIGNED + "\n" +
+                            "FIXED    | " + countFIXED + "\n" +
+                            "VERIFIED | " + countVERIFIED + "\n" +
+                            "CLOSED   | " + countCLOSED + "\n");
         }
     }
 }
