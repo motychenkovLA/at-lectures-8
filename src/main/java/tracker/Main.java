@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.IntSummaryStatistics;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -205,43 +206,15 @@ public class Main {
                      "Среднее количество дней на исправление: " + dayCountStream.getAverage() + "\n" +
                      "Минимальное количество дней на исправление: " + dayCountStream.getMin() + "\n");
 
-            long countOPEN = repository
+            Map<Status, Long> mapStatusCounting = repository
                     .values()
                     .stream()
-                    .filter(defect -> defect.getDefectStatus() == Status.OPEN)
-                    .count();
+                    .collect(Collectors.groupingBy(Defect::getDefectStatus, Collectors.counting()));
 
-            long countASSIGNED = repository
-                    .values()
-                    .stream()
-                    .filter(defect -> defect.getDefectStatus() == Status.ASSIGNED)
-                    .count();
-
-            long countFIXED = repository
-                    .values()
-                    .stream()
-                    .filter(defect -> defect.getDefectStatus() == Status.FIXED)
-                    .count();
-
-            long countVERIFIED = repository
-                    .values()
-                    .stream()
-                    .filter(defect -> defect.getDefectStatus() == Status.VERIFIED)
-                    .count();
-
-            long countCLOSED = repository
-                    .values()
-                    .stream()
-                    .filter(defect -> defect.getDefectStatus() == Status.CLOSED)
-                    .count();
-
-            System.out.println
-                    ("Статус   | Количество дефектов в этом статусе " + "\n" + "\n" +
-                            "OPEN     | " + countOPEN + "\n" +
-                            "ASSIGNED | " + countASSIGNED + "\n" +
-                            "FIXED    | " + countFIXED + "\n" +
-                            "VERIFIED | " + countVERIFIED + "\n" +
-                            "CLOSED   | " + countCLOSED + "\n");
+            System.out.println ("Статус | Количество дефектов в этом статусе");
+            for (Map.Entry<Status, Long> entry : mapStatusCounting.entrySet()) {
+                System.out.println(entry.getKey()+" | "+ entry.getValue());
+            }
         }
     }
 }
