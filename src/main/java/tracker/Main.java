@@ -1,6 +1,7 @@
 package tracker;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +13,8 @@ public class Main {
                         "\nДобавить новый дефект (введите команду add)" +
                         "\nВывести список дефектов (введите команду list)" +
                         "\nВернуться в главное меню (введите команду quit)" +
-                        "\nИзменить статус дефекта (введите команду change)");
+                        "\nИзменить статус дефекта (введите команду change)" +
+                        "\nВывести статистику по дефектам (введите команду stats)");
                 String command = scan.nextLine();
                 switch (command) {
                     case "add":
@@ -23,6 +25,9 @@ public class Main {
                         break;
                     case "change":
                         change(repository, scan);
+                        break;
+                    case "stats":
+                        stats(repository);
                         break;
                     case "quit":
                         System.out.println("Завершение работы программы");
@@ -147,5 +152,27 @@ public static void change(Repository repository,Scanner scan) {
         System.out.println("Вы ввели следующий дефект:");
         System.out.println(defect);
         repository.add(defect);
+    }
+    public static void stats (Repository repository) {
+        if (repository.isEmpty()) {
+            System.out.println("Дефектов не заведено!");
+        } else {
+            ArrayList <Integer> numberOfDays = new ArrayList<>();
+            for (Defect defect: repository.getAll()) {
+                numberOfDays.add(defect.getNumberOfDays());
+            }
+            IntSummaryStatistics intSummaryStatistics = numberOfDays.stream()
+                    .mapToInt(Integer::intValue)
+                    .summaryStatistics();
+            System.out.println("Максимальное количество дней на исправление: " +intSummaryStatistics.getMax());
+            System.out.println("Среднее количество дней на исправление: " +intSummaryStatistics.getAverage());
+            System.out.println("Минимальное количество дней на исправление: " +intSummaryStatistics.getMin()  + "\n");
+//            ArrayList <Status> stat = new ArrayList<>();
+//            for (Defect defForStat: repository.getAll()) {
+            Map<Status, Long> statusOfDefects = repository.getAll().stream()
+                    .collect(Collectors.groupingBy(Defect::getStatus, Collectors.counting()));
+            System.out.println("Статус, количество дефектов в этом статусе:");
+            System.out.println(statusOfDefects + "\n");
+        }
     }
 }

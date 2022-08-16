@@ -53,10 +53,13 @@ public class Defect {
                 status.equals(defect.status);
     }
 
-
     @Override
     public int hashCode() {
         return Objects.hash(id, description, severity, numberOfDays, attachment, status);
+    }
+
+    public int getNumberOfDays() {
+        return numberOfDays;
     }
 }
 
