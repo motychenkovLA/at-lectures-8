@@ -7,7 +7,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final int ARRAY_SIZE_DEFECT = 5;
-        Repository repository = new Repository(ARRAY_SIZE_DEFECT);
+        Repository repository = new Repository();
+        TransitionAction transitionAction = new TransitionAction();
 
         boolean isRun = true;
 
@@ -32,7 +33,7 @@ public class Main {
                                     " | " + "Количество дней на исправление " + amountDay + " | " + " Комментарий или id дефекта: " +
                                     attachment + " | " + "Статус:" + defect.getStatus());
                             //заносим дефект в массив
-                            repository.add(defect);
+                            repository.add(defect.getId(), defect);
                         } else {
                             System.out.println("Закончилось место, невозможно ввести новый дефект");
                         }
@@ -45,8 +46,16 @@ public class Main {
                         isRun = false;
                         break;
                     case "change":
-                        Defect concreteDefect = getDefectById(scanner, repository);
-                        concreteDefect.setStatus((statusDefectIn(scanner)));
+                        while (true) {
+                            Defect concreteDefect = getDefectById(scanner, repository);
+                            StatusDefect status = statusDefectIn(scanner);
+                            if (transitionAction.correctTransition(concreteDefect.getStatus(), status)) {
+                                concreteDefect.setStatus((status));
+                                break;
+                            } else {
+                                System.out.println("Переход из " + concreteDefect.getStatus() + " в статус " + status + " невозможен. Введите корректный статус");
+                            }
+                        }
                         break;
                     default:
                         System.out.println("Введите корректное значение");

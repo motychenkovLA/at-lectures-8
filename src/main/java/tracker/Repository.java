@@ -1,33 +1,32 @@
 package tracker;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Repository {
-    private Defect[] arrayDefects;
-    private int amountDefects = 0;
 
-    public Repository(int amount) {
-        arrayDefects = new Defect[amount];
+    private Map<Long, Defect> mapDefect;
+
+    public Repository() {
+        mapDefect = new HashMap<>();
     }
 
-    public void add(Defect defect) {
-            arrayDefects[amountDefects] = defect;
-            amountDefects++;
+    public Map<Long, Defect> getMapDefect() {
+        return mapDefect;
     }
 
-    public Defect[] getAll() {
-        int lengthArrayForReturn = amountDefects;
-        Defect[] defectsForReturn = new Defect[lengthArrayForReturn];
-        System.arraycopy(arrayDefects, 0, defectsForReturn, 0, lengthArrayForReturn);
-        return defectsForReturn;
+        public void add(Long id, Defect defect) {
+            mapDefect.put(id, defect);
     }
 
-    public int getAmountDefects() {
-        return amountDefects;
+        public int getAmountDefects() {
+        return mapDefect.size();
     }
 
     public String getAllDefectsInfo(){
 
         String resultString = "";
-        for (Defect defect : arrayDefects) {
+        for (Defect defect : mapDefect.values()) {
             if (defect != null) {
                 resultString += defect.toString() + "\n";
             }
@@ -39,10 +38,10 @@ public class Repository {
         return resultString;
     }
 
-    public Defect getDefectById(long id){
+        public Defect getDefectById(long id){
         Defect defect = null;
 
-        for (Defect d: arrayDefects){
+        for (Defect d: mapDefect.values()){
             if (d != null && d.getId() == id){
                 defect = d;
             }
