@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class TransitionAction {
 
-    Set<Transition> transitions = new HashSet<>();
+    static Set<Transition> transitions = new HashSet<>();
 
     public TransitionAction(){
         transitions.add(new Transition(StatusDefect.OPEN, StatusDefect.ANALYSIS));
@@ -22,7 +22,7 @@ public class TransitionAction {
         transitions.add(new Transition(StatusDefect.CLOSE, StatusDefect.OPEN));
     }
 
-    public boolean correctTransition(StatusDefect fromStatus, StatusDefect toStatus) {
+    public boolean isTransitionValid(StatusDefect fromStatus, StatusDefect toStatus) {
         for (Transition transition : transitions) {
             if (transition.getFromStatus().equals(fromStatus) && transition.getToStatus().equals(toStatus)) {
                 return true;

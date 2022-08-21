@@ -49,7 +49,7 @@ public class Main {
                         while (true) {
                             Defect concreteDefect = getDefectById(scanner, repository);
                             StatusDefect status = statusDefectIn(scanner);
-                            if (transitionAction.correctTransition(concreteDefect.getStatus(), status)) {
+                            if (transitionAction.isTransitionValid(concreteDefect.getStatus(), status)) {
                                 concreteDefect.setStatus((status));
                                 break;
                             } else {

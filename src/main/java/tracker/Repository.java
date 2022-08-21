@@ -41,10 +41,8 @@ public class Repository {
         public Defect getDefectById(long id){
         Defect defect = null;
 
-        for (Defect d: mapDefect.values()){
-            if (d != null && d.getId() == id){
-                defect = d;
-            }
+        if(mapDefect.containsKey(id)){
+            defect = mapDefect.get(id);
         }
         return defect;
     }
