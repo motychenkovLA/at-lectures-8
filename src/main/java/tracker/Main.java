@@ -1,14 +1,20 @@
 package tracker;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
         final int ARRAY_SIZE_DEFECT = 5;
         Repository repository = new Repository();
         TransitionAction transitionAction = new TransitionAction();
+
+        repository.add(1000000L, new Defect("res1", Criticality.LOW, 12, new CommentAttachment("comm1")));
+        repository.add(1000001L, new Defect("res2", Criticality.HIGH, 1, new CommentAttachment("comm2")));
+        repository.add(1000002L, new Defect("res3", Criticality.HIGHEST, 10, new CommentAttachment("comm3")));
+        repository.add(1000003L, new Defect("res4", Criticality.LOW, 66, new CommentAttachment("comm5")));
+        repository.add(1000004L, new Defect("res5", Criticality.HIGH, 122, new CommentAttachment("comm8")));
+        repository.add(1000005L, new Defect("res6", Criticality.HIGHEST, 4, new CommentAttachment("commololo")));
 
         boolean isRun = true;
 
@@ -57,6 +63,9 @@ public class Main {
                             }
                         }
                         break;
+                    case "stats":
+                        showStatistics(repository);
+                        break;
                     default:
                         System.out.println("Введите корректное значение");
                         break;
@@ -69,7 +78,8 @@ public class Main {
 
     public static String doIn(Scanner scanner) {
         System.out.println("Выберите действие: добавить новый дефект (\"add\"), " +
-                "вывести список (\"list\"), " + "изменить статус (\"change\"), " + "выйти из программы (\"quit\") - главное меню");
+                "вывести список (\"list\"), " + "изменить статус (\"change\"), " + "выйти из программы (\"quit\") - главное меню"
+                + "посмотреть статистику по дефектам (\"stats\")");
         String userDo = scanner.nextLine();
         return userDo;
     }
@@ -177,6 +187,26 @@ public class Main {
             }
         }
         return attachment;
+    }
+
+    public static void showStatistics(Repository repository){
+
+        int maxDaysToRepair = repository.getMapDefect().values().stream().max(Comparator.comparing(Defect::getAmountForCorrect)).get().getAmountForCorrect();
+        int minDaysToRepair = repository.getMapDefect().values().stream().min(Comparator.comparing(Defect::getAmountForCorrect)).get().getAmountForCorrect();;
+        double avgDaysToRepair = repository.getMapDefect().values().stream().mapToInt(Defect::getAmountForCorrect).average().getAsDouble();
+
+        System.out.println("По всем дефектам, среднее количество дней на исправление: " + avgDaysToRepair +
+                ", максимальное количество дней на исправление: " + maxDaysToRepair +
+                ", минимальное количество дней на исправление: " + minDaysToRepair);
+
+        Map<StatusDefect, Long> amountStatusesInDefects= repository.getMapDefect().values().stream()
+                .collect(Collectors.groupingBy(d -> d.getStatus(), Collectors.counting()));
+
+        System.out.println("\nТаблица количества статусов по дефектам:");
+        for (Map.Entry<StatusDefect, Long> entry: amountStatusesInDefects.entrySet()){
+            System.out.println(entry.getKey() + ": " + entry.getValue() );
+        }
+
     }
 
     public void printCriticality() {

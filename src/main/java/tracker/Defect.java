@@ -7,7 +7,7 @@ public class Defect {
     private final long id = lastId++;
     private String resume;
     private Criticality criticality;
-    private int amountForCorrect;
+    private Integer amountForCorrect;
     private Attachment attachment;
     private StatusDefect status = StatusDefect.OPEN;
 
@@ -38,7 +38,7 @@ public class Defect {
         this.criticality = criticality;
     }
 
-    public int getAmountForCorrect() {
+    public Integer getAmountForCorrect() {
         return amountForCorrect;
     }
 
