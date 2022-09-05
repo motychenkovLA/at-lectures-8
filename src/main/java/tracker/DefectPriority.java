@@ -5,10 +5,10 @@ public enum DefectPriority {
     MEDIUM("Средний"),
     HIGH("Высокий"),
     CRITICAL("Критический");
-    String PriorityName;
+    final String PriorityName;
 
-    DefectPriority(String criticalityName) {
-        this.PriorityName = criticalityName;
+    DefectPriority(String defectPriority) {
+        this.PriorityName = defectPriority;
     }
 
     public String getPriorityName() {
@@ -20,18 +20,4 @@ public enum DefectPriority {
             System.out.println(defectPriority);
         }
     }
-
-
-//    public static boolean getDefectPriorityCheck(Scanner in) {
-//        String defectPriority;
-//
-//        defectPriority = in.nextLine();
-//                        if (LOW.PriorityName.equalsIgnoreCase(defectPriority)
-//                                || MEDIUM.PriorityName.equalsIgnoreCase(defectPriority)
-//                                || HIGH.PriorityName.equalsIgnoreCase(defectPriority)
-//                                || CRITICAL.PriorityName.equalsIgnoreCase(defectPriority)) {
-//                            return false;
-//                        }
-//        return true;
-//    }
 }

@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.Objects;
+
 public class Repository {
     public static final int DEFECTS_AMOUNT_MAX = 10;
     private final Defect[] listOfDefects;
@@ -43,8 +45,19 @@ public class Repository {
             if (defect == null) {
                 break;
             }
-//            System.out.println("Список дефектов:");
             System.out.println(defect.getDefectInfo());
         }
+    }
+    public boolean checkIdExistence(Long defectId) {
+        boolean IdExistence = false;
+        for (Defect defect : getAllDefects()) {
+            if (defect == null) {
+                break;
+            } else if (Objects.equals(defect.getId(), defectId)){
+                IdExistence = true;
+                break;
+            }
+        }
+        return IdExistence;
     }
 }

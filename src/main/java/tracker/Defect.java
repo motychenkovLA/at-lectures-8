@@ -6,10 +6,10 @@ public class Defect {
     public String defectName;
     public DefectPriority defectPriority;
     public DefectStatus defectStatus;
-    public int defectFixDays;
+    public float defectFixDays;
     private Attachment attachment;
 
-    public Defect(String defectName, DefectPriority defectPriority, int defectFixDays, Attachment attachment) {
+    public Defect(String defectName, DefectPriority defectPriority, float defectFixDays, Attachment attachment) {
         this.defectName = defectName;
         this.defectPriority = defectPriority;
         this.defectFixDays = defectFixDays;
@@ -17,7 +17,7 @@ public class Defect {
         this.defectStatus = DefectStatus.OPEN;
     }
 
-    public Defect(String defectName, DefectPriority defectPriority, int defectFixDays) {
+    public Defect(String defectName, DefectPriority defectPriority, float defectFixDays) {
         this.defectName = defectName;
         this.defectPriority = defectPriority;
         this.defectFixDays = defectFixDays;
@@ -32,7 +32,6 @@ public class Defect {
     public Long getId() {
         return id;
     }
-
     public String getDefectNameInfo() {
         return " | Названиe дефекта: " + defectName;
     }
