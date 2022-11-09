@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class NewPageClass {
+public class BrowseNewPageClass {
     private static final By tabButton = By.xpath("//*[@id=\"tabButton\"]");
     WebDriver webDriver;
 
-    public NewPageClass(WebDriver webDriver) {
+    public BrowseNewPageClass(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
