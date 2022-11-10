@@ -47,11 +47,15 @@ public class DemoqaAlertsPageClass {
                 .dismiss();
     }
 
-    public void alertDismissCheck () {
-        if (!webDriver.findElements(confirmResultLocator).isEmpty()) {
-            System.out.println("Текст 'You selected Cancel' появился!");
-        } else {
-            System.out.println("Текст 'You selected Cancel' не появился!");
-        }
+//    public void alertDismissCheck () {
+//        if (!webDriver.findElements(confirmResultLocator).isEmpty()) {
+//            System.out.println("Текст 'You selected Cancel' появился!");
+//        } else {
+//            System.out.println("Текст 'You selected Cancel' не появился!");
+//        }
+//    }
+
+    public String getSelectedCancelText(WebDriver webDriver) {
+        return webDriver.findElement(confirmResultLocator).getText();
     }
 }
