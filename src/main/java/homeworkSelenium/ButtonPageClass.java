@@ -9,6 +9,9 @@ public class ButtonPageClass {
     private static final By rightClickBtn = By.xpath("//*[@id=\"rightClickBtn\"]");
     private static final By leftClickBtn = By.xpath("//button[text()=\"Click Me\"]");
 
+    private static final By doubleClickMessage = By.xpath("//*[@id=\"doubleClickMessage\"]");
+    private static final By rightClickMessage = By.xpath("//*[@id=\"rightClickMessage\"]");
+    private static final By leftClickMessage = By.xpath("//*[@id=\"dynamicClickMessage\"]");
 
     public ButtonPageClass(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -34,4 +37,18 @@ public class ButtonPageClass {
                 .build()
                 .perform();
     }
+
+    public boolean checkDoubleClick () {
+        return webDriver.findElements(doubleClickMessage).isEmpty();
+    }
+
+    public boolean checkRightClick () {
+        return webDriver.findElements(rightClickMessage).isEmpty();
+    }
+
+    public boolean checkLeftClick () {
+        return webDriver.findElements(leftClickMessage).isEmpty();
+    }
+
+
 }

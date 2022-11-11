@@ -12,7 +12,8 @@ public class AlertPageClass {
     private static final By timerAlertButton = By.xpath("//*[@id=\"timerAlertButton\"]");
     private static final By confirmButton = By.xpath("//*[@id=\"confirmButton\"]");
 
-    //private static final By confirmResult = By.xpath("//*[@id=\"confirmResult\"]");
+    private static final By confirmResult = By.xpath("//*[@id=\"confirmResult\"]");
+
     WebDriver webDriver;
 
     public AlertPageClass(WebDriver webDriver) {
@@ -37,11 +38,8 @@ public class AlertPageClass {
         confirmClick.click();
         webDriver.switchTo().alert().dismiss();
     }
-//    public void checkConfirmResult (){
-//        if (!webDriver.findElements(confirmResult).isEmpty()){
-//            System.out.println("Тест пройден");
-//        } else {
-//            System.out.println("Тест не пройден");
-//        }
-//    }
+
+    public boolean checkConfirmResult () {
+        return webDriver.findElements(confirmResult).isEmpty();
+    }
 }
