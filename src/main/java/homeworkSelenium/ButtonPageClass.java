@@ -38,17 +38,15 @@ public class ButtonPageClass {
                 .perform();
     }
 
-    public boolean checkDoubleClick () {
-        return webDriver.findElements(doubleClickMessage).isEmpty();
+    public String getDoubleClickMessage (WebDriver webDriver){
+        return webDriver.findElement(doubleClickMessage).getText();
     }
 
-    public boolean checkRightClick () {
-        return webDriver.findElements(rightClickMessage).isEmpty();
+    public String getRightClickMessage (WebDriver webDriver){
+        return webDriver.findElement(rightClickMessage).getText();
     }
 
-    public boolean checkLeftClick () {
-        return webDriver.findElements(leftClickMessage).isEmpty();
+    public String getLeftClickMessage (WebDriver webDriver){
+        return webDriver.findElement(leftClickMessage).getText();
     }
-
-
 }

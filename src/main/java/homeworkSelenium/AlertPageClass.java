@@ -39,7 +39,8 @@ public class AlertPageClass {
         webDriver.switchTo().alert().dismiss();
     }
 
-    public boolean checkConfirmResult () {
-        return webDriver.findElements(confirmResult).isEmpty();
+    public String getConfirmResult (WebDriver webDriver) {
+        return webDriver.findElement(confirmResult).getText();
     }
+
 }
