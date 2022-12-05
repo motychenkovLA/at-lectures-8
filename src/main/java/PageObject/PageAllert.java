@@ -38,11 +38,6 @@ public class PageAllert {
         buttonAllertThree.click();
     }
 
-    //метод проверки отображаемого текста после закрытия алерта
-    public void correctTextClosedAllert(String closedAllertMessage) {
-        assertEquals("You selected Cancel", closedAllertMessage);
-    }
-
     //элемент You selected Cancel
     public String closedAllertMessage() {
         return closedAllertMessage.getText();

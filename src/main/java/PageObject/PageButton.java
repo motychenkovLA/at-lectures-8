@@ -1,6 +1,7 @@
 package PageObject;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import static org.junit.Assert.assertEquals;
@@ -31,23 +32,21 @@ public class PageButton {
     private SelenideElement dynamicClickMessage;
 
     //метод клика по кнопке Double click me
+    @Step("Нажали на кнопку Double click me")
     public void clickButtonDoubleClick() {
         buttonDoubleClick.doubleClick();
     }
 
     //метод клика по кнопке Right click me
+    @Step("Нажали на кнопку Right click me")
     public void clickButtonRightClick() {
         buttonRightClick.contextClick();
     }
 
     //метод клика по кнопке Click me
+    @Step("Нажали на кнопку Click me")
     public void clickButtonClickMe() {
         buttonClickMe.click();
-    }
-
-    //метод проверки отображаемого текста по кнопке Double click me
-    public void correctTextButtonDoubleClick(String doubleClickMessage) {
-        assertEquals("You have done a double click", doubleClickMessage);
     }
 
     //элемент doubleClickMessage
@@ -55,19 +54,9 @@ public class PageButton {
         return doubleClickMessage.getText();
     }
 
-    //метод проверки отображаемого текста по кнопке Right click me
-    public void correctTextButtonRightClick(String rightClickMessage) {
-        assertEquals("You have done a right click", rightClickMessage);
-    }
-
     //элемент rightClickMessage
     public String rightClickMessageText() {
         return rightClickMessage.getText();
-    }
-
-    //метод проверки отображаемого текста по кнопке click me
-    public void correctTextButtonClickMe(String dynamicClickMessage) {
-        assertEquals("You have done a dynamic click", dynamicClickMessage);
     }
 
     //элемент dynamicClickMessage
