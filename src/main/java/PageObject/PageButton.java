@@ -50,16 +50,19 @@ public class PageButton {
     }
 
     //элемент doubleClickMessage
+    @Step("Получаем текст элемента после нажатия Double click me")
     public String doubleClickMessageText() {
         return doubleClickMessage.getText();
     }
 
     //элемент rightClickMessage
+    @Step("Получаем текст элемента после нажатия Right click me")
     public String rightClickMessageText() {
         return rightClickMessage.getText();
     }
 
     //элемент dynamicClickMessage
+    @Step("Получаем текст элемента после нажатия Click me")
     public String dynamicClickMessageText() {
         return dynamicClickMessage.getText();
     }
