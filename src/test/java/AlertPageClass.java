@@ -1,5 +1,4 @@
-package homeworkSelenium;
-
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,12 +19,14 @@ public class AlertPageClass {
         this.webDriver = webDriver;
     }
 
+    @Step("Вызвать алерт и принять")
     public void alertButtonClick (){
         WebElement alertClick = webDriver.findElement(alertButton);
         alertClick.click();
         webDriver.switchTo().alert().accept();
     }
 
+    @Step("Вызвать алерт и принять после задержки по времени")
     public void timerAlertButtonClick (){
         WebElement timerAlertClick = webDriver.findElement(timerAlertButton);
         timerAlertClick.click();
@@ -33,12 +34,14 @@ public class AlertPageClass {
         webDriverWait.until(ExpectedConditions.alertIsPresent()).accept();
     }
 
+    @Step("Вызвать алерт и отклонить")
     public void confirmButtonClick (){
         WebElement confirmClick = webDriver.findElement(confirmButton);
         confirmClick.click();
         webDriver.switchTo().alert().dismiss();
     }
 
+    @Step("Получить сообщение после отклонения алерта")
     public String getConfirmResult (WebDriver webDriver) {
         return webDriver.findElement(confirmResult).getText();
     }

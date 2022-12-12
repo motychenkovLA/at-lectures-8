@@ -1,5 +1,4 @@
-package homeworkSelenium;
-
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +11,7 @@ public class BrowseNewPageClass {
         this.webDriver = webDriver;
     }
 
+    @Step("Открыть новую вкладку")
     public void tabButtonClick (){
         WebElement button = webDriver.findElement(tabButton);
         button.click();

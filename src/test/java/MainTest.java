@@ -1,5 +1,5 @@
-package homeworkSelenium;
-
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.*;
 import org.junit.rules.Timeout;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +14,7 @@ public class MainTest {
 
     @Before
     public void connectDriver () {
-        System.setProperty("webdriver.chrome.driver", "src/main/java/homeworkSelenium/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/java/chromedriver.exe");
         webDriver = new ChromeDriver();
     }
 
@@ -26,6 +26,8 @@ public class MainTest {
     @Rule
     public Timeout globalTimeout = Timeout.seconds(180);
 
+    @DisplayName("Тест с кнопками")
+    @Description("Двойной клик, правый клик, левый клик")
     @Test
     public void homeWork1() {
 
@@ -37,7 +39,6 @@ public class MainTest {
         buttonPage.doubleClick();
         Assert.assertEquals("Ошибка, результаты не совпадают", "You have done a double click", buttonPage.getDoubleClickMessage(webDriver));
 
-
         buttonPage.rightClick();
         Assert.assertEquals("Ошибка, результаты не совпадают", "You have done a right click", buttonPage.getRightClickMessage(webDriver));
 
@@ -45,7 +46,8 @@ public class MainTest {
         Assert.assertEquals("Ошибка, результаты не совпадают", "You have done a dynamic click", buttonPage.getLeftClickMessage(webDriver));
 
     }
-
+    @DisplayName("Тест с алертами")
+    @Description("Принять алерт, принять алерт после задержки, отклонить алерт")
     @Test
     public void homeWork2 () {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -60,7 +62,8 @@ public class MainTest {
         Assert.assertEquals("Ошибка, результаты не совпадают", "You selected Cancel", alertPage.getConfirmResult(webDriver));
 
     }
-
+    @DisplayName("Тест с окнами")
+    @Description("Открыть новую вкладку, переключиться на предыдущую")
     @Test
     public void homeWork3 () {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
