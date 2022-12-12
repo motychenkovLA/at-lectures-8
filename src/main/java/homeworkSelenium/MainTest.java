@@ -75,7 +75,6 @@ public class MainTest {
         Iterator<String> iterator = handles.iterator();
         String newTab = iterator.next();
         webDriver.switchTo().window(newTab);
-        webDriver.get("https://google.com");
         webDriver.switchTo().window(demoQATab);
 
     }
